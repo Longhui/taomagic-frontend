@@ -1,0 +1,11 @@
+{
+  "presets": [
+    ["@babel/preset-env", { "targets": { "node": "18" } }],
+    "@babel/preset-typescript"
+  ],
+  "plugins": [
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-proposal-optional-chaining"
+  ],
+  "ignore": ["src/admin/**"]
+}

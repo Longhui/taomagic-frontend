@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Cast I Ching with Coins | TaoInsight</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script>
+tailwind.config = {
+    theme: {
+        extend: {
+            colors: {
+                'ink': '#1a1a1a',
+                'rice': '#f5f0e8',
+                'cinnabar': '#c41e3a',
+                'bronze': '#4a6741',
+                'gold': '#c9a227',
+            },
+            fontFamily: {
+                'serif': ['Playfair Display', 'Georgia', 'serif'],
+                'sans': ['Inter', 'sans-serif'],
+            }
+        }
+    }
+}
+</script>
+<style>
+@keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.yin-yang-rotate { animation: rotate 20s linear infinite; }
+html { scroll-behavior: smooth; }
+.step-card { transition: all 0.3s ease; }
+.step-card:hover { transform: translateY(-4px); box-shadow: 0 10px 40px rgba(0,0,0,0.1); }
+.coin-flip { animation: coinFlip 1.5s ease-out; }
+@keyframes coinFlip { 
+    0% { transform: rotateY(0deg) scale(1); }
+    50% { transform: rotateY(900deg) scale(1.2); }
+    100% { transform: rotateY(1800deg) scale(1); }
+}
+.progress-bar { transition: width 0.5s ease; }
+</style>
+</head>
+<body class="font-sans antialiased text-ink bg-rice">
+
+<!-- SVG Symbols -->
+<svg style="display:none">
+<symbol id="icon-yinyang" viewBox="0 0 200 200">
+<circle cx="100" cy="100" r="98" fill="#1a1a1a" stroke="#c9a227" stroke-width="2"/>
+<path d="M100,2 A49,49 0 0,1 100,98 A49,49 0 0,0 100,198 A98,98 0 0,1 100,2" fill="#f5f0e8"/>
+<circle cx="100" cy="50" r="15" fill="#1a1a1a"/>
+<circle cx="100" cy="150" r="15" fill="#f5f0e8"/>
+</symbol>
+<symbol id="icon-star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12,2 15,9 22,9 16,14 18,22 12,17 6,22 8,14 2,9 9,9"/></symbol>
+<symbol id="icon-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></symbol>
+<symbol id="icon-sparkles" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M3 12h18M7.5 7.5l9 9M16.5 7.5l-9 9"/></symbol>
+<symbol id="icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></symbol>
+<symbol id="icon-back" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></symbol>
+<symbol id="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20,6 9,17 4,12"/></symbol>
+<symbol id="icon-play" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></symbol>
+<symbol id="icon-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></symbol>
+<symbol id="icon-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></symbol>
+<symbol id="icon-hand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"/><path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></symbol>
+<symbol id="icon-coins" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6"/><circle cx="16" cy="16" r="6"/><path d="M8 14v4a6 6 0 0 0 6 6"/><path d="M16 10V6a6 6 0 0 0-6-6"/></symbol>
+<symbol id="icon-brain" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"/></symbol>
+<symbol id="icon-scroll" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2"/><path d="M6 2h14a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2z"/><path d="M12 18v2"/><path d="M8 22v2"/><path d="M16 22v2"/></symbol>
+<symbol id="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></symbol>
+<symbol id="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></symbol>
+</svg>
+
+<!-- Navigation -->
+<nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300 bg-ink/95 backdrop-blur-md shadow-lg">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-16">
+<a href="tao-insight-demo.html" class="flex items-center gap-2">
+<svg width="32" height="32" class="yin-yang-rotate"><use href="#icon-yinyang"/></svg>
+<span class="text-rice font-serif text-xl font-bold tracking-wider">TaoInsight</span>
+</a>
+<div class="hidden md:flex items-center gap-8">
+<a href="tao-insight-demo.html" class="text-rice/80 hover:text-gold transition-colors text-sm tracking-wide uppercase">Home</a>
+<a href="tao-insight-demo.html#wisdom" class="text-rice/80 hover:text-gold transition-colors text-sm tracking-wide uppercase">Wisdom</a>
+<a href="tao-insight-demo.html#divination" class="text-rice/80 hover:text-gold transition-colors text-sm tracking-wide uppercase">Divination</a>
+<a href="tao-insight-demo.html#shop" class="text-rice/80 hover:text-gold transition-colors text-sm tracking-wide uppercase">Feng Shui</a>
+</div>
+</div>
+</div>
+</nav>
+
+<!-- Hero Section -->
+<section class="relative min-h-[70vh] flex items-center justify-center overflow-hidden bg-ink pt-16">
+<div class="absolute inset-0 opacity-10">
+<div class="absolute top-1/4 left-1/4 w-96 h-96 bg-gold rounded-full blur-3xl"></div>
+<div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cinnabar rounded-full blur-3xl"></div>
+</div>
+<div class="relative z-10 max-w-5xl mx-auto px-4 text-center">
+<div class="mb-6 flex justify-center">
+<svg width="80" height="80" class="text-gold"><use href="#icon-coins"/></svg>
+</div>
+<h1 class="text-4xl md:text-6xl font-serif text-rice mb-4 leading-tight">
+How to Cast I Ching with <span class="text-gold">Coins</span>
+</h1>
+<p class="text-xl text-rice/70 max-w-2xl mx-auto mb-8">
+A step-by-step guide to authentic Liu Yao divination using three coins. 
+Master the ancient art of hexagram casting.
+</p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center">
+<a href="#interactive-demo" class="bg-cinnabar text-rice px-8 py-4 rounded-sm text-lg hover:bg-cinnabar/80 transition-all flex items-center justify-center gap-2">
+<svg width="20" height="20"><use href="#icon-play"/></svg>
+Try Interactive Demo
+</a>
+<a href="#step-by-step" class="border border-rice/30 text-rice px-8 py-4 rounded-sm text-lg hover:bg-rice/10 transition-all flex items-center justify-center gap-2">
+<svg width="20" height="20"><use href="#icon-scroll"/></svg>
+Read Full Guide
+</a>
+</div>
+</div>
+</section>
+
+<!-- Quick Reference Card -->
+<section class="py-16 bg-rice">
+<div class="max-w-5xl mx-auto px-4">
+<div class="bg-white rounded-lg border border-ink/10 p-8 shadow-sm">
+<h2 class="text-2xl font-serif text-ink mb-6 text-center">Coin-to-Line Quick Reference</h2>
+<div class="grid md:grid-cols-2 gap-8">
+<div class="space-y-4">
+<h3 class="font-medium text-ink flex items-center gap-2">
+<svg width="20" height="20" class="text-bronze"><use href="#icon-coins"/></svg>
+US Dollar Coins (Recommended)
+</h3>
+<div class="space-y-3">
+<div class="flex items-center gap-4 p-3 bg-bronze/5 rounded-lg">
+<div class="flex gap-1">
+<div class="w-10 h-10 rounded-full bg-ink text-rice flex items-center justify-center text-xs font-bold border-2 border-gold">H</div>
+<div class="w-10 h-10 rounded-full bg-ink text-rice flex items-center justify-center text-xs font-bold border-2 border-gold">H</div>
+<div class="w-10 h-10 rounded-full bg-ink text-rice flex items-center justify-center text-xs font-bold border-2 border-gold">H</div>
+</div>
+<div class="flex-1">
+<div class="text-sm font-medium">3 Heads (9) — Old Yang</div>
+<div class="text-xs text-ink/60">Changing line ⚊○</div>
+</div>
+</div>
+<div class="flex items-center gap-4 p-3 bg-rice rounded-lg">
+<div class="flex gap-1">
+<div class="w-10 h-10 rounded-full bg-ink text-rice flex items-center justify-center text-xs font-bold border-2 border-gold">H</div>
+<div class="w-10 h-10 rounded-full bg-ink text-rice flex items-center justify-center text-xs font-bold border-2 border-gold">H</div>
+<div class="w-10 h-10 rounded-full bg-rice text-ink flex items-center justify-center text-xs font-bold border-2 border-ink">T</div>
+</div>
+<div class="flex-1">
+<div class="text-sm font-medium">2 Heads, 1 Tail (8) — Young Yin</div>
+<div class="text-xs text-ink/60">Static line ⚋⚋</div>
+</div>
+</div>
+<div class="flex items-center gap-4 p-3 bg-rice rounded-lg">
+<div class="flex gap-1">
+<div class="w-10 h-10 rounded-full bg-ink text-rice flex items-center justify-center text-xs font-bold border-2 border-gold">H</div>
+<div class="w-10 h-10 rounded-full bg-rice text-ink flex items-center justify-center text-xs font-bold border-2 border-ink">T</div>
+<div class="w-10 h-10 rounded-full bg-rice text-ink flex items-center justify-center text-xs font-bold border-2 border-ink">T</div>
+</div>
+<div class="flex-1">
+<div class="text-sm font-medium">1 Head, 2 Tails (7) — Young Yang</div>
+<div class="text-xs text-ink/60">Static line ⚊</div>
+</div>
+</div>
+<div class="flex items-center gap-4 p-3 bg-cinnabar/5 rounded-lg">
+<div class="flex gap-1">
+<div class="w-10 h-10 rounded-full bg-rice text-ink flex items-center justify-center text-xs font-bold border-2 border-ink">T</div>
+<div class="w-10 h-10 rounded-full bg-rice text-ink flex items-center justify-center text-xs font-bold border-2 border-ink">T</div>
+<div class="w-10 h-10 rounded-full bg-rice text-ink flex items-center justify-center text-xs font-bold border-2 border-ink">T</div>
+</div>
+<div class="flex-1">
+<div class="text-sm font-medium">3 Tails (6) — Old Yin</div>
+<div class="text-xs text-ink/60">Changing line ⚋×</div>
+</div>
+</div>
+</div>
+</div>
+<div class="space-y-4">
+<h3 class="font-medium text-ink flex items-center gap-2">
+<svg width="20" height="20" class="text-cinnabar"><use href="#icon-brain"/></svg>
+What You Need to Know
+</h3>
+<div class="space-y-3 text-sm text-ink/80">
+<p><span class="font-medium text-ink">Heads = Yang (3 points)</span> — The "active" side with the portrait</p>
+<p><span class="font-medium text-ink">Tails = Yin (2 points)</span> — The "receptive" side with the building</p>
+<p class="pt-2 border-t border-ink/10"><span class="font-medium text-cinnabar">Old Yang (9)</span> and <span class="font-medium text-cinnabar">Old Yin (6)</span> are "changing lines" — they transform into their opposite, revealing future development.</p>
+<p><span class="font-medium text-bronze">Young Yang (7)</span> and <span class="font-medium text-bronze">Young Yin (8)</span> are "static lines" — they remain as they are.</p>
+<p class="pt-2 border-t border-ink/10">You cast <span class="font-medium">6 times</span> to build a hexagram from bottom (Line 1) to top (Line 6).</p>
+</div>
+<div class="bg-gold/10 p-4 rounded-lg mt-4">
+<p class="text-sm text-ink/80"><span class="font-medium text-gold">Pro Tip:</span> Use three identical coins of the same denomination for consistency. US quarters or pennies work perfectly.</p>
+</div>
+</div>
+</div>
+
+<!-- Reference Images -->
+<div class="mt-8 grid md:grid-cols-2 gap-6">
+<div class="bg-white rounded-lg border border-ink/10 p-4">
+<h4 class="font-medium text-ink mb-3 text-center">US Penny Example (WikiHow)</h4>
+<div class="aspect-[4/3] bg-ink/5 rounded-lg flex items-center justify-center overflow-hidden">
+<img src="images/us_coins_guide.png" alt="US penny coin divination guide showing 3 heads = Old Yang" class="w-full h-full object-contain"/>
+</div>
+<p class="text-xs text-ink/50 mt-2 text-center">3 Heads = 9 (Old Yang) | 3 Tails = 6 (Old Yin) | 2H1T = 8 (Young Yin) | 1H2T = 7 (Young Yang)</p>
+</div>
+<div class="bg-white rounded-lg border border-ink/10 p-4">
+<h4 class="font-medium text-ink mb-3 text-center">Traditional Chinese Coins</h4>
+<div class="aspect-[4/3] bg-ink/5 rounded-lg flex items-center justify-center overflow-hidden">
+<img src="images/coin_sides.png" alt="Traditional Chinese coins - character side (Yang) vs reverse side (Yin)" class="w-full h-full object-contain"/>
+</div>
+<p class="text-xs text-ink/50 mt-2 text-center">Character side (字) = Yang | Reverse side (背) = Yin</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Step-by-Step Guide -->
+<section id="step-by-step" class="py-24 bg-ink">
+<div class="max-w-5xl mx-auto px-4">
+<h2 class="text-3xl md:text-4xl font-serif text-rice text-center mb-4">The Complete Casting Process</h2>
+<p class="text-rice/60 text-center mb-16 max-w-2xl mx-auto">Follow these six phases to perform an authentic I Ching divination. Each phase builds upon the last, creating a ritual of focus and intention.</p>
+
+<!-- Progress Indicator -->
+<div class="hidden md:flex items-center justify-between mb-12 max-w-3xl mx-auto">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-gold text-ink flex items-center justify-center text-sm font-bold">1</div>
+<div class="text-xs text-rice/60 uppercase tracking-wider">Prepare</div>
+</div>
+<div class="flex-1 h-px bg-rice/20 mx-2"></div>
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-rice/20 text-rice/60 flex items-center justify-center text-sm font-bold">2</div>
+<div class="text-xs text-rice/60 uppercase tracking-wider">Question</div>
+</div>
+<div class="flex-1 h-px bg-rice/20 mx-2"></div>
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-rice/20 text-rice/60 flex items-center justify-center text-sm font-bold">3</div>
+<div class="text-xs text-rice/60 uppercase tracking-wider">Cast</div>
+</div>
+<div class="flex-1 h-px bg-rice/20 mx-2"></div>
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-rice/20 text-rice/60 flex items-center justify-center text-sm font-bold">4</div>
+<div class="text-xs text-rice/60 uppercase tracking-wider">Record</div>
+</div>
+<div class="flex-1 h-px bg-rice/20 mx-2"></div>
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-rice/20 text-rice/60 flex items-center justify-center text-sm font-bold">5</div>
+<div class="text-xs text-rice/60 uppercase tracking-wider">Build</div>
+</div>
+<div class="flex-1 h-px bg-rice/20 mx-2"></div>
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-rice/20 text-rice/60 flex items-center justify-center text-sm font-bold">6</div>
+<div class="text-xs text-rice/60 uppercase tracking-wider">Read</div>
+</div>
+</div>
+
+<!-- Steps -->
+<div class="space-y-8">
+
+<!-- Step 1 -->
+<div class="step-card bg-rice/5 rounded-lg border border-rice/10 p-8">
+<div class="flex items-start gap-6">
+<div class="hidden md:flex flex-col items-center">
+<div class="w-12 h-12 rounded-full bg-gold text-ink flex items-center justify-center text-xl font-bold font-serif">1</div>
+<div class="w-px h-full bg-rice/20 mt-2"></div>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-3 mb-4">
+<div class="md:hidden w-10 h-10 rounded-full bg-gold text-ink flex items-center justify-center text-lg font-bold">1</div>
+<h3 class="text-2xl font-serif text-rice">Preparation & Sacred Space</h3>
+</div>
+<div class="grid md:grid-cols-2 gap-6">
+<div>
+<p class="text-rice/80 mb-4 leading-relaxed">Before casting, create an environment conducive to focused intention. This is not superstition — it is the practical psychology of entering a receptive state.</p>
+<div class="space-y-3">
+<div class="flex items-start gap-3">
+<svg width="20" height="20" class="text-gold mt-0.5 flex-shrink-0"><use href="#icon-check"/></svg>
+<div>
+<div class="text-rice font-medium">Find Quiet Space</div>
+<div class="text-rice/60 text-sm">Turn off notifications. Close the door. Let others know you need 10 minutes of uninterrupted focus.</div>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<svg width="20" height="20" class="text-gold mt-0.5 flex-shrink-0"><use href="#icon-check"/></svg>
+<div>
+<div class="text-rice font-medium">Gather Your Tools</div>
+<div class="text-rice/60 text-sm">Three identical coins, a notebook, and a flat surface. A small cloth or tray to catch the coins is helpful.</div>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<svg width="20" height="20" class="text-gold mt-0.5 flex-shrink-0"><use href="#icon-check"/></svg>
+<div>
+<div class="text-rice font-medium">Center Yourself</div>
+<div class="text-rice/60 text-sm">Take three deep breaths. Feel your feet on the floor. Let your mind settle like still water.</div>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-ink rounded-lg p-6 border border-rice/10">
+<div class="text-center mb-4">
+<svg width="48" height="48" class="text-gold mx-auto mb-2"><use href="#icon-moon"/></svg>
+<h4 class="text-rice font-serif text-lg">Best Times to Cast</h4>
+</div>
+<div class="space-y-2 text-sm">
+<div class="flex justify-between text-rice/80">
+<span>Early Morning</span>
+<span class="text-gold">Yin energy, clarity</span>
+</div>
+<div class="flex justify-between text-rice/80">
+<span>Midday</span>
+<span class="text-gold">Yang energy, action</span>
+</div>
+<div class="flex justify-between text-rice/80">
+<span>Evening</span>
+<span class="text-gold">Reflection, insight</span>
+</div>
+<div class="flex justify-between text-rice/80">
+<span>Avoid</span>
+<span class="text-cinnabar">When angry or rushed</span>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-rice/10 text-xs text-rice/50">
+The I Ching responds to sincerity, not convenience. Choose a time when you can be fully present.
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Step 2 -->
+<div class="step-card bg-rice/5 rounded-lg border border-rice/10 p-8">
+<div class="flex items-start gap-6">
+<div class="hidden md:flex flex-col items-center">
+<div class="w-12 h-12 rounded-full bg-gold text-ink flex items-center justify-center text-xl font-bold font-serif">2</div>
+<div class="w-px h-full bg-rice/20 mt-2"></div>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-3 mb-4">
+<div class="md:hidden w-10 h-10 rounded-full bg-gold text-ink flex items-center justify-center text-lg font-bold">2</div>
+<h3 class="text-2xl font-serif text-rice">Formulate Your Question</h3>
+</div>
+<p class="text-rice/80 mb-6 leading-relaxed">The quality of your question determines the quality of your answer. A vague question yields a vague response. A specific, sincere question opens the door to precise wisdom.</p>
+<div class="grid md:grid-cols-2 gap-6">
+<div class="space-y-4">
+<h4 class="text-gold font-medium flex items-center gap-2">
+<svg width="18" height="18"><use href="#icon-check"/></svg>
+Good Questions
+</h4>
+<div class="space-y-3 text-sm">
+<div class="bg-bronze/10 p-3 rounded-lg text-rice/80">
+"Should I accept the job offer from Company X, and what should I watch for?"
+</div>
+<div class="bg-bronze/10 p-3 rounded-lg text-rice/80">
+"What is the true nature of my relationship with [Name], and how should I proceed?"
+</div>
+<div class="bg-bronze/10 p-3 rounded-lg text-rice/80">
+"What do I need to understand about my current health situation?"
+</div>
+</div>
+</div>
+<div class="space-y-4">
+<h4 class="text-cinnabar font-medium flex items-center gap-2">
+<svg width="18" height="18"><use href="#icon-chevron-down"/></svg>
+Avoid These
+</h4>
+<div class="space-y-3 text-sm">
+<div class="bg-cinnabar/10 p-3 rounded-lg text-rice/80">
+"Will I win the lottery?" — The I Ching guides decisions, not gambling.
+</div>
+<div class="bg-cinnabar/10 p-3 rounded-lg text-rice/80">
+"What is [someone else] thinking?" — Ask about your own situation only.
+</div>
+<div class="bg-cinnabar/10 p-3 rounded-lg text-rice/80">
+"Should I do this or that?" — Frame as "What should I understand about..."
+</div>
+</div>
+</div>
+</div>
+<div class="mt-6 bg-ink rounded-lg p-6 border border-gold/30">
+<p class="text-rice/80 text-sm leading-relaxed">
+<span class="text-gold font-medium">The Golden Rule:</span> Ask about <span class="text-gold">process and understanding</span>, not <span class="text-cinnabar">outcomes and predictions</span>. 
+Instead of "Will I get the job?" ask "What energy surrounds my application to Company X, and how should I approach it?"
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Step 3 -->
+<div class="step-card bg-rice/5 rounded-lg border border-rice/10 p-8">
+<div class="flex items-start gap-6">
+<div class="hidden md:flex flex-col items-center">
+<div class="w-12 h-12 rounded-full bg-gold text-ink flex items-center justify-center text-xl font-bold font-serif">3</div>
+<div class="w-px h-full bg-rice/20 mt-2"></div>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-3 mb-4">
+<div class="md:hidden w-10 h-10 rounded-full bg-gold text-ink flex items-center justify-center text-lg font-bold">3</div>
+<h3 class="text-2xl font-serif text-rice">The Casting Ritual</h3>
+</div>
+<p class="text-rice/80 mb-6 leading-relaxed">This is the heart of the practice. Each cast generates one line of your hexagram. You will cast six times total, from Line 1 (bottom) to Line 6 (top).</p>
+
+<div class="grid md:grid-cols-3 gap-6 mb-8">
+<div class="bg-ink rounded-lg p-6 border border-rice/10 text-center">
+<svg width="40" height="40" class="text-gold mx-auto mb-3"><use href="#icon-hand"/></svg>
+<h4 class="text-rice font-medium mb-2">1. Cup the Coins</h4>
+<p class="text-rice/60 text-sm">Place three coins in your dominant hand. Cup them gently, feeling their weight and temperature.</p>
+</div>
+<div class="bg-ink rounded-lg p-6 border border-rice/10 text-center">
+<svg width="40" height="40" class="text-gold mx-auto mb-3"><use href="#icon-brain"/></svg>
+<h4 class="text-rice font-medium mb-2">2. Focus Intention</h4>
+<p class="text-rice/60 text-sm">Hold your question clearly in mind. Do not speak it aloud — let it resonate in your heart.</p>
+</div>
+<div class="bg-ink rounded-lg p-6 border border-rice/10 text-center">
+<svg width="40" height="40" class="text-gold mx-auto mb-3"><use href="#icon-coins"/></svg>
+<h4 class="text-rice font-medium mb-2">3. Shake & Release</h4>
+<p class="text-rice/60 text-sm">Shake the coins gently 6-9 times, then release them onto your flat surface.</p>
+</div>
+</div>
+
+<div class="bg-gold/10 rounded-lg p-6 border border-gold/30">
+<h4 class="text-gold font-serif text-lg mb-3">The Shake Count</h4>
+<p class="text-rice/80 text-sm leading-relaxed mb-4">
+Traditionally, coins are shaken <span class="font-medium text-gold">6 or 9 times</span> — numbers sacred in Taoist numerology. 
+Six represents the lines of a hexagram. Nine represents the extreme of Yang before transformation. 
+Use whatever number feels natural, but be consistent across all six casts.
+</p>
+<div class="text-xs text-rice/50">
+Some practitioners shake while silently reciting their question. Others shake in rhythm with their breath. 
+Find what creates the strongest sense of connection for you.
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Step 4 -->
+<div class="step-card bg-rice/5 rounded-lg border border-rice/10 p-8">
+<div class="flex items-start gap-6">
+<div class="hidden md:flex flex-col items-center">
+<div class="w-12 h-12 rounded-full bg-gold text-ink flex items-center justify-center text-xl font-bold font-serif">4</div>
+<div class="w-px h-full bg-rice/20 mt-2"></div>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-3 mb-4">
+<div class="md:hidden w-10 h-10 rounded-full bg-gold text-ink flex items-center justify-center text-lg font-bold">4</div>
+<h3 class="text-2xl font-serif text-rice">Record the Result</h3>
+</div>
+<p class="text-rice/80 mb-6 leading-relaxed">Immediately after each cast, record the result before the pattern is disturbed. This is your raw data — treat it with respect.</p>
+
+<div class="bg-ink rounded-lg p-6 border border-rice/10 mb-6">
+<h4 class="text-gold font-medium mb-4">Recording Template</h4>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+<div class="bg-rice/5 p-3 rounded-lg">
+<div class="text-2xl font-serif text-rice mb-1">⚊○</div>
+<div class="text-xs text-gold">Old Yang (9)</div>
+<div class="text-xs text-rice/50">3 Heads</div>
+</div>
+<div class="bg-rice/5 p-3 rounded-lg">
+<div class="text-2xl font-serif text-rice mb-1">⚋⚋</div>
+<div class="text-xs text-bronze">Young Yin (8)</div>
+<div class="text-xs text-rice/50">2H + 1T</div>
+</div>
+<div class="bg-rice/5 p-3 rounded-lg">
+<div class="text-2xl font-serif text-rice mb-1">⚊</div>
+<div class="text-xs text-bronze">Young Yang (7)</div>
+<div class="text-xs text-rice/50">1H + 2T</div>
+</div>
+<div class="bg-rice/5 p-3 rounded-lg">
+<div class="text-2xl font-serif text-rice mb-1">⚋×</div>
+<div class="text-xs text-cinnabar">Old Yin (6)</div>
+<div class="text-xs text-rice/50">3 Tails</div>
+</div>
+</div>
+</div>
+
+<div class="space-y-3">
+<div class="flex items-start gap-3">
+<svg width="20" height="20" class="text-gold mt-0.5 flex-shrink-0"><use href="#icon-check"/></svg>
+<div class="text-rice/80 text-sm">
+<span class="font-medium text-rice">Record immediately</span> — Do not rely on memory. Write down or sketch the result before touching the coins.
+</div>
+</div>
+<div class="flex items-start gap-3">
+<svg width="20" height="20" class="text-gold mt-0.5 flex-shrink-0"><use href="#icon-check"/></svg>
+<div class="text-rice/80 text-sm">
+<span class="font-medium text-rice">Note the order</span> — Line 1 is the first cast (bottom of hexagram). Line 6 is the last cast (top).
+</div>
+</div>
+<div class="flex items-start gap-3">
+<svg width="20" height="20" class="text-gold mt-0.5 flex-shrink-0"><use href="#icon-check"/></svg>
+<div class="text-rice/80 text-sm">
+<span class="font-medium text-rice">Mark changing lines</span> — Circle or highlight Old Yang (9) and Old Yin (6). These are the most important lines for interpretation.
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Step 5 -->
+<div class="step-card bg-rice/5 rounded-lg border border-rice/10 p-8">
+<div class="flex items-start gap-6">
+<div class="hidden md:flex flex-col items-center">
+<div class="w-12 h-12 rounded-full bg-gold text-ink flex items-center justify-center text-xl font-bold font-serif">5</div>
+<div class="w-px h-full bg-rice/20 mt-2"></div>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-3 mb-4">
+<div class="md:hidden w-10 h-10 rounded-full bg-gold text-ink flex items-center justify-center text-lg font-bold">5</div>
+<h3 class="text-2xl font-serif text-rice">Build the Hexagram</h3>
+</div>
+<p class="text-rice/80 mb-6 leading-relaxed">After six casts, you have all the data needed to construct your hexagram. This is where the abstract becomes visible — the pattern of your situation made manifest.</p>
+
+<div class="grid md:grid-cols-2 gap-8">
+<div>
+<h4 class="text-gold font-medium mb-4">Assembly Method</h4>
+<div class="space-y-4">
+<div class="bg-ink rounded-lg p-4 border border-rice/10">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-8 h-8 rounded-full bg-gold/20 text-gold flex items-center justify-center text-sm font-bold">1</div>
+<div class="text-rice font-medium">Start from the Bottom</div>
+</div>
+<p class="text-rice/60 text-sm pl-11">Line 1 (first cast) goes at the bottom. Line 6 (last cast) goes at the top.</p>
+</div>
+<div class="bg-ink rounded-lg p-4 border border-rice/10">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-8 h-8 rounded-full bg-gold/20 text-gold flex items-center justify-center text-sm font-bold">2</div>
+<div class="text-rice font-medium">Draw the Lines</div>
+</div>
+<p class="text-rice/60 text-sm pl-11">Yang (7, 9) = solid line ———. Yin (6, 8) = broken line — —.</p>
+</div>
+<div class="bg-ink rounded-lg p-4 border border-rice/10">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-8 h-8 rounded-full bg-gold/20 text-gold flex items-center justify-center text-sm font-bold">3</div>
+<div class="text-rice font-medium">Mark Changes</div>
+</div>
+<p class="text-rice/60 text-sm pl-11">Circle Old Yang (9) and cross Old Yin (6). These lines will transform.</p>
+</div>
+</div>
+</div>
+<div>
+<h4 class="text-gold font-medium mb-4">Example Hexagram</h4>
+<div class="bg-ink rounded-lg p-6 border border-rice/10">
+<div class="flex flex-col-reverse items-center gap-2 mb-4">
+<div class="flex items-center gap-2"><div class="h-3 w-32 bg-rice rounded-sm"></div><span class="text-xs text-cinnabar">×</span></div>
+<div class="h-3 w-32 bg-rice rounded-sm"></div>
+<div class="flex items-center gap-2"><div class="h-3 w-14 bg-rice rounded-sm"></div><div class="w-3"></div><div class="h-3 w-14 bg-rice rounded-sm"></div></div>
+<div class="h-3 w-32 bg-rice rounded-sm"></div>
+<div class="flex items-center gap-2"><div class="h-3 w-14 bg-rice rounded-sm"></div><div class="w-3"></div><div class="h-3 w-14 bg-rice rounded-sm"></div><span class="text-xs text-cinnabar">○</span></div>
+<div class="h-3 w-32 bg-rice rounded-sm"></div>
+</div>
+<div class="text-center text-xs text-rice/50 space-y-1">
+<div>Line 6: Old Yin (6) — Changing ×</div>
+<div>Line 5: Young Yang (7)</div>
+<div>Line 4: Young Yin (8)</div>
+<div>Line 3: Young Yang (7)</div>
+<div>Line 2: Old Yang (9) — Changing ○</div>
+<div>Line 1: Young Yang (7)</div>
+</div>
+<div class="mt-4 pt-4 border-t border-rice/10 text-xs text-gold text-center">
+This hexagram has 2 changing lines, creating a second "future" hexagram.
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Step 6 -->
+<div class="step-card bg-rice/5 rounded-lg border border-rice/10 p-8">
+<div class="flex items-start gap-6">
+<div class="hidden md:flex flex-col items-center">
+<div class="w-12 h-12 rounded-full bg-gold text-ink flex items-center justify-center text-xl font-bold font-serif">6</div>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-3 mb-4">
+<div class="md:hidden w-10 h-10 rounded-full bg-gold text-ink flex items-center justify-center text-lg font-bold">6</div>
+<h3 class="text-2xl font-serif text-rice">Interpretation & Reading</h3>
+</div>
+<p class="text-rice/80 mb-6 leading-relaxed">Now comes the reward for your careful work. The hexagram is not a fortune — it is a mirror reflecting the energy pattern of your situation and the natural path of transformation.</p>
+
+<div class="grid md:grid-cols-3 gap-6 mb-8">
+<div class="bg-ink rounded-lg p-6 border border-rice/10">
+<svg width="32" height="32" class="text-gold mx-auto mb-3"><use href="#icon-book"/></svg>
+<h4 class="text-rice font-medium text-center mb-2">Read the Main Text</h4>
+<p class="text-rice/60 text-sm text-center">Start with the Gua Ci (hexagram text) for your primary hexagram. This gives the overall theme.</p>
+</div>
+<div class="bg-ink rounded-lg p-6 border border-rice/10">
+<svg width="32" height="32" class="text-cinnabar mx-auto mb-3"><use href="#icon-sparkles"/></svg>
+<h4 class="text-rice font-medium text-center mb-2">Study Changing Lines</h4>
+<p class="text-rice/60 text-sm text-center">If you have changing lines (6 or 9), read their Yao Ci (line texts). These are the most specific guidance.</p>
+</div>
+<div class="bg-ink rounded-lg p-6 border border-rice/10">
+<svg width="32" height="32" class="text-bronze mx-auto mb-3"><use href="#icon-scroll"/></svg>
+<h4 class="text-rice font-medium text-center mb-2">Check Future Hexagram</h4>
+<p class="text-rice/60 text-sm text-center">If lines changed, the second hexagram shows where your situation is heading.</p>
+</div>
+</div>
+
+<div class="bg-gold/10 rounded-lg p-6 border border-gold/30">
+<h4 class="text-gold font-serif text-lg mb-3">Reading Principles</h4>
+<div class="space-y-2 text-sm text-rice/80">
+<p><span class="text-gold font-medium">1.</span> The I Ching speaks in archetypes, not specifics. "The dragon rises from the deep" means your potential is emerging — not that you will literally encounter a dragon.</p>
+<p><span class="text-gold font-medium">2.</span> Changing lines are the "active" energy in your situation. They represent what is in motion and what requires attention.</p>
+<p><span class="text-gold font-medium">3.</span> The text is a starting point, not a command. Use it as a framework for your own intuition and reasoning.</p>
+<p><span class="text-gold font-medium">4.</span> Return to the text over days or weeks. The I Ching often reveals deeper layers with time.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- Interactive Demo Section -->
+<section id="interactive-demo" class="py-24 bg-rice">
+<div class="max-w-4xl mx-auto px-4">
+<h2 class="text-3xl md:text-4xl font-serif text-ink text-center mb-4">Interactive Practice</h2>
+<p class="text-ink/60 text-center mb-12 max-w-2xl mx-auto">Practice the casting process. Choose your preferred method: use real coins and record results, or generate digitally.</p>
+
+<div class="bg-white rounded-lg border border-ink/10 p-8 shadow-lg">
+<!-- Progress -->
+<div class="flex items-center justify-between mb-8">
+<div class="flex-1">
+<div class="flex justify-between text-sm text-ink/60 mb-2">
+<span>Progress</span>
+<span id="progress-text">Line 1 of 6</span>
+</div>
+<div class="h-2 bg-ink/10 rounded-full overflow-hidden">
+<div id="progress-bar" class="h-full bg-cinnabar rounded-full progress-bar" style="width: 0%"></div>
+</div>
+</div>
+</div>
+
+<!-- Question Input -->
+<div id="demo-question" class="mb-8">
+<label class="block text-sm font-medium text-ink mb-2">Your Question (Optional)</label>
+<input type="text" id="demo-question-input" placeholder="What guidance do you seek?" class="w-full px-4 py-3 rounded-sm border border-ink/20 focus:outline-none focus:border-bronze"/>
+</div>
+
+<!-- Method Selection -->
+<div class="bg-bronze/5 rounded-lg p-4 mb-8">
+<div class="flex justify-center gap-4 mb-3">
+<button id="demo-method-manual" onclick="setDemoMethod('manual')" class="px-4 py-2 rounded-sm text-sm bg-cinnabar text-rice transition-colors">🪙 Use Real Coins (Recommended)</button>
+<button id="demo-method-random" onclick="setDemoMethod('random')" class="px-4 py-2 rounded-sm text-sm bg-ink/10 text-ink/70 hover:bg-ink/5 transition-colors">🎲 Random Generate</button>
+</div>
+<p id="demo-method-desc" class="text-xs text-ink/50 text-center">Shake three real coins, then click the coin icons to match your result</p>
+</div>
+
+<!-- Manual Input Area -->
+<div id="demo-manual-area" class="mb-8">
+<div class="flex justify-center gap-6 mb-6">
+<div class="text-center">
+<div id="demo-coin-1" class="w-24 h-24 rounded-full bg-ink text-rice flex flex-col items-center justify-center shadow-lg text-2xl font-bold mb-2 cursor-pointer hover:scale-105 transition-transform" onclick="toggleDemoCoin(1)">H<span class="text-xs opacity-70">Heads</span></div>
+<div class="flex gap-1 justify-center">
+<button onclick="setDemoCoin(1, 'H')" class="w-8 h-8 rounded-full bg-ink text-rice border border-ink/30 text-xs hover:bg-cinnabar transition-colors">H</button>
+<button onclick="setDemoCoin(1, 'T')" class="w-8 h-8 rounded-full bg-rice text-ink border border-ink text-xs hover:bg-cinnabar transition-colors">T</button>
+</div>
+</div>
+<div class="text-center">
+<div id="demo-coin-2" class="w-24 h-24 rounded-full bg-ink text-rice flex flex-col items-center justify-center shadow-lg text-2xl font-bold mb-2 cursor-pointer hover:scale-105 transition-transform" onclick="toggleDemoCoin(2)">H<span class="text-xs opacity-70">Heads</span></div>
+<div class="flex gap-1 justify-center">
+<button onclick="setDemoCoin(2, 'H')" class="w-8 h-8 rounded-full bg-ink text-rice border border-ink/30 text-xs hover:bg-cinnabar transition-colors">H</button>
+<button onclick="setDemoCoin(2, 'T')" class="w-8 h-8 rounded-full bg-rice text-ink border border-ink text-xs hover:bg-cinnabar transition-colors">T</button>
+</div>
+</div>
+<div class="text-center">
+<div id="demo-coin-3" class="w-24 h-24 rounded-full bg-rice text-ink border-4 border-ink flex flex-col items-center justify-center shadow-lg text-2xl font-bold mb-2 cursor-pointer hover:scale-105 transition-transform" onclick="toggleDemoCoin(3)">T<span class="text-xs opacity-70">Tails</span></div>
+<div class="flex gap-1 justify-center">
+<button onclick="setDemoCoin(3, 'H')" class="w-8 h-8 rounded-full bg-ink text-rice border border-ink/30 text-xs hover:bg-cinnabar transition-colors">H</button>
+<button onclick="setDemoCoin(3, 'T')" class="w-8 h-8 rounded-full bg-rice text-ink border border-ink text-xs hover:bg-cinnabar transition-colors">T</button>
+</div>
+</div>
+</div>
+<div class="text-center">
+<button id="demo-record-btn" onclick="recordDemoLine()" class="bg-cinnabar text-rice px-8 py-3 rounded-sm text-lg hover:bg-cinnabar/80 transition-colors inline-flex items-center gap-2">
+<svg width="20" height="20"><use href="#icon-check"/></svg>
+Record Line <span id="demo-record-line-num">1</span>
+</button>
+</div>
+</div>
+
+<!-- Random Area (hidden by default) -->
+<div id="demo-random-area" class="hidden mb-8">
+<div class="flex justify-center gap-6 mb-6">
+<div id="demo-random-coin-1" class="w-24 h-24 rounded-full bg-ink text-rice flex flex-col items-center justify-center shadow-lg text-2xl font-bold transition-all">H<span class="text-xs opacity-70">Heads</span></div>
+<div id="demo-random-coin-2" class="w-24 h-24 rounded-full bg-ink text-rice flex flex-col items-center justify-center shadow-lg text-2xl font-bold transition-all">H<span class="text-xs opacity-70">Heads</span></div>
+<div id="demo-random-coin-3" class="w-24 h-24 rounded-full bg-rice text-ink border-4 border-ink flex flex-col items-center justify-center shadow-lg text-2xl font-bold transition-all">T<span class="text-xs opacity-70">Tails</span></div>
+</div>
+<div class="text-center">
+<button id="demo-shake-btn" onclick="shakeDemoCoins()" class="bg-cinnabar text-rice px-8 py-3 rounded-sm text-lg hover:bg-cinnabar/80 transition-colors inline-flex items-center gap-2">
+<svg width="20" height="20"><use href="#icon-hand"/></svg>
+Shake & Cast Line <span id="demo-shake-line-num">1</span>
+</button>
+</div>
+</div>
+
+<!-- Result Display -->
+<div id="demo-result" class="hidden mb-8">
+<div class="bg-bronze/5 rounded-lg p-6 text-center">
+<div id="demo-line-result" class="text-2xl font-serif text-ink mb-2"></div>
+<div id="demo-line-detail" class="text-sm text-ink/60"></div>
+</div>
+</div>
+
+<!-- Hexagram Building -->
+<div class="mb-8">
+<h3 class="text-lg font-serif text-ink mb-4 text-center">Your Hexagram</h3>
+<div id="demo-hexagram" class="flex flex-col-reverse items-center gap-2">
+<div class="h-4 w-56 rounded-sm bg-ink/10" data-line="6"></div>
+<div class="h-4 w-56 rounded-sm bg-ink/10" data-line="5"></div>
+<div class="h-4 w-56 rounded-sm bg-ink/10" data-line="4"></div>
+<div class="h-4 w-56 rounded-sm bg-ink/10" data-line="3"></div>
+<div class="h-4 w-56 rounded-sm bg-ink/10" data-line="2"></div>
+<div class="h-4 w-56 rounded-sm bg-ink/10" data-line="1"></div>
+</div>
+<div class="text-center mt-4 text-sm text-ink/50">
+<span id="demo-status">Select your casting method above to begin</span>
+</div>
+</div>
+
+<!-- Final Result -->
+<div id="demo-final" class="hidden">
+<div class="bg-ink rounded-lg p-8 text-center text-rice">
+<h3 class="text-2xl font-serif mb-4">Divination Complete</h3>
+<p class="text-rice/70 mb-6">Your hexagram has been cast. Ready for a full AI-powered reading?</p>
+<div class="flex justify-center gap-4">
+<a href="tao-insight-demo.html#divination" class="bg-cinnabar text-rice px-6 py-3 rounded-sm hover:bg-cinnabar/80 transition-colors inline-flex items-center gap-2">
+<svg width="18" height="18"><use href="#icon-sparkles"/></svg>
+Try Full AI Reading
+</a>
+<button onclick="resetDemo()" class="border border-rice/30 text-rice px-6 py-3 rounded-sm hover:bg-rice/10 transition-colors">
+Cast Again
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Video Section -->
+<section class="py-24 bg-ink">
+<div class="max-w-5xl mx-auto px-4">
+<h2 class="text-3xl md:text-4xl font-serif text-rice text-center mb-4">Video Guide</h2>
+<p class="text-rice/60 text-center mb-12 max-w-2xl mx-auto">Watch the complete casting process demonstrated step by step. Perfect for visual learners.</p>
+
+<!-- Plyr CSS -->
+<link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+
+<div class="grid md:grid-cols-2 gap-8">
+<!-- Video 1: Introduction -->
+<div class="bg-rice/5 rounded-lg border border-rice/10 overflow-hidden">
+<div class="aspect-video bg-gradient-to-br from-ink to-ink/80 relative">
+<div id="player-1" data-plyr-provider="youtube" data-plyr-embed-id="dQw4w9WgXcQ"></div>
+</div>
+<div class="p-6">
+<h3 class="text-rice font-serif text-lg mb-2">Part 1: Understanding the Basics</h3>
+<p class="text-rice/60 text-sm mb-4">Learn the fundamentals of coin divination: Yin and Yang, the four possible outcomes, and how they form hexagram lines.</p>
+<div class="flex items-center gap-2 text-xs text-rice/40">
+<svg width="14" height="14"><use href="#icon-coins"/></svg>
+<span>Coin identification • Line values • Recording methods</span>
+</div>
+</div>
+</div>
+
+<!-- Video 2: Full Demonstration -->
+<div class="bg-rice/5 rounded-lg border border-rice/10 overflow-hidden">
+<div class="aspect-video bg-gradient-to-br from-ink to-ink/80 relative">
+<div id="player-2" data-plyr-provider="youtube" data-plyr-embed-id="dQw4w9WgXcQ"></div>
+</div>
+<div class="p-6">
+<h3 class="text-rice font-serif text-lg mb-2">Part 2: Full Casting Ritual</h3>
+<p class="text-rice/60 text-sm mb-4">Watch a complete divination from preparation through interpretation. See how to shake, record, and build the hexagram in real time.</p>
+<div class="flex items-center gap-2 text-xs text-rice/40">
+<svg width="14" height="14"><use href="#icon-hand"/></svg>
+<span>Preparation • Six casts • Hexagram assembly • Reading</span>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Plyr JS -->
+<script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+<script>
+// Initialize Plyr players with privacy-enhanced YouTube
+document.addEventListener('DOMContentLoaded', function() {
+    const players = Plyr.setup('[data-plyr-provider="youtube"]', {
+        youtube: {
+            noCookie: true,  // 使用 youtube-nocookie.com
+            rel: 0,          // 不显示相关视频
+            showinfo: 0,     // 不显示标题
+            iv_load_policy: 3 // 不显示视频注释
+        },
+        controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'fullscreen'],
+        ratio: '16:9'
+    });
+});
+</script>
+
+<div class="mt-12 bg-rice/5 rounded-lg p-6 border border-rice/10">
+<h3 class="text-gold font-serif text-lg mb-3 text-center">About These Videos</h3>
+<div class="grid md:grid-cols-3 gap-4 text-sm text-rice/70">
+<div class="flex items-start gap-2">
+<svg width="16" height="16" class="text-gold mt-0.5 flex-shrink-0"><use href="#icon-check"/></svg>
+<span>Privacy-enhanced YouTube embed (no cookies until play)</span>
+</div>
+<div class="flex items-start gap-2">
+<svg width="16" height="16" class="text-gold mt-0.5 flex-shrink-0"><use href="#icon-check"/></svg>
+<span>Lightweight Plyr player (faster than default YouTube)</span>
+</div>
+<div class="flex items-start gap-2">
+<svg width="16" height="16" class="text-gold mt-0.5 flex-shrink-0"><use href="#icon-check"/></svg>
+<span>Mobile-responsive with gesture controls</span>
+</div>
+</div>
+</div>
+
+<div class="mt-8 text-center">
+<p class="text-rice/40 text-sm mb-4">Want to be notified when new videos are released? Subscribe below.</p>
+<div class="flex justify-center gap-3 max-w-md mx-auto">
+<input type="email" placeholder="Enter your email" class="flex-1 px-4 py-2 rounded-sm border border-rice/20 bg-rice text-ink text-sm focus:outline-none focus:border-gold"/>
+<button class="bg-gold text-ink px-4 py-2 rounded-sm text-sm hover:bg-gold/80 transition-colors">Notify Me</button>
+</div>
+</div>
+</div>
+</section><!-- FAQ Section -->
+<section class="py-24 bg-rice">
+<div class="max-w-4xl mx-auto px-4">
+<h2 class="text-3xl md:text-4xl font-serif text-ink text-center mb-12">Common Questions</h2>
+<div class="space-y-4" id="faq-container">
+<div class="bg-white rounded-lg border border-ink/10 overflow-hidden">
+<button onclick="toggleFaq(this)" class="w-full p-6 flex items-center justify-between text-left hover:bg-ink/5 transition-colors">
+<span class="font-medium text-ink">Can I use any coins, or do they need to be Chinese?</span>
+<svg width="20" height="20" class="text-ink/40 transition-transform"><use href="#icon-chevron-down"/></svg>
+</button>
+<div class="hidden px-6 pb-6">
+<p class="text-ink/70 leading-relaxed">Any three identical coins work perfectly. US quarters, pennies, or Euro coins are all fine. The I Ching responds to your intention and the mathematical probability (not the coin's origin). What matters is consistency — use the same three coins for all six casts.</p>
+</div>
+</div>
+<div class="bg-white rounded-lg border border-ink/10 overflow-hidden">
+<button onclick="toggleFaq(this)" class="w-full p-6 flex items-center justify-between text-left hover:bg-ink/5 transition-colors">
+<span class="font-medium text-ink">What if a coin lands on its edge or rolls away?</span>
+<svg width="20" height="20" class="text-ink/40 transition-transform"><use href="#icon-chevron-down"/></svg>
+</button>
+<div class="hidden px-6 pb-6">
+<p class="text-ink/70 leading-relaxed">If a coin lands on its edge or falls off the table, that cast is considered "void" — the energy was not settled. Simply gather the coins and cast again. Some practitioners view this as the I Ching indicating the question needs refinement.</p>
+</div>
+</div>
+<div class="bg-white rounded-lg border border-ink/10 overflow-hidden">
+<button onclick="toggleFaq(this)" class="w-full p-6 flex items-center justify-between text-left hover:bg-ink/5 transition-colors">
+<span class="font-medium text-ink">How often can I cast for the same question?</span>
+<svg width="20" height="20" class="text-ink/40 transition-transform"><use href="#icon-chevron-down"/></svg>
+</button>
+<div class="hidden px-6 pb-6">
+<p class="text-ink/70 leading-relaxed">Traditional wisdom says: once per question. If you cast repeatedly hoping for a "better" answer, you are not seeking guidance — you are seeking validation. Wait at least a moon cycle (28 days) before casting on the same topic, or until the situation has materially changed.</p>
+</div>
+</div>
+<div class="bg-white rounded-lg border border-ink/10 overflow-hidden">
+<button onclick="toggleFaq(this)" class="w-full p-6 flex items-center justify-between text-left hover:bg-ink/5 transition-colors">
+<span class="font-medium text-ink">Do I need to speak my question aloud?</span>
+<svg width="20" height="20" class="text-ink/40 transition-transform"><use href="#icon-chevron-down"/></svg>
+</button>
+<div class="hidden px-6 pb-6">
+<p class="text-ink/70 leading-relaxed">No — mental focus is sufficient and often preferred. Speaking aloud can scatter energy. Hold your question clearly in your mind as you shake the coins. Some practitioners silently recite their question in rhythm with the shakes.</p>
+</div>
+</div>
+<div class="bg-white rounded-lg border border-ink/10 overflow-hidden">
+<button onclick="toggleFaq(this)" class="w-full p-6 flex items-center justify-between text-left hover:bg-ink/5 transition-colors">
+<span class="font-medium text-ink">What does it mean if I get no changing lines?</span>
+<svg width="20" height="20" class="text-ink/40 transition-transform"><use href="#icon-chevron-down"/></svg>
+</button>
+<div class="hidden px-6 pb-6">
+<p class="text-ink/70 leading-relaxed">A hexagram with no changing lines (all 7s and 8s) indicates a stable situation. The energy pattern is fixed, and the guidance focuses on how to work within the current structure rather than anticipating major shifts. Read the main hexagram text carefully — it contains all the wisdom you need.</p>
+</div>
+</div>
+<div class="bg-white rounded-lg border border-ink/10 overflow-hidden">
+<button onclick="toggleFaq(this)" class="w-full p-6 flex items-center justify-between text-left hover:bg-ink/5 transition-colors">
+<span class="font-medium text-ink">Can I cast for someone else?</span>
+<svg width="20" height="20" class="text-ink/40 transition-transform"><use href="#icon-chevron-down"/></svg>
+</button>
+<div class="hidden px-6 pb-6">
+<p class="text-ink/70 leading-relaxed">Yes, but with important conditions. You must have their explicit permission and they should formulate the question themselves. You act as a "medium" for their energy. Never cast for someone without their knowledge — this violates the principle of sincerity that the I Ching requires.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-24 bg-bronze/10">
+<div class="max-w-3xl mx-auto px-4 text-center">
+<svg width="48" height="48" class="text-bronze mx-auto mb-4"><use href="#icon-sparkles"/></svg>
+<h2 class="text-3xl font-serif text-ink mb-4">Ready to Cast Your First Hexagram?</h2>
+<p class="text-ink/70 mb-8">Now that you understand the method, try it yourself. Our digital divination tool faithfully replicates the coin-casting process.</p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center">
+<a href="tao-insight-demo.html#divination" class="bg-cinnabar text-rice px-8 py-4 rounded-sm text-lg hover:bg-cinnabar/80 transition-colors inline-flex items-center justify-center gap-2">
+<svg width="20" height="20"><use href="#icon-coins"/></svg>
+Start Digital Divination
+</a>
+<a href="tao-insight-demo.html#shop" class="border border-ink/30 text-ink px-8 py-4 rounded-sm text-lg hover:bg-ink/5 transition-colors inline-flex items-center justify-center gap-2">
+<svg width="20" height="20"><use href="#icon-arrow"/></svg>
+Browse Feng Shui Tools
+</a>
+</div>
+</div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-ink text-rice/60 py-16">
+<div class="max-w-7xl mx-auto px-4">
+<div class="grid md:grid-cols-4 gap-8 mb-12">
+<div>
+<div class="flex items-center gap-2 mb-4">
+<svg width="24" height="24"><use href="#icon-yinyang"/></svg>
+<span class="text-rice font-serif text-lg font-bold">TaoInsight</span>
+</div>
+<p class="text-sm leading-relaxed">Bridging 5,000 years of Chinese wisdom with modern seekers worldwide.</p>
+</div>
+<div>
+<h4 class="text-rice font-medium mb-4">Explore</h4>
+<ul class="space-y-2 text-sm">
+<li><a href="tao-insight-demo.html#wisdom" class="hover:text-gold transition-colors">Yi Jing Wisdom</a></li>
+<li><a href="tao-insight-demo.html#divination" class="hover:text-gold transition-colors">I Ching Divination</a></li>
+<li><a href="tao-insight-demo.html#shop" class="hover:text-gold transition-colors">Feng Shui Store</a></li>
+<li><a href="#" class="hover:text-gold transition-colors">How to Cast</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-rice font-medium mb-4">Resources</h4>
+<ul class="space-y-2 text-sm">
+<li><a href="#" class="hover:text-gold transition-colors">Coin Guide</a></li>
+<li><a href="#" class="hover:text-gold transition-colors">Hexagram Lookup</a></li>
+<li><a href="#" class="hover:text-gold transition-colors">Video Tutorials</a></li>
+<li><a href="#" class="hover:text-gold transition-colors">FAQ</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-rice font-medium mb-4">Connect</h4>
+<ul class="space-y-2 text-sm">
+<li><a href="#" class="hover:text-gold transition-colors">About Us</a></li>
+<li><a href="#" class="hover:text-gold transition-colors">Contact</a></li>
+<li><a href="#" class="hover:text-gold transition-colors">Newsletter</a></li>
+</ul>
+</div>
+</div>
+<div class="border-t border-rice/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-sm">2024 TaoInsight. All rights reserved.</p>
+<div class="flex gap-6 text-sm">
+<a href="#" class="hover:text-gold transition-colors">Privacy Policy</a>
+<a href="#" class="hover:text-gold transition-colors">Terms of Service</a>
+</div>
+</div>
+</div>
+</footer>
+
+<script>
+// FAQ Toggle
+function toggleFaq(btn) {
+    const content = btn.nextElementSibling;
+    const arrow = btn.querySelector('svg');
+    content.classList.toggle('hidden');
+    arrow.style.transform = content.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+}
+
+// Interactive Demo
+let demoLines = [];
+let demoCurrentLine = 0;
+let isShaking = false;
+
+function shakeDemoCoins() {
+    if (isShaking || demoCurrentLine >= 6) return;
+    isShaking = true;
+
+    const btn = document.getElementById('demo-shake-btn');
+    btn.disabled = true;
+    btn.innerHTML = '<svg width="20" height="20" class="animate-spin"><use href="#icon-rotate"/></svg> Shaking...';
+
+    const coins = [
+        document.getElementById('demo-coin-1'),
+        document.getElementById('demo-coin-2'),
+        document.getElementById('demo-coin-3')
+    ];
+
+    // Animate
+    coins.forEach(coin => {
+        coin.style.animation = 'coinFlip 1s ease-out';
+    });
+
+    setTimeout(() => {
+        const values = [
+            Math.random() > 0.5 ? 'H' : 'T',
+            Math.random() > 0.5 ? 'H' : 'T',
+            Math.random() > 0.5 ? 'H' : 'T'
+        ];
+
+        const heads = values.filter(v => v === 'H').length;
+        let lineValue, lineName, lineSymbol, isChanging;
+
+        if (heads === 3) {
+            lineValue = 9; lineName = 'Old Yang'; lineSymbol = '⚊○'; isChanging = true;
+        } else if (heads === 2) {
+            lineValue = 8; lineName = 'Young Yin'; lineSymbol = '⚋⚋'; isChanging = false;
+        } else if (heads === 1) {
+            lineValue = 7; lineName = 'Young Yang'; lineSymbol = '⚊'; isChanging = false;
+        } else {
+            lineValue = 6; lineName = 'Old Yin'; lineSymbol = '⚋×'; isChanging = true;
+        }
+
+        demoLines.push({ value: lineValue, name: lineName, symbol: lineSymbol, changing: isChanging });
+        demoCurrentLine++;
+
+        // Update coins
+        coins.forEach((coin, i) => {
+            coin.style.animation = '';
+            const isHead = values[i] === 'H';
+            coin.className = `w-24 h-24 rounded-full flex flex-col items-center justify-center shadow-lg text-2xl font-bold transition-all ${isHead ? 'bg-ink text-rice' : 'bg-rice text-ink border-4 border-ink'}`;
+            coin.innerHTML = `${values[i]}<span class="text-xs opacity-70">${isHead ? 'Heads' : 'Tails'}</span>`;
+        });
+
+        // Show result
+        document.getElementById('demo-result').classList.remove('hidden');
+        document.getElementById('demo-line-result').innerHTML = lineSymbol;
+        document.getElementById('demo-line-detail').textContent = `${lineName} (${lineValue}) — ${heads} Heads, ${3-heads} Tails`;
+
+        // Update hexagram
+        updateDemoHexagram();
+
+        // Update progress
+        const progress = (demoCurrentLine / 6) * 100;
+        document.getElementById('progress-bar').style.width = progress + '%';
+        document.getElementById('progress-text').textContent = `Line ${Math.min(demoCurrentLine + 1, 6)} of 6`;
+
+        if (demoCurrentLine >= 6) {
+            document.getElementById('demo-status').textContent = 'Divination Complete!';
+            document.getElementById('demo-final').classList.remove('hidden');
+            btn.innerHTML = '<svg width="20" height="20"><use href="#icon-check"/></svg> Complete';
+        } else {
+            document.getElementById('demo-status').textContent = `Line ${demoCurrentLine} recorded. Cast Line ${demoCurrentLine + 1}.`;
+            btn.disabled = false;
+            btn.innerHTML = '<svg width="20" height="20"><use href="#icon-hand"/></svg> Shake & Cast';
+        }
+
+        isShaking = false;
+    }, 1000);
+}
+
+function updateDemoHexagram() {
+    const container = document.getElementById('demo-hexagram');
+    container.innerHTML = '';
+    for (let i = 6; i >= 1; i--) {
+        const line = demoLines[i - 1];
+        let html = '';
+        if (line) {
+            const isYang = line.value === 7 || line.value === 9;
+            const color = line.changing ? 'bg-cinnabar' : 'bg-ink';
+            if (isYang) {
+                html = `<div class="flex items-center gap-2"><div class="h-4 w-56 rounded-sm ${color}"></div>${line.changing ? '<span class="text-cinnabar text-xs">○</span>' : ''}</div>`;
+            } else {
+                html = `<div class="flex items-center gap-2"><div class="h-4 w-24 rounded-sm ${color}"></div><div class="w-4"></div><div class="h-4 w-24 rounded-sm ${color}"></div>${line.changing ? '<span class="text-cinnabar text-xs">×</span>' : ''}</div>`;
+            }
+        } else {
+            html = `<div class="h-4 w-56 rounded-sm bg-ink/10" data-line="${i}"></div>`;
+        }
+        container.innerHTML += html;
+    }
+}
+
+function resetDemo() {
+    demoLines = [];
+    demoCurrentLine = 0;
+    isShaking = false;
+    document.getElementById('demo-result').classList.add('hidden');
+    document.getElementById('demo-final').classList.add('hidden');
+    document.getElementById('progress-bar').style.width = '0%';
+    document.getElementById('progress-text').textContent = 'Line 1 of 6';
+    document.getElementById('demo-status').textContent = 'Click "Shake & Cast" to begin Line 1';
+
+    const btn = document.getElementById('demo-shake-btn');
+    btn.disabled = false;
+    btn.innerHTML = '<svg width="20" height="20"><use href="#icon-hand"/></svg> Shake & Cast';
+
+    const coins = [
+        document.getElementById('demo-coin-1'),
+        document.getElementById('demo-coin-2'),
+        document.getElementById('demo-coin-3')
+    ];
+    coins.forEach(coin => {
+        coin.style.animation = '';
+        coin.className = 'w-24 h-24 rounded-full bg-ink text-rice flex flex-col items-center justify-center shadow-lg text-2xl font-bold transition-all';
+        coin.innerHTML = 'H<span class="text-xs opacity-70">Heads</span>';
+    });
+
+    updateDemoHexagram();
+}
+</script>
+
+</body>
+</html>

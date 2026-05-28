@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TaoInsight - Ancient Wisdom for Modern Life</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script>
+tailwind.config = {
+    theme: {
+        extend: {
+            colors: {
+                'ink': '#1a1a1a',
+                'rice': '#f5f0e8',
+                'cinnabar': '#c41e3a',
+                'bronze': '#4a6741',
+                'gold': '#c9a227',
+            },
+            fontFamily: {
+                'serif': ['Playfair Display', 'Georgia', 'serif'],
+                'sans': ['Inter', 'sans-serif'],
+            }
+        }
+    }
+}
+</script>
+<style>
+@keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.yin-yang-rotate { animation: rotate 20s linear infinite; }
+.line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+html { scroll-behavior: smooth; }
+.page { display: none; }
+.page.active { display: block; }
+</style>
+</head>
+<body class="font-sans antialiased text-ink bg-rice">
+
+<!-- SVG Symbols -->
+<svg style="display:none">
+<symbol id="icon-yinyang" viewBox="0 0 200 200">
+<circle cx="100" cy="100" r="98" fill="#1a1a1a" stroke="#c9a227" stroke-width="2"/>
+<path d="M100,2 A49,49 0 0,1 100,98 A49,49 0 0,0 100,198 A98,98 0 0,1 100,2" fill="#f5f0e8"/>
+<circle cx="100" cy="50" r="15" fill="#1a1a1a"/>
+<circle cx="100" cy="150" r="15" fill="#f5f0e8"/>
+</symbol>
+<symbol id="icon-star" viewBox="0 0 24 24" fill="currentColor"><polygon points="12,2 15,9 22,9 16,14 18,22 12,17 6,22 8,14 2,9 9,9"/></symbol>
+<symbol id="icon-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></symbol>
+<symbol id="icon-sparkles" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M3 12h18M7.5 7.5l9 9M16.5 7.5l-9 9"/></symbol>
+<symbol id="icon-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></symbol>
+<symbol id="icon-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></symbol>
+<symbol id="icon-back" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></symbol>
+<symbol id="icon-cart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></symbol>
+<symbol id="icon-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></symbol>
+<symbol id="icon-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></symbol>
+<symbol id="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></symbol>
+<symbol id="icon-rotate" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></symbol>
+<symbol id="icon-flame" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></symbol>
+<symbol id="icon-droplet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></symbol>
+<symbol id="icon-mountain" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+<symbol id="icon-wind" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"/></symbol>
+<symbol id="icon-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></symbol>
+<symbol id="icon-square" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/></symbol>
+<symbol id="icon-triangle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></symbol>
+<symbol id="icon-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></symbol>
+<symbol id="icon-filter" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></symbol>
+</svg>
+
+<!-- Navigation -->
+<nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300 bg-transparent">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-16">
+<a href="#" onclick="showPage('home')" class="flex items-center gap-2">
+<svg width="32" height="32" class="yin-yang-rotate"><use href="#icon-yinyang"/></svg>
+<span class="text-rice font-serif text-xl font-bold tracking-wider">TaoInsight</span>
+</a>
+<div class="hidden md:flex items-center gap-8">
+<a href="#" onclick="showPage('wisdom')" class="text-rice/80 hover:text-gold transition-colors text-sm tracking-wide uppercase">Wisdom</a>
+<a href="#" onclick="showPage('divination')" class="text-rice/80 hover:text-gold transition-colors text-sm tracking-wide uppercase">Divination</a>
+<a href="#" onclick="showPage('shop')" class="text-rice/80 hover:text-gold transition-colors text-sm tracking-wide uppercase">Feng Shui</a>
+<button onclick="showPage('divination')" class="bg-cinnabar text-rice px-4 py-2 rounded-sm text-sm hover:bg-cinnabar/80 transition-colors">Free Reading</button>
+</div>
+<button class="md:hidden text-rice" onclick="toggleMobileMenu()">
+<svg width="24" height="24"><use href="#icon-menu"/></svg>
+</button>
+</div>
+</div>
+<div id="mobile-menu" class="hidden md:hidden bg-ink/95 backdrop-blur-md">
+<a href="#" onclick="showPage('wisdom');toggleMobileMenu()" class="block px-4 py-3 text-rice/80 hover:text-gold">Wisdom</a>
+<a href="#" onclick="showPage('divination');toggleMobileMenu()" class="block px-4 py-3 text-rice/80 hover:text-gold">Divination</a>
+<a href="#" onclick="showPage('shop');toggleMobileMenu()" class="block px-4 py-3 text-rice/80 hover:text-gold">Feng Shui Store</a>
+</div>
+</nav>
+
+<!-- ==================== HOME PAGE ==================== -->
+<div id="page-home" class="page active">
+<!-- Hero -->
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-ink">
+<div class="absolute inset-0 opacity-10">
+<div class="absolute top-1/4 left-1/4 w-96 h-96 bg-gold rounded-full blur-3xl"></div>
+<div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cinnabar rounded-full blur-3xl"></div>
+</div>
+<div class="relative z-10 max-w-7xl mx-auto px-4 text-center">
+<div class="mb-8 flex justify-center">
+<svg width="120" height="120" class="yin-yang-rotate"><use href="#icon-yinyang"/></svg>
+</div>
+<h1 class="text-4xl md:text-6xl lg:text-7xl font-serif text-rice mb-6 leading-tight">
+Unlock Ancient Chinese<br><span class="text-gold">Wisdom</span> for Modern Life
+</h1>
+<p class="text-lg md:text-xl text-rice/70 max-w-2xl mx-auto mb-10 leading-relaxed">
+Discover the I Ching, master Feng Shui, and transform your space with 
+5,000 years of Taoist philosophy. Your journey to harmony begins here.
+</p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center">
+<button onclick="showPage('divination')" class="bg-cinnabar text-rice px-8 py-4 rounded-sm text-lg hover:bg-cinnabar/80 transition-all flex items-center justify-center gap-2">
+<svg width="20" height="20"><use href="#icon-sparkles"/></svg>
+Get Free I Ching Reading
+</button>
+<button onclick="document.getElementById('pillars').scrollIntoView({behavior:'smooth'})" class="border border-rice/30 text-rice px-8 py-4 rounded-sm text-lg hover:bg-rice/10 transition-all">
+Explore Wisdom
+</button>
+</div>
+<div class="mt-16 grid grid-cols-3 gap-8 max-w-3xl mx-auto">
+<div class="text-center"><div class="text-2xl md:text-3xl font-serif text-gold">5,000+</div><div class="text-sm text-rice/60 mt-1">Years of Wisdom</div></div>
+<div class="text-center"><div class="text-2xl md:text-3xl font-serif text-gold">64</div><div class="text-sm text-rice/60 mt-1">Hexagrams</div></div>
+<div class="text-center"><div class="text-2xl md:text-3xl font-serif text-gold">8</div><div class="text-sm text-rice/60 mt-1">Trigrams</div></div>
+</div>
+</div>
+</section>
+
+<!-- Three Pillars -->
+<section id="pillars" class="py-24 bg-rice">
+<div class="max-w-7xl mx-auto px-4">
+<div class="text-center mb-16">
+<h2 class="text-3xl md:text-4xl font-serif text-ink mb-4">Three Paths to Harmony</h2>
+<p class="text-ink/60 max-w-2xl mx-auto">Whether you seek knowledge, guidance, or transformation — your journey begins with one of these three gates.</p>
+</div>
+<div class="grid md:grid-cols-3 gap-8">
+<!-- Wisdom -->
+<div class="group bg-white rounded-lg border border-ink/10 p-8 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer" onclick="showPage('wisdom')">
+<div class="inline-flex p-3 rounded-lg mb-6 bg-bronze/10 text-bronze border border-bronze/30">
+<svg width="28" height="28"><use href="#icon-book"/></svg>
+</div>
+<h3 class="text-2xl font-serif text-ink mb-1">Yi Jing Wisdom</h3>
+<p class="text-sm text-ink/40 mb-4 font-serif">易经知识</p>
+<p class="text-ink/70 mb-6 leading-relaxed">Explore the Tao, Yin-Yang, Five Elements, and the 64 Hexagrams. Understand the ancient framework that has guided decisions for millennia.</p>
+<ul class="space-y-2 mb-8">
+<li class="flex items-center gap-2 text-sm text-ink/60"><svg width="12" height="12" class="text-gold"><use href="#icon-star"/></svg>Tao Origin & Philosophy</li>
+<li class="flex items-center gap-2 text-sm text-ink/60"><svg width="12" height="12" class="text-gold"><use href="#icon-star"/></svg>Yin-Yang Dynamics</li>
+<li class="flex items-center gap-2 text-sm text-ink/60"><svg width="12" height="12" class="text-gold"><use href="#icon-star"/></svg>Five Elements Theory</li>
+<li class="flex items-center gap-2 text-sm text-ink/60"><svg width="12" height="12" class="text-gold"><use href="#icon-star"/></svg>Heavenly Stems & Earthly Branches</li>
+<li class="flex items-center gap-2 text-sm text-ink/60"><svg width="12" height="12" class="text-gold"><use href="#icon-star"/></svg>64 Hexagrams Guide</li>
+</ul>
+<span class="inline-flex items-center gap-2 text-ink font-medium hover:text-cinnabar transition-colors group-hover:gap-3">Start Learning <svg width="16" height="16"><use href="#icon-arrow"/></svg></span>
+</div>
+
+<!-- Divination -->
+<div class="group bg-white rounded-lg border border-ink/10 p-8 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer" onclick="showPage('divination')">
+<div class="inline-flex p-3 rounded-lg mb-6 bg-cinnabar/10 text-cinnabar border border-cinnabar/30">
+<svg width="28" height="28"><use href="#icon-sparkles"/></svg>
+</div>
+<h3 class="text-2xl font-serif text-ink mb-1">Liu Yao Divination</h3>
+<p class="text-sm text-ink/40 mb-4 font-serif">六爻预测</p>
+<p class="text-ink/70 mb-6 leading-relaxed">Experience authentic I Ching divination. Cast your coins, receive your hexagram, and unlock personalized guidance for life's important questions.</p>
+<ul class="space-y-2 mb-8">
+<li class="flex items-center gap-2 text-sm text-ink/60"><svg width="12" height="12" class="text-gold"><use href="#icon-star"/></svg>Free AI-Powered Reading</li>
+<li class="flex items-center gap-2 text-sm text-ink/60"><svg width="12" height="12" class="text-gold"><use href="#icon-star"/></svg>Authentic Coin Method</li>
+<li class="flex items-center gap-2 text-sm text-ink/60"><svg width="12" height="12" class="text-gold"><use href="#icon-star"/></svg>Detailed Hexagram Analysis</li>
+<li class="flex items-center gap-2 text-sm text-ink/60"><svg width="12" height="12" class="text-gold"><use href="#icon-star"/></svg>Master Consultation Available</li>
+<li class="flex items-center gap-2 text-sm text-ink/60"><svg width="12" height="12" class="text-gold"><use href="#icon-star"/></svg>Reading History</li>
+</ul>
+<span class="inline-flex items-center gap-2 text-ink font-medium hover:text-cinnabar transition-colors group-hover:gap-3">Cast Your Coins <svg width="16" height="16"><use href="#icon-arrow"/></svg></span>
+</div>
+
+<!-- Feng Shui -->
+<div class="group bg-white rounded-lg border border-ink/10 p-8 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer" onclick="showPage('shop')">
+<div class="inline-flex p-3 rounded-lg mb-6 bg-gold/10 text-gold border border-gold/30">
+<svg width="28" height="28"><use href="#icon-home"/></svg>
+</div>
+<h3 class="text-2xl font-serif text-ink mb-1">Feng Shui Store</h3>
+<p class="text-sm text-ink/40 mb-4 font-serif">风水改运</p>
+<p class="text-ink/70 mb-6 leading-relaxed">Transform your living space with authentic Feng Shui objects. From wealth corners to protective charms, curated items blessed with purpose.</p>
+<ul class="space-y-2 mb-8">
+<li class="flex items-center gap-2 text-sm text-ink/60"><svg width="12" height="12" class="text-gold"><use href="#icon-star"/></svg>Wealth & Abundance Items</li>
+<li class="flex items-center gap-2 text-sm text-ink/60"><svg width="12" height="12" class="text-gold"><use href="#icon-star"/></svg>Protective Charms</li>
+<li class="flex items-center gap-2 text-sm text-ink/60"><svg width="12" height="12" class="text-gold"><use href="#icon-star"/></svg>Five Elements Decor</li>
+<li class="flex items-center gap-2 text-sm text-ink/60"><svg width="12" height="12" class="text-gold"><use href="#icon-star"/></svg>Bagua Mirrors</li>
+<li class="flex items-center gap-2 text-sm text-ink/60"><svg width="12" height="12" class="text-gold"><use href="#icon-star"/></svg>Personal Lucky Objects</li>
+</ul>
+<span class="inline-flex items-center gap-2 text-ink font-medium hover:text-cinnabar transition-colors group-hover:gap-3">Shop Collection <svg width="16" height="16"><use href="#icon-arrow"/></svg></span>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Featured Products -->
+<section class="py-24 bg-ink">
+<div class="max-w-7xl mx-auto px-4">
+<div class="flex justify-between items-end mb-12">
+<div>
+<h2 class="text-3xl md:text-4xl font-serif text-rice mb-2">Curated Feng Shui Objects</h2>
+<p class="text-rice/60">Each item selected for authentic energy and purpose</p>
+</div>
+<button onclick="showPage('shop')" class="hidden md:inline-flex items-center gap-2 text-gold hover:text-rice transition-colors">
+View All <svg width="16" height="16"><use href="#icon-arrow"/></svg>
+</button>
+</div>
+<div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="group bg-ink border border-rice/10 rounded-lg overflow-hidden hover:border-gold/50 transition-all cursor-pointer" onclick="showPage('shop')">
+<div class="aspect-square bg-gradient-to-br from-ink to-ink/80 flex items-center justify-center relative">
+<div class="w-24 h-24 rounded-full bg-rice/5 border border-rice/20 flex items-center justify-center">
+<svg width="32" height="32" class="text-gold/60"><use href="#icon-sparkles"/></svg>
+</div>
+<span class="absolute top-3 right-3 bg-cinnabar text-rice text-xs px-2 py-1 rounded-sm">Best Seller</span>
+</div>
+<div class="p-5">
+<p class="text-xs text-bronze uppercase tracking-wider mb-1">Health & Protection</p>
+<h3 class="text-rice font-serif text-lg mb-2">Brass Wu Lou (Calabash)</h3>
+<p class="text-rice/50 text-sm mb-4">Traditional Feng Shui cure for illness and negative energy.</p>
+<div class="flex justify-between items-center">
+<span class="text-gold text-xl font-serif">$48</span>
+<button class="text-sm text-rice/70 hover:text-gold transition-colors border border-rice/20 px-3 py-1 rounded-sm hover:border-gold">Add to Cart</button>
+</div>
+</div>
+</div>
+<div class="group bg-ink border border-rice/10 rounded-lg overflow-hidden hover:border-gold/50 transition-all cursor-pointer" onclick="showPage('shop')">
+<div class="aspect-square bg-gradient-to-br from-ink to-ink/80 flex items-center justify-center relative">
+<div class="w-24 h-24 rounded-full bg-rice/5 border border-rice/20 flex items-center justify-center">
+<svg width="32" height="32" class="text-gold/60"><use href="#icon-star"/></svg>
+</div>
+<span class="absolute top-3 right-3 bg-cinnabar text-rice text-xs px-2 py-1 rounded-sm">Popular</span>
+</div>
+<div class="p-5">
+<p class="text-xs text-bronze uppercase tracking-wider mb-1">Wealth Attraction</p>
+<h3 class="text-rice font-serif text-lg mb-2">Obsidian Pixiu Bracelet</h3>
+<p class="text-rice/50 text-sm mb-4">Legendary wealth beast paired with protective black obsidian.</p>
+<div class="flex justify-between items-center">
+<span class="text-gold text-xl font-serif">$36</span>
+<button class="text-sm text-rice/70 hover:text-gold transition-colors border border-rice/20 px-3 py-1 rounded-sm hover:border-gold">Add to Cart</button>
+</div>
+</div>
+</div>
+<div class="group bg-ink border border-rice/10 rounded-lg overflow-hidden hover:border-gold/50 transition-all cursor-pointer" onclick="showPage('shop')">
+<div class="aspect-square bg-gradient-to-br from-ink to-ink/80 flex items-center justify-center relative">
+<div class="w-24 h-24 rounded-full bg-rice/5 border border-rice/20 flex items-center justify-center">
+<svg width="32" height="32" class="text-gold/60"><use href="#icon-circle"/></svg>
+</div>
+<span class="absolute top-3 right-3 bg-cinnabar text-rice text-xs px-2 py-1 rounded-sm">Essential</span>
+</div>
+<div class="p-5">
+<p class="text-xs text-bronze uppercase tracking-wider mb-1">Space Protection</p>
+<h3 class="text-rice font-serif text-lg mb-2">Bagua Mirror Set</h3>
+<p class="text-rice/50 text-sm mb-4">Complete set of flat, convex, and concave mirrors.</p>
+<div class="flex justify-between items-center">
+<span class="text-gold text-xl font-serif">$62</span>
+<button class="text-sm text-rice/70 hover:text-gold transition-colors border border-rice/20 px-3 py-1 rounded-sm hover:border-gold">Add to Cart</button>
+</div>
+</div>
+</div>
+<div class="group bg-ink border border-rice/10 rounded-lg overflow-hidden hover:border-gold/50 transition-all cursor-pointer" onclick="showPage('shop')">
+<div class="aspect-square bg-gradient-to-br from-ink to-ink/80 flex items-center justify-center relative">
+<div class="w-24 h-24 rounded-full bg-rice/5 border border-rice/20 flex items-center justify-center">
+<svg width="32" height="32" class="text-gold/60"><use href="#icon-triangle"/></svg>
+</div>
+<span class="absolute top-3 right-3 bg-cinnabar text-rice text-xs px-2 py-1 rounded-sm">New</span>
+</div>
+<div class="p-5">
+<p class="text-xs text-bronze uppercase tracking-wider mb-1">Energy Balance</p>
+<h3 class="text-rice font-serif text-lg mb-2">Five Elements Crystal Grid</h3>
+<p class="text-rice/50 text-sm mb-4">Curated crystals representing Wood, Fire, Earth, Metal, Water.</p>
+<div class="flex justify-between items-center">
+<span class="text-gold text-xl font-serif">$89</span>
+<button class="text-sm text-rice/70 hover:text-gold transition-colors border border-rice/20 px-3 py-1 rounded-sm hover:border-gold">Add to Cart</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Testimonials -->
+<section class="py-24 bg-rice">
+<div class="max-w-7xl mx-auto px-4">
+<h2 class="text-3xl md:text-4xl font-serif text-ink text-center mb-16">Voices from the Community</h2>
+<div class="grid md:grid-cols-3 gap-8">
+<div class="bg-white p-8 rounded-lg border border-ink/10 shadow-sm">
+<div class="flex gap-1 mb-4">
+<svg width="16" height="16" class="text-gold fill-gold"><use href="#icon-star"/></svg>
+<svg width="16" height="16" class="text-gold fill-gold"><use href="#icon-star"/></svg>
+<svg width="16" height="16" class="text-gold fill-gold"><use href="#icon-star"/></svg>
+<svg width="16" height="16" class="text-gold fill-gold"><use href="#icon-star"/></svg>
+<svg width="16" height="16" class="text-gold fill-gold"><use href="#icon-star"/></svg>
+</div>
+<p class="text-ink/80 mb-6 leading-relaxed italic">"The I Ching reading gave me clarity during a major career decision. The hexagram interpretation was surprisingly precise and actionable."</p>
+<div><p class="font-medium text-ink">Sarah M.</p><p class="text-sm text-ink/50">California</p></div>
+</div>
+<div class="bg-white p-8 rounded-lg border border-ink/10 shadow-sm">
+<div class="flex gap-1 mb-4">
+<svg width="16" height="16" class="text-gold fill-gold"><use href="#icon-star"/></svg>
+<svg width="16" height="16" class="text-gold fill-gold"><use href="#icon-star"/></svg>
+<svg width="16" height="16" class="text-gold fill-gold"><use href="#icon-star"/></svg>
+<svg width="16" height="16" class="text-gold fill-gold"><use href="#icon-star"/></svg>
+<svg width="16" height="16" class="text-gold fill-gold"><use href="#icon-star"/></svg>
+</div>
+<p class="text-ink/80 mb-6 leading-relaxed italic">"After placing the wealth corner items as recommended, I received an unexpected promotion within two months. Coincidence? Maybe. But I'm not moving them."</p>
+<div><p class="font-medium text-ink">James K.</p><p class="text-sm text-ink/50">New York</p></div>
+</div>
+<div class="bg-white p-8 rounded-lg border border-ink/10 shadow-sm">
+<div class="flex gap-1 mb-4">
+<svg width="16" height="16" class="text-gold fill-gold"><use href="#icon-star"/></svg>
+<svg width="16" height="16" class="text-gold fill-gold"><use href="#icon-star"/></svg>
+<svg width="16" height="16" class="text-gold fill-gold"><use href="#icon-star"/></svg>
+<svg width="16" height="16" class="text-gold fill-gold"><use href="#icon-star"/></svg>
+<svg width="16" height="16" class="text-gold fill-gold"><use href="#icon-star"/></svg>
+</div>
+<p class="text-ink/80 mb-6 leading-relaxed italic">"The knowledge section helped me understand Feng Shui beyond superstition. It's actually a sophisticated system of environmental psychology."</p>
+<div><p class="font-medium text-ink">Dr. Emily Chen</p><p class="text-sm text-ink/50">Texas</p></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Newsletter -->
+<section class="py-24 bg-bronze/10">
+<div class="max-w-3xl mx-auto px-4 text-center">
+<svg width="32" height="32" class="text-bronze mx-auto mb-4"><use href="#icon-mail"/></svg>
+<h2 class="text-3xl font-serif text-ink mb-4">Join 10,000+ Seekers</h2>
+<p class="text-ink/70 mb-8">Receive weekly Tao wisdom, moon phase insights, and exclusive Feng Shui tips directly to your inbox.</p>
+<div class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+<input type="email" placeholder="Enter your email" class="flex-1 px-4 py-3 rounded-sm border border-ink/20 bg-white focus:outline-none focus:border-bronze"/>
+<button class="bg-ink text-rice px-6 py-3 rounded-sm hover:bg-ink/80 transition-colors">Subscribe</button>
+</div>
+<p class="text-xs text-ink/40 mt-4">No spam. Unsubscribe anytime. Your privacy is sacred.</p>
+</div>
+</section>
+</div>
+
+<!-- ==================== DIVINATION PAGE ==================== -->
+<div id="page-divination" class="page">
+<div class="min-h-screen bg-rice">
+<div class="bg-ink text-rice py-4">
+<div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
+<button onclick="showPage('home')" class="flex items-center gap-2 text-rice/70 hover:text-gold transition-colors">
+<svg width="20" height="20"><use href="#icon-back"/></svg>
+Back to Home
+</button>
+</div>
+</div>
+<div class="max-w-4xl mx-auto px-4 py-16">
+<div class="text-center mb-12">
+<svg width="48" height="48" class="text-cinnabar mx-auto mb-4"><use href="#icon-sparkles"/></svg>
+<h1 class="text-4xl md:text-5xl font-serif text-ink mb-4">I Ching Divination</h1>
+<p class="text-xl text-ink/60">六爻算卦 · Liu Yao Divination</p>
+</div>
+<div id="divination-intro" class="bg-white rounded-lg border border-ink/10 p-8 mb-8">
+<div class="flex items-center justify-between mb-4">
+<h2 class="text-2xl font-serif text-ink">How It Works</h2>
+<a href="guide.html" target="_blank" class="text-sm text-cinnabar hover:text-cinnabar/80 transition-colors inline-flex items-center gap-1">
+<svg width="16" height="16"><use href="#icon-book"/></svg>
+View Detailed Guide
+</a>
+</div>
+<div class="grid md:grid-cols-3 gap-6 mb-8">
+<div class="text-center">
+<div class="w-12 h-12 rounded-full bg-bronze/10 text-bronze flex items-center justify-center text-xl font-bold mx-auto mb-3">1</div>
+<h3 class="font-medium text-ink mb-2">Focus Your Question</h3>
+<p class="text-sm text-ink/60">Think clearly about what you seek guidance on.</p>
+</div>
+<div class="text-center">
+<div class="w-12 h-12 rounded-full bg-bronze/10 text-bronze flex items-center justify-center text-xl font-bold mx-auto mb-3">2</div>
+<h3 class="font-medium text-ink mb-2">Cast the Coins</h3>
+<p class="text-sm text-ink/60">Three coins determine each line of your hexagram.</p>
+</div>
+<div class="text-center">
+<div class="w-12 h-12 rounded-full bg-bronze/10 text-bronze flex items-center justify-center text-xl font-bold mx-auto mb-3">3</div>
+<h3 class="font-medium text-ink mb-2">Receive Wisdom</h3>
+<p class="text-sm text-ink/60">Your hexagram reveals the pattern of change.</p>
+</div>
+</div>
+<div class="border-t border-ink/10 pt-6">
+<div class="bg-bronze/5 rounded-lg p-4 mb-4 flex items-center gap-3">
+<svg width="20" height="20" class="text-bronze"><use href="#icon-coins"/></svg>
+<div>
+<p class="text-sm text-ink/80">New to coin divination? Learn the <a href="guide.html" target="_blank" class="text-cinnabar hover:underline">proper casting method</a> with our step-by-step guide.</p>
+</div>
+</div>
+<label class="block text-sm font-medium text-ink mb-2">Your Question (Optional)</label>
+<textarea id="question-input" placeholder="What guidance do you seek?" class="w-full px-4 py-3 rounded-sm border border-ink/20 focus:outline-none focus:border-bronze mb-4 resize-none" rows="3"></textarea>
+<button onclick="startDivination()" class="w-full bg-cinnabar text-rice py-4 rounded-sm text-lg hover:bg-cinnabar/80 transition-colors flex items-center justify-center gap-2">
+<svg width="20" height="20"><use href="#icon-sparkles"/></svg>
+Begin Divination
+</button>
+</div>
+</div>
+<div id="divination-casting" class="hidden">
+<div class="bg-ink text-rice rounded-lg p-8 mb-8">
+<div class="text-center mb-6">
+<h2 class="text-2xl font-serif mb-2">Casting Line <span id="current-line">1</span> of 6</h2>
+<p class="text-rice/60">Choose your casting method below</p>
+</div>
+
+<!-- Method Selection -->
+<div class="bg-rice/5 rounded-lg p-4 mb-6">
+<div class="flex justify-center gap-4 mb-4">
+<button id="method-manual" onclick="setCastingMethod('manual')" class="px-4 py-2 rounded-sm text-sm bg-cinnabar text-rice transition-colors">🪙 Use Real Coins (Recommended)</button>
+<button id="method-random" onclick="setCastingMethod('random')" class="px-4 py-2 rounded-sm text-sm bg-rice/10 text-rice/70 hover:bg-rice/20 transition-colors">🎲 Random Generate</button>
+</div>
+<p id="method-desc" class="text-xs text-rice/50 text-center">Shake three real coins, then record the result below</p>
+</div>
+
+<!-- Manual Input Area -->
+<div id="manual-input-area" class="mb-8">
+<div class="flex justify-center gap-6 mb-6">
+<div class="text-center">
+<div id="coin-1" class="w-20 h-20 rounded-full bg-rice text-ink border-2 border-ink flex flex-col items-center justify-center shadow-lg text-xl font-bold mb-2 cursor-pointer hover:scale-105 transition-transform" onclick="toggleCoin(1)">H<span class="text-[10px] opacity-70">Heads</span></div>
+<div class="flex gap-1 justify-center">
+<button onclick="setCoin(1, 'H')" class="w-8 h-8 rounded-full bg-ink text-rice border border-rice/30 text-xs hover:bg-cinnabar transition-colors">H</button>
+<button onclick="setCoin(1, 'T')" class="w-8 h-8 rounded-full bg-rice text-ink border border-ink text-xs hover:bg-cinnabar transition-colors">T</button>
+</div>
+</div>
+<div class="text-center">
+<div id="coin-2" class="w-20 h-20 rounded-full bg-rice text-ink border-2 border-ink flex flex-col items-center justify-center shadow-lg text-xl font-bold mb-2 cursor-pointer hover:scale-105 transition-transform" onclick="toggleCoin(2)">H<span class="text-[10px] opacity-70">Heads</span></div>
+<div class="flex gap-1 justify-center">
+<button onclick="setCoin(2, 'H')" class="w-8 h-8 rounded-full bg-ink text-rice border border-rice/30 text-xs hover:bg-cinnabar transition-colors">H</button>
+<button onclick="setCoin(2, 'T')" class="w-8 h-8 rounded-full bg-rice text-ink border border-ink text-xs hover:bg-cinnabar transition-colors">T</button>
+</div>
+</div>
+<div class="text-center">
+<div id="coin-3" class="w-20 h-20 rounded-full bg-rice text-ink border-2 border-ink flex flex-col items-center justify-center shadow-lg text-xl font-bold mb-2 cursor-pointer hover:scale-105 transition-transform" onclick="toggleCoin(3)">H<span class="text-[10px] opacity-70">Heads</span></div>
+<div class="flex gap-1 justify-center">
+<button onclick="setCoin(3, 'H')" class="w-8 h-8 rounded-full bg-ink text-rice border border-rice/30 text-xs hover:bg-cinnabar transition-colors">H</button>
+<button onclick="setCoin(3, 'T')" class="w-8 h-8 rounded-full bg-rice text-ink border border-ink text-xs hover:bg-cinnabar transition-colors">T</button>
+</div>
+</div>
+</div>
+<div class="text-center">
+<button id="manual-cast-btn" onclick="castManualLine()" class="bg-cinnabar text-rice px-8 py-3 rounded-sm hover:bg-cinnabar/80 transition-colors inline-flex items-center gap-2">
+<svg width="20" height="20"><use href="#icon-check"/></svg>
+Record Line <span id="manual-line-num">1</span>
+</button>
+</div>
+</div>
+
+<!-- Random Generate Area (hidden by default) -->
+<div id="random-area" class="hidden mb-8">
+<div class="flex justify-center gap-6 mb-6">
+<div id="random-coin-1" class="w-20 h-20 rounded-full bg-rice text-ink border-2 border-ink flex flex-col items-center justify-center shadow-lg text-xl font-bold">H<span class="text-[10px] opacity-70">Heads</span></div>
+<div id="random-coin-2" class="w-20 h-20 rounded-full bg-rice text-ink border-2 border-ink flex flex-col items-center justify-center shadow-lg text-xl font-bold">H<span class="text-[10px] opacity-70">Heads</span></div>
+<div id="random-coin-3" class="w-20 h-20 rounded-full bg-rice text-ink border-2 border-ink flex flex-col items-center justify-center shadow-lg text-xl font-bold">H<span class="text-[10px] opacity-70">Heads</span></div>
+</div>
+<div class="text-center">
+<button id="random-cast-btn" onclick="castRandomLine()" class="bg-cinnabar text-rice px-8 py-3 rounded-sm hover:bg-cinnabar/80 transition-colors inline-flex items-center gap-2">
+<svg width="20" height="20"><use href="#icon-hand"/></svg>
+Shake & Cast Line <span id="random-line-num">1</span>
+</button>
+</div>
+</div>
+
+<!-- Guide Link -->
+<div class="bg-gold/10 rounded-lg p-4 mb-6 border border-gold/30">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<svg width="20" height="20" class="text-gold"><use href="#icon-book"/></svg>
+<div>
+<p class="text-rice text-sm font-medium">New to coin divination?</p>
+<p class="text-rice/60 text-xs">Learn the proper casting method with our step-by-step guide</p>
+</div>
+</div>
+<a href="guide.html" target="_blank" class="bg-gold text-ink px-4 py-2 rounded-sm text-sm hover:bg-gold/80 transition-colors inline-flex items-center gap-1">
+View Guide
+<svg width="14" height="14"><use href="#icon-arrow"/></svg>
+</a>
+</div>
+</div>
+
+<!-- Hexagram Building -->
+<div class="bg-rice/5 rounded-lg p-6 mb-8">
+<h3 class="text-rice font-serif text-center mb-4">Your Hexagram</h3>
+<div id="hexagram-lines" class="flex flex-col-reverse items-center gap-1">
+<div class="h-3 w-48 rounded-sm bg-rice/20"></div>
+<div class="h-3 w-48 rounded-sm bg-rice/20"></div>
+<div class="h-3 w-48 rounded-sm bg-rice/20"></div>
+<div class="h-3 w-48 rounded-sm bg-rice/20"></div>
+<div class="h-3 w-48 rounded-sm bg-rice/20"></div>
+<div class="h-3 w-48 rounded-sm bg-rice/20"></div>
+</div>
+</div>
+
+<div class="flex justify-center gap-4">
+<button onclick="resetDivination()" class="border border-rice/30 text-rice px-6 py-3 rounded-sm hover:bg-rice/10 transition-colors flex items-center gap-2">
+<svg width="16" height="16"><use href="#icon-rotate"/></svg>
+Reset
+</button>
+</div>
+</div>
+</div>
+<div id="divination-result" class="hidden">
+<div class="text-center mb-12">
+<div class="inline-block bg-gold/10 text-gold px-3 py-1 rounded-sm text-sm mb-4">Hexagram <span id="hex-num">1</span> of 64</div>
+<h1 id="hex-name" class="text-4xl md:text-5xl font-serif text-ink mb-2">The Creative</h1>
+<p id="hex-chinese" class="text-2xl text-ink/40 font-serif mb-4">乾 · ☰☰</p>
+<p id="hex-question" class="text-ink/60 italic hidden"></p>
+</div>
+<div class="grid md:grid-cols-2 gap-8 mb-12">
+<div class="bg-white rounded-lg border border-ink/10 p-8">
+<h3 class="font-serif text-ink mb-4 text-center">Your Hexagram</h3>
+<div id="result-lines" class="flex flex-col-reverse items-center gap-1"></div>
+<div class="mt-4 text-center text-sm text-ink/50"><p>Bottom (Line 1) → Top (Line 6)</p></div>
+</div>
+<div class="bg-white rounded-lg border border-ink/10 p-8">
+<h3 class="font-serif text-ink mb-4">Interpretation</h3>
+<p id="hex-meaning" class="text-ink/80 leading-relaxed mb-6">Pure yang energy, creative power, initiative.</p>
+<div class="space-y-3">
+<h4 class="font-medium text-ink">Guidance for Your Question:</h4>
+<div class="bg-bronze/5 p-4 rounded-sm">
+<p id="hex-guidance" class="text-ink/70 text-sm leading-relaxed"></p>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-ink rounded-lg p-8 text-center">
+<h3 class="text-rice font-serif text-2xl mb-4">Want Deeper Insight?</h3>
+<p class="text-rice/70 mb-6 max-w-xl mx-auto">Our master practitioners can provide a personalized analysis of your hexagram.</p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center">
+<button class="bg-cinnabar text-rice px-6 py-3 rounded-sm hover:bg-cinnabar/80 transition-colors flex items-center justify-center gap-2">
+<svg width="18" height="18"><use href="#icon-star"/></svg>
+Master Consultation $29
+</button>
+<button onclick="resetDivination()" class="border border-rice/30 text-rice px-6 py-3 rounded-sm hover:bg-rice/10 transition-colors">New Reading</button>
+</div>
+</div>
+</div>
+<div class="bg-bronze/5 rounded-lg p-6 mt-8">
+<h3 class="font-serif text-ink mb-3 flex items-center gap-2">
+<svg width="20" height="20" class="text-bronze"><use href="#icon-book"/></svg>
+About the Method
+</h3>
+<p class="text-ink/70 text-sm leading-relaxed">
+The I Ching (Book of Changes) is one of the oldest divination systems, dating back over 3,000 years. 
+Our digital method faithfully replicates the traditional three-coin technique used to generate one of 64 hexagrams.
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ==================== SHOP PAGE ==================== -->
+<div id="page-shop" class="page">
+<div class="min-h-screen bg-rice">
+<div class="bg-ink text-rice">
+<div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+<button onclick="showPage('home')" class="flex items-center gap-2 text-rice/70 hover:text-gold transition-colors">
+<svg width="20" height="20"><use href="#icon-back"/></svg>
+<span class="font-serif">TaoInsight</span>
+</button>
+<div class="flex items-center gap-4">
+<div class="relative hidden md:block">
+<svg width="18" height="18" class="absolute left-3 top-1/2 -translate-y-1/2 text-ink/40"><use href="#icon-search"/></svg>
+<input type="text" placeholder="Search items..." class="pl-9 pr-4 py-2 rounded-sm bg-rice text-ink text-sm w-48 md:w-64 focus:outline-none focus:ring-2 focus:ring-gold"/>
+</div>
+<button class="relative p-2 hover:bg-rice/10 rounded-sm transition-colors">
+<svg width="20" height="20"><use href="#icon-cart"/></svg>
+<span class="absolute -top-1 -right-1 bg-cinnabar text-rice text-xs w-5 h-5 rounded-full flex items-center justify-center">0</span>
+</button>
+</div>
+</div>
+</div>
+<div class="bg-ink text-rice py-12">
+<div class="max-w-7xl mx-auto px-4 text-center">
+<h1 class="text-4xl md:text-5xl font-serif mb-4">Feng Shui Store</h1>
+<p class="text-rice/60 max-w-2xl mx-auto">Authentic objects curated for energy, purpose, and transformation.</p>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-4 py-8">
+<div class="flex flex-col md:flex-row gap-4 mb-8">
+<div class="flex gap-2 overflow-x-auto pb-2 md:pb-0" id="shop-categories">
+<button onclick="filterShop('all')" class="px-4 py-2 rounded-sm text-sm whitespace-nowrap bg-ink text-rice">All Items</button>
+<button onclick="filterShop('wealth')" class="px-4 py-2 rounded-sm text-sm whitespace-nowrap bg-white text-ink/70 hover:bg-ink/5 border border-ink/10">Wealth</button>
+<button onclick="filterShop('protection')" class="px-4 py-2 rounded-sm text-sm whitespace-nowrap bg-white text-ink/70 hover:bg-ink/5 border border-ink/10">Protection</button>
+<button onclick="filterShop('harmony')" class="px-4 py-2 rounded-sm text-sm whitespace-nowrap bg-white text-ink/70 hover:bg-ink/5 border border-ink/10">Harmony</button>
+<button onclick="filterShop('health')" class="px-4 py-2 rounded-sm text-sm whitespace-nowrap bg-white text-ink/70 hover:bg-ink/5 border border-ink/10">Health</button>
+<button onclick="filterShop('love')" class="px-4 py-2 rounded-sm text-sm whitespace-nowrap bg-white text-ink/70 hover:bg-ink/5 border border-ink/10">Love</button>
+</div>
+<div class="flex items-center gap-2 ml-auto">
+<svg width="16" height="16" class="text-ink/40"><use href="#icon-filter"/></svg>
+<select id="sort-select" onchange="sortProducts()" class="bg-white border border-ink/10 rounded-sm px-3 py-2 text-sm text-ink/70 focus:outline-none">
+<option value="popular">Most Popular</option>
+<option value="rating">Highest Rated</option>
+<option value="price-low">Price: Low to High</option>
+<option value="price-high">Price: High to Low</option>
+</select>
+</div>
+</div>
+<div id="products-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
+</div>
+<div class="bg-ink text-rice py-16 mt-12">
+<div class="max-w-7xl mx-auto px-4">
+<div class="grid md:grid-cols-3 gap-8 text-center">
+<div>
+<h3 class="font-serif text-gold text-xl mb-2">Authentic Sourcing</h3>
+<p class="text-rice/60 text-sm">All items sourced from traditional craftsmen and blessed with proper intention.</p>
+</div>
+<div>
+<h3 class="font-serif text-gold text-xl mb-2">Energy Cleansed</h3>
+<p class="text-rice/60 text-sm">Every object is energetically cleansed with sage and sound before shipping.</p>
+</div>
+<div>
+<h3 class="font-serif text-gold text-xl mb-2">30-Day Harmony</h3>
+<p class="text-rice/60 text-sm">Not feeling the energy? Return within 30 days for full refund.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ==================== WISDOM PAGE ==================== -->
+<div id="page-wisdom" class="page">
+<div class="min-h-screen bg-rice">
+<div class="bg-ink text-rice">
+<div class="max-w-4xl mx-auto px-4 py-4">
+<button onclick="showPage('home')" class="flex items-center gap-2 text-rice/70 hover:text-gold transition-colors">
+<svg width="20" height="20"><use href="#icon-back"/></svg>
+Back to Home
+</button>
+</div>
+</div>
+<div class="bg-ink text-rice py-16">
+<div class="max-w-4xl mx-auto px-4 text-center">
+<svg width="48" height="48" class="text-gold mx-auto mb-4"><use href="#icon-book"/></svg>
+<h1 class="text-4xl md:text-5xl font-serif mb-4">Yi Jing Wisdom</h1>
+<p class="text-xl text-rice/60">易经知识 · Ancient Knowledge for Modern Seekers</p>
+</div>
+</div>
+<div class="max-w-4xl mx-auto px-4 py-12">
+<div class="bg-white rounded-lg border border-ink/10 p-8 mb-8">
+<p class="text-ink/80 leading-relaxed text-lg">
+The I Ching (易经) — Book of Changes — is one of humanity's oldest wisdom traditions, 
+dating back over 3,000 years. These teachings on the Tao, Yin-Yang, Five Elements, 
+and the nature of change have guided emperors, philosophers, and ordinary people 
+through life's decisions and transformations.
+</p>
+<p class="text-ink/60 mt-4">
+Explore the sections below to build your understanding. Each opens a gateway 
+to practical wisdom you can apply immediately.
+</p>
+</div>
+<div id="wisdom-sections" class="space-y-4"></div>
+<div class="mt-12 bg-gradient-to-r from-bronze/10 to-gold/10 rounded-lg p-8 text-center">
+<h3 class="text-2xl font-serif text-ink mb-4">Ready to Apply This Wisdom?</h3>
+<p class="text-ink/70 mb-6">Knowledge becomes power when put into practice. Try a free I Ching reading or explore our curated Feng Shui objects.</p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center">
+<button onclick="showPage('divination')" class="bg-cinnabar text-rice px-6 py-3 rounded-sm hover:bg-cinnabar/80 transition-colors inline-flex items-center justify-center gap-2">
+<svg width="18" height="18"><use href="#icon-flame"/></svg>
+Try I Ching Reading
+</button>
+<button onclick="showPage('shop')" class="border border-ink/30 text-ink px-6 py-3 rounded-sm hover:bg-ink/5 transition-colors inline-flex items-center justify-center gap-2">
+<svg width="18" height="18"><use href="#icon-arrow"/></svg>
+Browse Feng Shui Store
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Footer -->
+<footer class="bg-ink text-rice/60 py-16">
+<div class="max-w-7xl mx-auto px-4">
+<div class="grid md:grid-cols-4 gap-8 mb-12">
+<div>
+<div class="flex items-center gap-2 mb-4">
+<svg width="24" height="24"><use href="#icon-yinyang"/></svg>
+<span class="text-rice font-serif text-lg font-bold">TaoInsight</span>
+</div>
+<p class="text-sm leading-relaxed">Bridging 5,000 years of Chinese wisdom with modern seekers worldwide.</p>
+</div>
+<div>
+<h4 class="text-rice font-medium mb-4">Explore</h4>
+<ul class="space-y-2 text-sm">
+<li><a href="#" onclick="showPage('wisdom')" class="hover:text-gold transition-colors">Yi Jing Wisdom</a></li>
+<li><a href="#" onclick="showPage('divination')" class="hover:text-gold transition-colors">I Ching Divination</a></li>
+<li><a href="#" onclick="showPage('shop')" class="hover:text-gold transition-colors">Feng Shui Store</a></li>
+<li><a href="#" class="hover:text-gold transition-colors">Blog & Articles</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-rice font-medium mb-4">Services</h4>
+<ul class="space-y-2 text-sm">
+<li><a href="#" class="hover:text-gold transition-colors">Free AI Reading</a></li>
+<li><a href="#" class="hover:text-gold transition-colors">Master Consultation</a></li>
+<li><a href="#" class="hover:text-gold transition-colors">Space Analysis</a></li>
+<li><a href="#" class="hover:text-gold transition-colors">Corporate Feng Shui</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-rice font-medium mb-4">Connect</h4>
+<ul class="space-y-2 text-sm">
+<li><a href="#" class="hover:text-gold transition-colors">About Us</a></li>
+<li><a href="#" class="hover:text-gold transition-colors">Contact</a></li>
+<li><a href="#" class="hover:text-gold transition-colors">FAQ</a></li>
+<li><a href="#" class="hover:text-gold transition-colors">Shipping & Returns</a></li>
+</ul>
+</div>
+</div>
+<div class="border-t border-rice/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-sm">2024 TaoInsight. All rights reserved.</p>
+<div class="flex gap-6 text-sm">
+<a href="#" class="hover:text-gold transition-colors">Privacy Policy</a>
+<a href="#" class="hover:text-gold transition-colors">Terms of Service</a>
+</div>
+</div>
+</div>
+</footer>
+
+<script>
+// ========== NAVIGATION ==========
+function showPage(page) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + page).classList.add('active');
+    window.scrollTo(0, 0);
+    if (page === 'shop') renderProducts('all');
+    if (page === 'wisdom') renderWisdom();
+}
+
+function toggleMobileMenu() {
+    document.getElementById('mobile-menu').classList.toggle('hidden');
+}
+
+window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (window.scrollY > 50) {
+        nav.classList.remove('bg-transparent');
+        nav.classList.add('bg-ink/95', 'backdrop-blur-md', 'shadow-lg');
+    } else {
+        nav.classList.add('bg-transparent');
+        nav.classList.remove('bg-ink/95', 'backdrop-blur-md', 'shadow-lg');
+    }
+});
+
+// ========== DIVINATION ==========
+const HEXAGRAMS = [
+    { num: 1, name: "The Creative", chinese: "乾", trigrams: "☰☰", meaning: "Pure yang energy, creative power, initiative. The dragon rising." },
+    { num: 2, name: "The Receptive", chinese: "坤", trigrams: "☷☷", meaning: "Pure yin energy, nurturing, following. Fertile ground receiving seeds." },
+    { num: 3, name: "Difficulty at the Beginning", chinese: "屯", trigrams: "☳☵", meaning: "Birth pains, chaos before order. Persist and gather support." },
+    { num: 4, name: "Youthful Folly", chinese: "蒙", trigrams: "☵☶", meaning: "Inexperience, learning, seeking instruction. Find proper guidance." },
+    { num: 5, name: "Waiting", chinese: "需", trigrams: "☵☰", meaning: "Nourishment, patience, anticipation. Wait with confidence." },
+    { num: 6, name: "Conflict", chinese: "讼", trigrams: "☰☵", meaning: "Dispute, litigation. Avoid prolonged battle, seek mediation." },
+    { num: 7, name: "The Army", chinese: "师", trigrams: "☵☷", meaning: "Collective force, discipline, leadership. Organization brings success." },
+    { num: 8, name: "Holding Together", chinese: "比", trigrams: "☷☵", meaning: "Union, seeking leadership, group formation. Choose allegiances wisely." },
+    { num: 9, name: "Small Taming", chinese: "小畜", trigrams: "☴☰", meaning: "Gentle accumulation, small gains. Patience with gradual progress." },
+    { num: 10, name: "Treading", chinese: "履", trigrams: "☰☱", meaning: "Conduct, proper behavior. Walk carefully on tiger's tail." },
+    { num: 11, name: "Peace", chinese: "泰", trigrams: "☷☰", meaning: "Harmony, prosperity. Heaven and earth aligned. Flourishing conditions." },
+    { num: 12, name: "Standstill", chinese: "否", trigrams: "☰☷", meaning: "Stagnation, blockage. Heaven and earth not communicating." },
+    { num: 13, name: "Fellowship", chinese: "同人", trigrams: "☲☰", meaning: "Community, shared purpose. Brotherhood emerges from common ground." },
+    { num: 14, name: "Great Possession", chinese: "大有", trigrams: "☰☲", meaning: "Abundance, wealth. Use resources wisely, share generously." },
+    { num: 15, name: "Modesty", chinese: "谦", trigrams: "☶☷", meaning: "Humility, unpretentiousness. The wise conceal their brilliance." },
+    { num: 16, name: "Enthusiasm", chinese: "豫", trigrams: "☷☳", meaning: "Joyful movement, inspiration. Thunder from the earth awakens." },
+    { num: 17, name: "Following", chinese: "随", trigrams: "☱☳", meaning: "Adaptation, acceptance. Follow the natural flow of events." },
+    { num: 18, name: "Work on the Decayed", chinese: "蛊", trigrams: "☶☴", meaning: "Repair, restoration. Address what has been neglected." },
+    { num: 19, name: "Approach", chinese: "临", trigrams: "☷☱", meaning: "Advance, coming forward. The powerful approaches the receptive." },
+    { num: 20, name: "Contemplation", chinese: "观", trigrams: "☴☷", meaning: "Viewing, observation. Look within and without with clarity." },
+    { num: 21, name: "Biting Through", chinese: "噬嗑", trigrams: "☲☳", meaning: "Decision, justice. Remove obstacles with determined action." },
+    { num: 22, name: "Grace", chinese: "贲", trigrams: "☶☲", meaning: "Beauty, adornment. Outer grace reflects inner worth." },
+    { num: 23, name: "Splitting Apart", chinese: "剥", trigrams: "☶☷", meaning: "Decline, decay. Yield gracefully to the inevitable." },
+    { num: 24, name: "Return", chinese: "复", trigrams: "☷☳", meaning: "Turning point, recovery. The light returns after darkness." },
+    { num: 25, name: "Innocence", chinese: "无妄", trigrams: "☰☳", meaning: "Naturalness, purity. Act without ulterior motives." },
+    { num: 26, name: "Great Taming", chinese: "大畜", trigrams: "☶☰", meaning: "Potential energy, accumulation. Store power for right timing." },
+    { num: 27, name: "Nourishment", chinese: "颐", trigrams: "☶☳", meaning: "Sustenance, care. Nourish body and spirit properly." },
+    { num: 28, name: "Great Exceeding", chinese: "大过", trigrams: "☱☴", meaning: "Excess, critical point. Dangerous imbalance requires bold action." },
+    { num: 29, name: "The Abysmal", chinese: "坎", trigrams: "☵☵", meaning: "Danger, depth. Maintain integrity through repeated peril." },
+    { num: 30, name: "The Clinging", chinese: "离", trigrams: "☲☲", meaning: "Clarity, illumination. Fire clings to its fuel. Sustain wisely." },
+    { num: 31, name: "Influence", chinese: "咸", trigrams: "☱☶", meaning: "Attraction, mutual influence. Courtship and receptivity." },
+    { num: 32, name: "Duration", chinese: "恒", trigrams: "☴☳", meaning: "Endurance, consistency. Lasting commitment brings success." },
+    { num: 33, name: "Retreat", chinese: "遁", trigrams: "☰☶", meaning: "Strategic withdrawal. Disengage to preserve strength." },
+    { num: 34, name: "Great Power", chinese: "大壮", trigrams: "☳☰", meaning: "Great strength, momentum. Use power with wisdom and restraint." },
+    { num: 35, name: "Progress", chinese: "晋", trigrams: "☲☷", meaning: "Rapid advancement, recognition. Sun rising over the earth." },
+    { num: 36, name: "Darkening of the Light", chinese: "明夷", trigrams: "☷☲", meaning: "Concealment, adversity. Hide brilliance to survive difficult times." },
+    { num: 37, name: "The Family", chinese: "家人", trigrams: "☲☴", meaning: "Household order, defined roles. Domestic harmony through proper relationships." },
+    { num: 38, name: "Opposition", chinese: "睽", trigrams: "☱☲", meaning: "Divergence, estrangement. Find unity within difference." },
+    { num: 39, name: "Obstruction", chinese: "蹇", trigrams: "☵☶", meaning: "Obstacles, impasse. Step back and gather allies." },
+    { num: 40, name: "Deliverance", chinese: "解", trigrams: "☳☵", meaning: "Liberation, relief. Thunder and rain dissolve tension." },
+    { num: 41, name: "Decrease", chinese: "损", trigrams: "☶☱", meaning: "Reduction, sacrifice. Decrease ego to increase virtue." },
+    { num: 42, name: "Increase", chinese: "益", trigrams: "☴☱", meaning: "Growth, benefit. Wind and thunder bring flourishing." },
+    { num: 43, name: "Breakthrough", chinese: "夬", trigrams: "☱☰", meaning: "Resolute action, determination. Forceful but righteous advance." },
+    { num: 44, name: "Coming to Meet", chinese: "姤", trigrams: "☰☴", meaning: "Encounter, temptation. Be cautious with unexpected meetings." },
+    { num: 45, name: "Gathering Together", chinese: "萃", trigrams: "☱☷", meaning: "Assembly, collecting. Assemble resources for collective effort." },
+    { num: 46, name: "Pushing Upward", chinese: "升", trigrams: "☴☷", meaning: "Gradual ascent. Patient advancement through consistent effort." },
+    { num: 47, name: "Oppression", chinese: "困", trigrams: "☵☱", meaning: "Exhaustion, confinement. Conserve resources, speak less." },
+    { num: 48, name: "The Well", chinese: "井", trigrams: "☵☴", meaning: "Source, community resource. Maintain what serves all." },
+    { num: 49, name: "Revolution", chinese: "革", trigrams: "☱☲", meaning: "Transformation, upheaval. Change must be timed perfectly." },
+    { num: 50, name: "The Cauldron", chinese: "鼎", trigrams: "☲☴", meaning: "Nourishment, transformation. Cook the raw into the refined." },
+    { num: 51, name: "The Arousing", chinese: "震", trigrams: "☳☳", meaning: "Shock, awakening. Sudden change brings breakthrough." },
+    { num: 52, name: "Keeping Still", chinese: "艮", trigrams: "☶☶", meaning: "Stillness, meditation. The wisdom of non-action." },
+    { num: 53, name: "Development", chinese: "渐", trigrams: "☴☶", meaning: "Gradual progress, maturation. Tree growing on the mountain." },
+    { num: 54, name: "The Marrying Maiden", chinese: "归妹", trigrams: "☱☳", meaning: "Transition, unripe action. Act within proper boundaries." },
+    { num: 55, name: "Abundance", chinese: "丰", trigrams: "☲☳", meaning: "Peak prosperity, fullness. Enjoy while recognizing decline follows." },
+    { num: 56, name: "The Wanderer", chinese: "旅", trigrams: "☲☶", meaning: "Travel, strangeness. Adapt to unfamiliar circumstances." },
+    { num: 57, name: "The Gentle", chinese: "巽", trigrams: "☴☴", meaning: "Penetration, subtle influence. Patient effort moves mountains." },
+    { num: 58, name: "The Joyous", chinese: "兑", trigrams: "☱☱", meaning: "Joy, pleasure. Open communication and genuine happiness." },
+    { num: 59, name: "Dispersion", chinese: "涣", trigrams: "☴☵", meaning: "Dissolution, dispersion. Water over wind dissolves rigidity." },
+    { num: 60, name: "Limitation", chinese: "节", trigrams: "☵☱", meaning: "Boundaries, regulation. Proper limits create freedom." },
+    { num: 61, name: "Inner Truth", chinese: "中孚", trigrams: "☱☴", meaning: "Sincerity, centering. Truth from the heart moves others." },
+    { num: 62, name: "Small Exceeding", chinese: "小过", trigrams: "☶☳", meaning: "Preponderance of the small. Attend to details carefully." },
+    { num: 63, name: "After Completion", chinese: "既济", trigrams: "☵☲", meaning: "Completion, fulfillment. Maintain vigilance after success." },
+    { num: 64, name: "Before Completion", chinese: "未济", trigrams: "☲☵", meaning: "Incompletion, transition. The cycle begins again." }
+];
+
+let divinationLines = [];
+let divinationCurrentLine = 0;
+let isCasting = false;
+let currentMethod = 'manual'; // 'manual' or 'random'
+let manualCoins = ['H', 'H', 'H']; // Current manual coin states
+
+function startDivination() {
+    document.getElementById('divination-intro').classList.add('hidden');
+    document.getElementById('divination-casting').classList.remove('hidden');
+    divinationLines = [];
+    divinationCurrentLine = 0;
+    currentMethod = 'manual';
+    manualCoins = ['H', 'H', 'H'];
+    updateHexagramDisplay();
+    setCastingMethod('manual');
+    updateManualDisplay();
+}
+
+function setCastingMethod(method) {
+    currentMethod = method;
+    const manualBtn = document.getElementById('method-manual');
+    const randomBtn = document.getElementById('method-random');
+    const manualArea = document.getElementById('manual-input-area');
+    const randomArea = document.getElementById('random-area');
+    const desc = document.getElementById('method-desc');
+
+    if (method === 'manual') {
+        manualBtn.className = 'px-4 py-2 rounded-sm text-sm bg-cinnabar text-rice transition-colors';
+        randomBtn.className = 'px-4 py-2 rounded-sm text-sm bg-rice/10 text-rice/70 hover:bg-rice/20 transition-colors';
+        manualArea.classList.remove('hidden');
+        randomArea.classList.add('hidden');
+        desc.textContent = '🪙 Shake three real coins, then record the result below (Recommended for authentic divination)';
+    } else {
+        manualBtn.className = 'px-4 py-2 rounded-sm text-sm bg-rice/10 text-rice/70 hover:bg-rice/20 transition-colors';
+        randomBtn.className = 'px-4 py-2 rounded-sm text-sm bg-cinnabar text-rice transition-colors';
+        manualArea.classList.add('hidden');
+        randomArea.classList.remove('hidden');
+        desc.textContent = '🎲 Digital random generation for practice or when coins are unavailable';
+    }
+}
+
+function setCoin(coinNum, value) {
+    manualCoins[coinNum - 1] = value;
+    updateManualDisplay();
+}
+
+function toggleCoin(coinNum) {
+    manualCoins[coinNum - 1] = manualCoins[coinNum - 1] === 'H' ? 'T' : 'H';
+    updateManualDisplay();
+}
+
+function updateManualDisplay() {
+    for (let i = 1; i <= 3; i++) {
+        const coin = document.getElementById('coin-' + i);
+        const isHeads = manualCoins[i - 1] === 'H';
+        coin.className = `w-20 h-20 rounded-full flex flex-col items-center justify-center shadow-lg text-xl font-bold mb-2 cursor-pointer hover:scale-105 transition-transform ${isHeads ? 'bg-rice text-ink border-2 border-ink' : 'bg-ink text-rice'}`;
+        coin.innerHTML = `${isHeads ? 'H' : 'T'}<span class="text-[10px] opacity-70">${isHeads ? 'Heads' : 'Tails'}</span>`;
+    }
+}
+
+function castManualLine() {
+    if (divinationCurrentLine >= 6) return;
+
+    const heads = manualCoins.filter(c => c === 'H').length;
+    const lineValue = calculateLineValue(heads);
+
+    divinationLines.push(lineValue);
+    divinationCurrentLine++;
+
+    updateHexagramDisplay();
+    document.getElementById('current-line').textContent = Math.min(divinationCurrentLine + 1, 6);
+    document.getElementById('manual-line-num').textContent = Math.min(divinationCurrentLine + 1, 6);
+    document.getElementById('random-line-num').textContent = Math.min(divinationCurrentLine + 1, 6);
+
+    // Reset coins for next cast
+    manualCoins = ['H', 'H', 'H'];
+    updateManualDisplay();
+
+    if (divinationCurrentLine >= 6) {
+        setTimeout(showResult, 500);
+    }
+}
+
+function castRandomLine() {
+    if (isCasting || divinationCurrentLine >= 6) return;
+    isCasting = true;
+
+    const btn = document.getElementById('random-cast-btn');
+    btn.disabled = true;
+    btn.innerHTML = '<svg width="20" height="20" class="animate-spin"><use href="#icon-rotate"/></svg> Shaking...';
+
+    // Animate coins
+    const coins = [document.getElementById('random-coin-1'), document.getElementById('random-coin-2'), document.getElementById('random-coin-3')];
+    coins.forEach(coin => {
+        coin.style.animation = 'coinFlip 1s ease-out';
+    });
+
+    setTimeout(() => {
+        const values = [Math.random() > 0.5 ? 'H' : 'T', Math.random() > 0.5 ? 'H' : 'T', Math.random() > 0.5 ? 'H' : 'T'];
+        const heads = values.filter(v => v === 'H').length;
+        const lineValue = calculateLineValue(heads);
+
+        divinationLines.push(lineValue);
+        divinationCurrentLine++;
+
+        // Update display
+        coins.forEach((coin, i) => {
+            coin.style.animation = '';
+            const isHeads = values[i] === 'H';
+            coin.className = `w-20 h-20 rounded-full flex flex-col items-center justify-center shadow-lg text-xl font-bold ${isHeads ? 'bg-rice text-ink border-2 border-ink' : 'bg-ink text-rice'}`;
+            coin.innerHTML = `${isHeads ? 'H' : 'T'}<span class="text-[10px] opacity-70">${isHeads ? 'Heads' : 'Tails'}</span>`;
+        });
+
+        updateHexagramDisplay();
+        document.getElementById('current-line').textContent = Math.min(divinationCurrentLine + 1, 6);
+        document.getElementById('manual-line-num').textContent = Math.min(divinationCurrentLine + 1, 6);
+        document.getElementById('random-line-num').textContent = Math.min(divinationCurrentLine + 1, 6);
+
+        btn.disabled = false;
+        btn.innerHTML = '<svg width="20" height="20"><use href="#icon-hand"/></svg> Shake & Cast Line ' + Math.min(divinationCurrentLine + 1, 6);
+        isCasting = false;
+
+        if (divinationCurrentLine >= 6) {
+            setTimeout(showResult, 500);
+        }
+    }, 1000);
+}
+
+function calculateLineValue(heads) {
+    // 3 Heads (9) = Old Yang (changing)
+    // 2 Heads, 1 Tail (8) = Young Yin
+    // 1 Head, 2 Tails (7) = Young Yang  
+    // 3 Tails (6) = Old Yin (changing)
+    if (heads === 3) return 9;      // Old Yang
+    if (heads === 2) return 8;      // Young Yin
+    if (heads === 1) return 7;      // Young Yang
+    return 6;                       // Old Yin
+}
+
+function getLineSymbol(value) {
+    if (value === 9) return '⚊○';   // Old Yang (changing)
+    if (value === 8) return '⚋⚋';   // Young Yin
+    if (value === 7) return '⚊';    // Young Yang
+    return '⚋×';                     // Old Yin (changing)
+}
+
+function getLineName(value) {
+    if (value === 9) return 'Old Yang (9)';
+    if (value === 8) return 'Young Yin (8)';
+    if (value === 7) return 'Young Yang (7)';
+    return 'Old Yin (6)';
+}
+
+function updateHexagramDisplay() {
+    const container = document.getElementById('hexagram-lines');
+    container.innerHTML = '';
+    for (let i = 0; i < 6; i++) {
+        const line = divinationLines[i];
+        let html = '';
+        if (line === undefined) {
+            html = '<div class="h-3 w-48 rounded-sm bg-rice/20"></div>';
+        } else {
+            const isYang = line === 7 || line === 9;
+            const isChanging = line === 6 || line === 9;
+            const color = isChanging ? 'bg-cinnabar' : 'bg-rice';
+            if (isYang) {
+                html = `<div class="flex items-center justify-center gap-2"><div class="h-3 w-48 rounded-sm ${color}"></div>${isChanging ? '<span class="text-cinnabar text-xs">○</span>' : ''}</div>`;
+            } else {
+                html = `<div class="flex items-center justify-center gap-2"><div class="h-3 w-20 rounded-sm ${color}"></div><div class="w-4"></div><div class="h-3 w-20 rounded-sm ${color}"></div>${isChanging ? '<span class="text-cinnabar text-xs">×</span>' : ''}</div>`;
+            }
+        }
+        container.innerHTML += html;
+    }
+}
+
+function showResult() {
+    document.getElementById('divination-casting').classList.add('hidden');
+    document.getElementById('divination-result').classList.remove('hidden');
+
+    // Calculate hexagram number based on lines
+    const hexNum = calculateHexagramNumber(divinationLines);
+    const hex = HEXAGRAMS[hexNum - 1];
+
+    document.getElementById('hex-num').textContent = hex.num;
+    document.getElementById('hex-name').textContent = hex.name;
+    document.getElementById('hex-chinese').textContent = hex.chinese + ' · ' + hex.trigrams;
+    document.getElementById('hex-meaning').textContent = hex.meaning;
+
+    const question = document.getElementById('question-input').value;
+    if (question) {
+        document.getElementById('hex-question').textContent = '"' + question + '"';
+        document.getElementById('hex-question').classList.remove('hidden');
+    }
+
+    // Build changing lines description
+    const changingLines = divinationLines.map((line, idx) => {
+        if (line === 6 || line === 9) {
+            return `Line ${idx + 1}: ${getLineName(line)} ${getLineSymbol(line)}`;
+        }
+        return null;
+    }).filter(Boolean);
+
+    let guidance = 'This hexagram suggests that the current situation requires ' + (hex.num % 2 === 0 ? 'patience and receptivity' : 'active engagement and initiative') + '. ';
+
+    if (changingLines.length > 0) {
+        guidance += 'Pay special attention to the changing lines: ' + changingLines.join('; ') + '. These indicate areas of transformation in your situation.';
+    } else {
+        guidance += 'The energy pattern is stable. Focus on working within the current structure rather than anticipating major shifts.';
+    }
+
+    document.getElementById('hex-guidance').textContent = guidance;
+
+    const resultContainer = document.getElementById('result-lines');
+    resultContainer.innerHTML = '';
+    divinationLines.forEach(line => {
+        const isYang = line === 7 || line === 9;
+        const isChanging = line === 6 || line === 9;
+        const color = isChanging ? 'bg-cinnabar' : 'bg-ink';
+        let html = '';
+        if (isYang) {
+            html = `<div class="flex items-center justify-center gap-2"><div class="h-3 w-48 rounded-sm ${color}"></div>${isChanging ? '<span class="text-cinnabar text-xs">○</span>' : ''}</div>`;
+        } else {
+            html = `<div class="flex items-center justify-center gap-2"><div class="h-3 w-20 rounded-sm ${color}"></div><div class="w-4"></div><div class="h-3 w-20 rounded-sm ${color}"></div>${isChanging ? '<span class="text-cinnabar text-xs">×</span>' : ''}</div>`;
+        }
+        resultContainer.innerHTML += html;
+    });
+}
+
+function calculateHexagramNumber(lines) {
+    // Simple mapping: convert lines to binary and map to hexagram
+    // This is a simplified version - real I Ching uses trigram combinations
+    const upper = lines.slice(3, 6).map(l => l === 7 || l === 9 ? 1 : 0);
+    const lower = lines.slice(0, 3).map(l => l === 7 || l === 9 ? 1 : 0);
+
+    const upperVal = parseInt(upper.join(''), 2) || 0;
+    const lowerVal = parseInt(lower.join(''), 2) || 0;
+
+    // Map to 1-64 range
+    return ((upperVal * 8 + lowerVal) % 64) + 1;
+}
+
+function resetDivination() {
+    divinationLines = [];
+    divinationCurrentLine = 0;
+    isCasting = false;
+    currentMethod = 'manual';
+    manualCoins = ['H', 'H', 'H'];
+
+    document.getElementById('divination-result').classList.add('hidden');
+    document.getElementById('divination-casting').classList.add('hidden');
+    document.getElementById('divination-intro').classList.remove('hidden');
+    document.getElementById('current-line').textContent = '1';
+
+    // Reset manual coins display
+    updateManualDisplay();
+
+    // Reset random coins display
+    ['random-coin-1', 'random-coin-2', 'random-coin-3'].forEach(id => {
+        const coin = document.getElementById(id);
+        if (coin) {
+            coin.className = 'w-20 h-20 rounded-full bg-rice text-ink border-2 border-ink flex flex-col items-center justify-center shadow-lg text-xl font-bold';
+            coin.innerHTML = 'H<span class="text-[10px] opacity-70">Heads</span>';
+        }
+    });
+
+    // Reset buttons
+    const manualBtn = document.getElementById('manual-cast-btn');
+    if (manualBtn) manualBtn.innerHTML = '<svg width="20" height="20"><use href="#icon-check"/></svg> Record Line 1';
+
+    const randomBtn = document.getElementById('random-cast-btn');
+    if (randomBtn) {
+        randomBtn.disabled = false;
+        randomBtn.innerHTML = '<svg width="20" height="20"><use href="#icon-hand"/></svg> Shake & Cast Line 1';
+    }
+}
+
+// ========== SHOP ==========
+const PRODUCTS = [
+    { id: 1, name: 'Brass Wu Lou (Calabash)', price: 48, category: 'health', rating: 4.9, reviews: 128, description: 'Traditional Feng Shui cure for illness and negative energy.', material: 'Solid Brass', size: '4.5 inches', tags: ['Health', 'Protection'], bestseller: true },
+    { id: 2, name: 'Obsidian Pixiu Bracelet', price: 36, category: 'wealth', rating: 4.8, reviews: 256, description: 'Legendary wealth beast paired with protective black obsidian.', material: 'Black Obsidian', size: 'Adjustable', tags: ['Wealth', 'Protection'], bestseller: true },
+    { id: 3, name: 'Bagua Mirror Set (3pc)', price: 62, category: 'protection', rating: 4.7, reviews: 89, description: 'Complete set of flat, convex, and concave Bagua mirrors.', material: 'Wood, Glass', size: '6 inches each', tags: ['Protection', 'Bagua'], bestseller: false },
+    { id: 4, name: 'Five Elements Crystal Grid', price: 89, category: 'harmony', rating: 4.9, reviews: 67, description: 'Curated crystals representing Wood, Fire, Earth, Metal, Water.', material: 'Natural Crystals', size: 'Grid 8x8 inches', tags: ['Five Elements', 'Crystals'], bestseller: false },
+    { id: 5, name: 'Rose Quartz Mandarin Ducks', price: 54, category: 'love', rating: 4.8, reviews: 143, description: 'Pair of mandarin ducks carved from rose quartz.', material: 'Rose Quartz', size: '3 inches each', tags: ['Love', 'Rose Quartz'], bestseller: true },
+    { id: 6, name: 'Brass Money Frog', price: 42, category: 'wealth', rating: 4.6, reviews: 198, description: 'The legendary Jin Chan sits upon coins.', material: 'Brass', size: '3.5 inches', tags: ['Wealth', 'Brass'], bestseller: false },
+    { id: 7, name: 'Bamboo Wind Chime (8 Rods)', price: 38, category: 'harmony', rating: 4.7, reviews: 112, description: 'Eight bamboo rods produce soothing tones.', material: 'Natural Bamboo', size: '24 inches', tags: ['Harmony', 'Bamboo'], bestseller: false },
+    { id: 8, name: 'Five Emperor Coins Set', price: 28, category: 'wealth', rating: 4.5, reviews: 234, description: 'Replica coins from five powerful Qing Dynasty emperors.', material: 'Brass Alloy', size: '1.2 inches each', tags: ['Wealth', 'Coins'], bestseller: false },
+    { id: 9, name: 'Selenite Wand Set', price: 45, category: 'protection', rating: 4.8, reviews: 156, description: 'High-vibration selenite wands for space cleansing.', material: 'Natural Selenite', size: '6 inches (3pc)', tags: ['Protection', 'Cleansing'], bestseller: false },
+    { id: 10, name: 'Ammonite Fossil Display', price: 78, category: 'wealth', rating: 4.9, reviews: 45, description: 'Ancient ammonite fossil with natural golden ratio spiral.', material: 'Natural Fossil', size: '5-6 inches', tags: ['Wealth', 'Fossil'], bestseller: false },
+    { id: 11, name: 'Red String Protection Bracelet', price: 18, category: 'protection', rating: 4.4, reviews: 567, description: 'Simple yet powerful red string bracelet.', material: 'Silk Thread', size: 'Adjustable', tags: ['Protection', 'Simple'], bestseller: true },
+    { id: 12, name: 'Lucky Bamboo (3 Stalks)', price: 32, category: 'wealth', rating: 4.6, reviews: 389, description: 'Three stalks represent happiness, long life, and prosperity.', material: 'Live Plant', size: '12-16 inches', tags: ['Wealth', 'Plant'], bestseller: false }
+];
+
+let currentCategory = 'all';
+let currentSort = 'popular';
+
+function renderProducts(category) {
+    currentCategory = category;
+    const grid = document.getElementById('products-grid');
+    let filtered = PRODUCTS.filter(p => category === 'all' || p.category === category);
+    if (currentSort === 'price-low') filtered.sort((a, b) => a.price - b.price);
+    else if (currentSort === 'price-high') filtered.sort((a, b) => b.price - a.price);
+    else if (currentSort === 'rating') filtered.sort((a, b) => b.rating - a.rating);
+    else filtered.sort((a, b) => b.reviews - a.reviews);
+
+    grid.innerHTML = filtered.map(product => `
+        <div class="group bg-white rounded-lg border border-ink/10 overflow-hidden hover:shadow-lg transition-all">
+            <div class="aspect-square bg-gradient-to-br from-rice to-rice/80 flex items-center justify-center relative">
+                <div class="w-24 h-24 rounded-full bg-ink/5 border border-ink/10 flex items-center justify-center">
+                    <svg width="32" height="32" class="text-gold/60"><use href="#icon-star"/></svg>
+                </div>
+                ${product.bestseller ? '<span class="absolute top-3 right-3 bg-cinnabar text-rice text-xs px-2 py-1 rounded-sm">Best Seller</span>' : ''}
+            </div>
+            <div class="p-5">
+                <div class="flex items-center gap-1 mb-2">
+                    ${Array(5).fill(0).map((_, i) => `<svg width="12" height="12" class="${i < Math.floor(product.rating) ? 'text-gold fill-gold' : 'text-ink/20'}"><use href="#icon-star"/></svg>`).join('')}
+                    <span class="text-xs text-ink/50 ml-1">(${product.reviews})</span>
+                </div>
+                <p class="text-xs text-bronze uppercase tracking-wider mb-1">${product.tags[0]}</p>
+                <h3 class="text-ink font-serif text-lg mb-2">${product.name}</h3>
+                <p class="text-xs text-ink/40 mb-3">${product.material} · ${product.size}</p>
+                <p class="text-sm text-ink/60 mb-4 line-clamp-2">${product.description}</p>
+                <div class="flex flex-wrap gap-1 mb-4">
+                    ${product.tags.map(tag => `<span class="text-xs bg-bronze/10 text-bronze px-2 py-0.5 rounded-sm">${tag}</span>`).join('')}
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-xl font-serif text-gold">$${product.price}</span>
+                    <button class="bg-ink text-rice px-4 py-2 rounded-sm text-sm hover:bg-ink/80 transition-colors">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    `).join('');
+
+    document.querySelectorAll('#shop-categories button').forEach(btn => {
+        btn.className = btn.className.replace('bg-ink text-rice', 'bg-white text-ink/70 hover:bg-ink/5 border border-ink/10');
+    });
+    const activeBtn = document.querySelector(`#shop-categories button[onclick="filterShop('${category}')"]`);
+    if (activeBtn) activeBtn.className = activeBtn.className.replace('bg-white text-ink/70 hover:bg-ink/5 border border-ink/10', 'bg-ink text-rice');
+}
+
+function filterShop(category) {
+    renderProducts(category);
+}
+
+function sortProducts() {
+    currentSort = document.getElementById('sort-select').value;
+    renderProducts(currentCategory);
+}
+
+// ========== WISDOM ==========
+const WISDOM_DATA = [
+    {
+        id: 'tao', title: 'The Tao · 道', subtitle: 'The Source of All Things', icon: 'circle', color: 'bronze',
+        content: [
+            "The Tao (Dao) is the fundamental, unnamable force that underlies and unifies all of reality. Before heaven and earth existed, there was the Tao — formless, eternal, and inexhaustible.",
+            "Key Concepts:",
+            "• Wu Wei (Non-Action): Not inaction, but action in harmony with the natural flow. Like water finding its path around obstacles.",
+            "• Ziran (Naturalness): Being spontaneously oneself, without artificiality or forced effort.",
+            "• Pu (Uncarved Block): The uncarved block represents original simplicity before society imposes its patterns.",
+            "For Modern Life:",
+            "The Tao teaches us to recognize when to push forward and when to yield. In a world of constant striving, the wisdom of Wu Wei reminds us that the most powerful action often looks like no action at all."
+        ]
+    },
+    {
+        id: 'yinyang', title: 'Yin & Yang · 阴阳', subtitle: 'The Dance of Opposites', icon: 'circle', color: 'cinnabar',
+        content: [
+            "Yin and Yang are not opposing forces but complementary energies that create wholeness. The Yin-Yang symbol (Taijitu) shows how each contains the seed of the other.",
+            "Yin Qualities:",
+            "• Receptive, dark, cool, inward, feminine, earth, moon, water",
+            "• Associated with rest, reflection, and accumulation",
+            "Yang Qualities:",
+            "• Creative, bright, warm, outward, masculine, heaven, sun, fire",
+            "• Associated with action, expression, and expansion",
+            "The Dynamic Balance:",
+            "No state is permanent. Day becomes night, summer turns to winter. Health, relationships, and success all depend on maintaining dynamic balance between these forces.",
+            "Practical Application:",
+            "When feeling burned out (excess Yang), cultivate Yin through rest and meditation. When feeling stuck (excess Yin), activate Yang through movement and social connection."
+        ]
+    },
+    {
+        id: 'fiveelements', title: 'Five Elements · 五行', subtitle: 'Wu Xing — The Five Phases', icon: 'triangle', color: 'gold',
+        content: [
+            "The Five Elements (Wu Xing) describe five fundamental energies and their interactions. Unlike Western elements, these are dynamic processes rather than static substances.",
+            "WOOD (木) — Growth, expansion, spring",
+            "• Direction: East | Color: Green | Organ: Liver | Quality: Vision, planning",
+            "FIRE (火) — Transformation, peak energy, summer",
+            "• Direction: South | Color: Red | Organ: Heart | Quality: Joy, passion",
+            "EARTH (土) — Stability, nourishment, late summer",
+            "• Direction: Center | Color: Yellow | Organ: Spleen | Quality: Grounding",
+            "METAL (金) — Contraction, precision, autumn",
+            "• Direction: West | Color: White | Organ: Lungs | Quality: Letting go",
+            "WATER (水) — Flow, wisdom, winter",
+            "• Direction: North | Color: Black/Blue | Organ: Kidneys | Quality: Adaptability",
+            "Generating Cycle (相生): Wood → Fire → Earth → Metal → Water → Wood",
+            "Controlling Cycle (相克): Wood controls Earth, Earth controls Water, Water controls Fire, Fire controls Metal, Metal controls Wood"
+        ]
+    },
+    {
+        id: 'bagua', title: 'Bagua · 八卦', subtitle: 'The Eight Trigrams', icon: 'square', color: 'bronze',
+        content: [
+            "The Bagua (Eight Trigrams) are the building blocks of I Ching divination and Feng Shui practice. Each trigram consists of three lines — solid (Yang) or broken (Yin).",
+            "Qian (Heaven) ☰ — Pure Yang: Creativity, strength, leadership | Northwest",
+            "Kun (Earth) ☷ — Pure Yin: Receptivity, nurturing, support | Southwest",
+            "Zhen (Thunder) ☳ — Yang below Yin: Initiation, movement, new beginnings | East",
+            "Xun (Wind) ☴ — Yin below Yang: Penetration, gentleness, gradual influence | Southeast",
+            "Kan (Water) ☵ — Yang between Yin: Danger, depth, wisdom | North",
+            "Li (Fire) ☲ — Yin between Yang: Clarity, illumination, beauty | South",
+            "Gen (Mountain) ☶ — Yin below Yang: Stillness, meditation, boundaries | Northeast",
+            "Dui (Lake) ☱ — Yin above Yang: Joy, pleasure, communication | West",
+            "From Trigrams to Hexagrams: When two trigrams combine (one above, one below), they form one of 64 hexagrams."
+        ]
+    },
+    {
+        id: 'heavenly', title: 'Heavenly Stems & Earthly Branches · 天干地支', subtitle: 'The Chinese Time System', icon: 'wind', color: 'cinnabar',
+        content: [
+            "The Heavenly Stems (天干) and Earthly Branches (地支) form the traditional Chinese calendar system used in astrology, divination, and Feng Shui.",
+            "Ten Heavenly Stems (天干):",
+            "1. Jia (甲) — Yang Wood | 2. Yi (乙) — Yin Wood | 3. Bing (丙) — Yang Fire",
+            "4. Ding (丁) — Yin Fire | 5. Wu (戊) — Yang Earth | 6. Ji (己) — Yin Earth",
+            "7. Geng (庚) — Yang Metal | 8. Xin (辛) — Yin Metal | 9. Ren (壬) — Yang Water | 10. Gui (癸) — Yin Water",
+            "Twelve Earthly Branches (地支):",
+            "1. Zi (子) Rat — Yang Water (North) | 2. Chou (丑) Ox — Yin Earth",
+            "3. Yin (寅) Tiger — Yang Wood (East) | 4. Mao (卯) Rabbit — Yin Wood (East)",
+            "5. Chen (辰) Dragon — Yang Earth | 6. Si (巳) Snake — Yin Fire (South)",
+            "7. Wu (午) Horse — Yang Fire (South) | 8. Wei (未) Goat — Yin Earth",
+            "9. Shen (申) Monkey — Yang Metal (West) | 10. You (酉) Rooster — Yin Metal (West)",
+            "11. Xu (戌) Dog — Yang Earth | 12. Hai (亥) Pig — Yin Water (North)",
+            "The 60-Year Cycle: Stems and Branches combine to create a 60-year cycle (甲子). Your birth year combination is part of your Ba Zi destiny chart."
+        ]
+    },
+    {
+        id: 'divination', title: 'I Ching Divination · 易经预测', subtitle: 'The Book of Changes', icon: 'flame', color: 'gold',
+        content: [
+            "The I Ching (易经) is one of the oldest books in the world, used for divination and philosophical guidance for over 3,000 years.",
+            "How Divination Works:",
+            "1. Formulate Your Question: Ask something specific and meaningful.",
+            "2. Generate a Hexagram: Traditionally done with 50 yarrow stalks or three coins.",
+            "3. Read the Text: Each hexagram has a main text and six line texts.",
+            "4. Changing Lines: Old lines transform into their opposite, creating a second hexagram.",
+            "Types of Questions Suitable for I Ching:",
+            "• Should I take this job offer? | • What is the nature of this relationship?",
+            "• How should I approach this conflict? | • What do I need to understand about my situation?",
+            "What NOT to Ask: Lottery numbers, medical diagnoses, questions about others without knowledge, same question repeatedly."
+        ]
+    },
+    {
+        id: 'fengshui', title: 'Feng Shui · 风水', subtitle: 'Wind & Water — The Art of Placement', icon: 'droplet', color: 'bronze',
+        content: [
+            "Feng Shui (风水) literally means 'Wind and Water' — the art of arranging space to harmonize with the natural flow of energy (Qi).",
+            "Core Principles:",
+            "1. Qi (气) Flow: Energy should flow smoothly, neither too fast nor too slow.",
+            "2. Command Position: Important furniture should have clear view of the door.",
+            "3. Five Elements Balance: Each area benefits from specific elemental energies.",
+            "4. Yin-Yang Balance: Spaces need both active (Yang) and restful (Yin) areas.",
+            "The Bagua Map (Energy Grid):",
+            "Knowledge | Career | Helpful People",
+            "Family    | Center | Children",
+            "Wealth    | Fame   | Relationships",
+            "Quick Fixes: Clutter blocks Qi flow | Sharp corners create poison arrows | Dark entry weakens career | Bed under beam creates pressure"
+        ]
+    },
+    {
+        id: 'eightmansions', title: 'Eight Mansions · 八宅明镜', subtitle: 'Ba Zhai Ming Jing', icon: 'mountain', color: 'cinnabar',
+        content: [
+            "The Eight Mansions (八宅) system is one of the most practical Feng Shui methods for home arrangement, based on your personal Gua number and directional energies.",
+            "Calculate Your Gua Number:",
+            "For Men: (100 - birth year last two digits) ÷ 9, remainder is Gua",
+            "For Women: (birth year last two digits - 4) ÷ 9, remainder is Gua",
+            "Four Auspicious Directions:",
+            "1. Sheng Qi (生气) — Vitality, prosperity, growth",
+            "2. Tian Yi (天医) — Health, healing, well-being",
+            "3. Yan Nian (延年) — Longevity, stability, relationships",
+            "4. Fu Wei (伏位) — Harmony, peace, self-cultivation",
+            "Four Inauspicious Directions:",
+            "1. Jue Ming (绝命) — Death, misfortune | 2. Wu Gui (五鬼) — Chaos, conflict",
+            "3. Liu Sha (六煞) — Stress, illness | 4. Huo Hai (祸害) — Mishaps, setbacks",
+            "Practical Application:",
+            "• Sleep with head pointing to Sheng Qi direction",
+            "• Place desk facing Tian Yi for health",
+            "• Position stove in Yan Nian for family harmony",
+            "• Avoid placing important activities in inauspicious directions"
+        ]
+    }
+];
+
+let openWisdomSection = 'tao';
+
+function renderWisdom() {
+    const container = document.getElementById('wisdom-sections');
+    container.innerHTML = WISDOM_DATA.map(section => {
+        const isOpen = openWisdomSection === section.id;
+        const colorMap = {
+            bronze: 'text-bronze border-bronze/30 bg-bronze/5',
+            cinnabar: 'text-cinnabar border-cinnabar/30 bg-cinnabar/5',
+            gold: 'text-gold border-gold/30 bg-gold/5',
+        };
+        const iconMap = {
+            circle: '#icon-circle', square: '#icon-square', triangle: '#icon-triangle',
+            wind: '#icon-wind', flame: '#icon-flame', droplet: '#icon-droplet',
+            mountain: '#icon-mountain'
+        };
+
+        return `
+            <div class="rounded-lg border overflow-hidden transition-all ${isOpen ? 'shadow-md' : ''} ${colorMap[section.color]}">
+                <button onclick="toggleWisdom('${section.id}')" class="w-full p-6 flex items-center gap-4 text-left hover:bg-black/5 transition-colors">
+                    <div class="p-3 rounded-lg bg-white/80">
+                        <svg width="24" height="24"><use href="${iconMap[section.icon]}"/></svg>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-xl font-serif">${section.title}</h3>
+                        <p class="text-sm opacity-70">${section.subtitle}</p>
+                    </div>
+                    <svg width="20" height="20" class="transition-transform ${isOpen ? 'rotate-180' : ''}"><use href="#icon-chevron-down"/></svg>
+                </button>
+                ${isOpen ? `
+                    <div class="px-6 pb-6">
+                        <div class="bg-white/80 rounded-lg p-6 space-y-3">
+                            ${section.content.map(para => {
+                                if (para.startsWith('•') || para.startsWith('1.') || para.startsWith('2.') || para.startsWith('3.') || para.startsWith('4.') || para.startsWith('5.') || para.startsWith('6.') || para.startsWith('7.') || para.startsWith('8.') || para.startsWith('9.') || para.startsWith('10.')) {
+                                    return `<div class="bg-stone-50 p-3 rounded-sm text-sm">${para}</div>`;
+                                }
+                                if (para.includes(':') && !para.includes('|') && para.length < 50) {
+                                    return `<h4 class="font-serif text-lg mt-4 mb-2">${para}</h4>`;
+                                }
+                                return `<p class="leading-relaxed text-ink/80">${para}</p>`;
+                            }).join('')}
+                        </div>
+                    </div>
+                ` : ''}
+            </div>
+        `;
+    }).join('');
+}
+
+function toggleWisdom(id) {
+    openWisdomSection = openWisdomSection === id ? null : id;
+    renderWisdom();
+}
+
+// Initialize
+window.onload = function() {
+    renderProducts('all');
+    renderWisdom();
+};
+</script>
+
+</body>
+</html>

@@ -1,0 +1,284 @@
+{
+  "products": [
+    {
+      "title": "Brass Wu Lou (Calabash)",
+      "subtitle": "Health & Protection",
+      "description": "Traditional Feng Shui cure for illness and negative energy. The Wu Lou absorbs sickness chi and transforms it into healing energy. Handcrafted from solid brass with intricate engravings.",
+      "handle": "brass-wu-lou-calabash",
+      "is_giftcard": false,
+      "weight": 250,
+      "status": "published",
+      "collection_id": "feng-shui-health",
+      "images": ["https://placeholder.com/brass-wu-lou.jpg"],
+      "options": [{ "title": "Size", "values": ["Small", "Medium", "Large"] }],
+      "variants": [
+        {
+          "title": "Small (3 inches)",
+          "prices": [{ "currency_code": "usd", "amount": 3800 }],
+          "options": [{ "value": "Small" }],
+          "inventory_quantity": 50
+        },
+        {
+          "title": "Medium (4.5 inches)",
+          "prices": [{ "currency_code": "usd", "amount": 4800 }],
+          "options": [{ "value": "Medium" }],
+          "inventory_quantity": 30
+        },
+        {
+          "title": "Large (6 inches)",
+          "prices": [{ "currency_code": "usd", "amount": 6800 }],
+          "options": [{ "value": "Large" }],
+          "inventory_quantity": 20
+        }
+      ]
+    },
+    {
+      "title": "Obsidian Pixiu Bracelet",
+      "subtitle": "Wealth & Protection",
+      "description": "The legendary wealth beast Pixiu paired with protective black obsidian. Attracts wealth while shielding from negative energy. Adjustable elastic band fits most wrists.",
+      "handle": "obsidian-pixiu-bracelet",
+      "is_giftcard": false,
+      "weight": 80,
+      "status": "published",
+      "collection_id": "feng-shui-wealth",
+      "images": ["https://placeholder.com/obsidian-pixiu.jpg"],
+      "options": [],
+      "variants": [
+        {
+          "title": "Standard",
+          "prices": [{ "currency_code": "usd", "amount": 3600 }],
+          "inventory_quantity": 100
+        }
+      ]
+    },
+    {
+      "title": "Bagua Mirror Set (3pc)",
+      "subtitle": "Space Protection",
+      "description": "Complete set of flat, convex, and concave Bagua mirrors. Essential for exterior Feng Shui protection against sha chi. Each mirror serves a specific protective purpose.",
+      "handle": "bagua-mirror-set",
+      "is_giftcard": false,
+      "weight": 400,
+      "status": "published",
+      "collection_id": "feng-shui-protection",
+      "images": ["https://placeholder.com/bagua-mirror.jpg"],
+      "options": [],
+      "variants": [
+        {
+          "title": "Standard Set",
+          "prices": [{ "currency_code": "usd", "amount": 6200 }],
+          "inventory_quantity": 25
+        }
+      ]
+    },
+    {
+      "title": "Five Elements Crystal Grid",
+      "subtitle": "Energy Balance",
+      "description": "Curated crystal set representing Wood (Green Aventurine), Fire (Carnelian), Earth (Yellow Jasper), Metal (Clear Quartz), Water (Sodalite). Perfect for meditation spaces and energy alignment.",
+      "handle": "five-elements-crystal-grid",
+      "is_giftcard": false,
+      "weight": 350,
+      "status": "published",
+      "collection_id": "feng-shui-harmony",
+      "images": ["https://placeholder.com/crystal-grid.jpg"],
+      "options": [],
+      "variants": [
+        {
+          "title": "Standard Grid",
+          "prices": [{ "currency_code": "usd", "amount": 8900 }],
+          "inventory_quantity": 15
+        }
+      ]
+    },
+    {
+      "title": "Rose Quartz Mandarin Ducks",
+      "subtitle": "Love & Relationships",
+      "description": "Pair of mandarin ducks carved from rose quartz, the stone of unconditional love. Place in the southwest corner for relationship harmony. Comes with placement guide.",
+      "handle": "rose-quartz-mandarin-ducks",
+      "is_giftcard": false,
+      "weight": 200,
+      "status": "published",
+      "collection_id": "feng-shui-love",
+      "images": ["https://placeholder.com/mandarin-ducks.jpg"],
+      "options": [],
+      "variants": [
+        {
+          "title": "Pair (3 inches each)",
+          "prices": [{ "currency_code": "usd", "amount": 5400 }],
+          "inventory_quantity": 40
+        }
+      ]
+    },
+    {
+      "title": "Brass Money Frog (Three-Legged Toad)",
+      "subtitle": "Wealth Attraction",
+      "description": "The legendary Jin Chan sits upon coins, holding one in its mouth. Place facing inward near your front door to attract wealth. Made from brass with gold finish.",
+      "handle": "brass-money-frog",
+      "is_giftcard": false,
+      "weight": 180,
+      "status": "published",
+      "collection_id": "feng-shui-wealth",
+      "images": ["https://placeholder.com/money-frog.jpg"],
+      "options": [{ "title": "Size", "values": ["Small", "Large"] }],
+      "variants": [
+        {
+          "title": "Small (2.5 inches)",
+          "prices": [{ "currency_code": "usd", "amount": 3200 }],
+          "options": [{ "value": "Small" }],
+          "inventory_quantity": 60
+        },
+        {
+          "title": "Large (3.5 inches)",
+          "prices": [{ "currency_code": "usd", "amount": 4200 }],
+          "options": [{ "value": "Large" }],
+          "inventory_quantity": 40
+        }
+      ]
+    },
+    {
+      "title": "Bamboo Wind Chime (8 Rods)",
+      "subtitle": "Harmony & Balance",
+      "description": "Eight bamboo rods produce soothing tones that activate positive chi flow. Hang near windows or doors for gentle energy circulation. Sustainably sourced bamboo.",
+      "handle": "bamboo-wind-chime",
+      "is_giftcard": false,
+      "weight": 300,
+      "status": "published",
+      "collection_id": "feng-shui-harmony",
+      "images": ["https://placeholder.com/wind-chime.jpg"],
+      "options": [],
+      "variants": [
+        {
+          "title": "Standard (24 inches)",
+          "prices": [{ "currency_code": "usd", "amount": 3800 }],
+          "inventory_quantity": 35
+        }
+      ]
+    },
+    {
+      "title": "Five Emperor Coins Set",
+      "subtitle": "Wealth & History",
+      "description": "Replica coins from five powerful Qing Dynasty emperors. String together and place under doormat or in wealth corner. Brass alloy with authentic patina finish.",
+      "handle": "five-emperor-coins",
+      "is_giftcard": false,
+      "weight": 60,
+      "status": "published",
+      "collection_id": "feng-shui-wealth",
+      "images": ["https://placeholder.com/emperor-coins.jpg"],
+      "options": [],
+      "variants": [
+        {
+          "title": "Set of 5",
+          "prices": [{ "currency_code": "usd", "amount": 2800 }],
+          "inventory_quantity": 80
+        }
+      ]
+    },
+    {
+      "title": "Selenite Wand Set",
+      "subtitle": "Protection & Cleansing",
+      "description": "High-vibration selenite wands for space cleansing and energy clearing. Use to cleanse other crystals and create protective barriers. Set of 3 wands.",
+      "handle": "selenite-wand-set",
+      "is_giftcard": false,
+      "weight": 150,
+      "status": "published",
+      "collection_id": "feng-shui-protection",
+      "images": ["https://placeholder.com/selenite-wand.jpg"],
+      "options": [],
+      "variants": [
+        {
+          "title": "Set of 3 (6 inches)",
+          "prices": [{ "currency_code": "usd", "amount": 4500 }],
+          "inventory_quantity": 30
+        }
+      ]
+    },
+    {
+      "title": "Ammonite Fossil Display",
+      "subtitle": "Ancient Wealth Energy",
+      "description": "Ancient ammonite fossil with natural golden ratio spiral. Represents millions of years of earth energy and continuous prosperity. From Madagascar.",
+      "handle": "ammonite-fossil",
+      "is_giftcard": false,
+      "weight": 500,
+      "status": "published",
+      "collection_id": "feng-shui-wealth",
+      "images": ["https://placeholder.com/ammonite-fossil.jpg"],
+      "options": [],
+      "variants": [
+        {
+          "title": "Display Piece (5-6 inches)",
+          "prices": [{ "currency_code": "usd", "amount": 7800 }],
+          "inventory_quantity": 10
+        }
+      ]
+    },
+    {
+      "title": "Red String Protection Bracelet",
+      "subtitle": "Simple Protection",
+      "description": "Simple yet powerful red string bracelet blessed with protective intention. Worn on left wrist to ward off negative energy. Hand-tied with intention.",
+      "handle": "red-string-bracelet",
+      "is_giftcard": false,
+      "weight": 10,
+      "status": "published",
+      "collection_id": "feng-shui-protection",
+      "images": ["https://placeholder.com/red-string.jpg"],
+      "options": [],
+      "variants": [
+        {
+          "title": "Adjustable",
+          "prices": [{ "currency_code": "usd", "amount": 1800 }],
+          "inventory_quantity": 200
+        }
+      ]
+    },
+    {
+      "title": "Lucky Bamboo (3 Stalks)",
+      "subtitle": "Living Wealth Energy",
+      "description": "Three stalks represent happiness, long life, and prosperity. Easy-care indoor plant that brings vibrant wood element energy. Includes ceramic pot.",
+      "handle": "lucky-bamboo-3-stalks",
+      "is_giftcard": false,
+      "weight": 400,
+      "status": "published",
+      "collection_id": "feng-shui-wealth",
+      "images": ["https://placeholder.com/lucky-bamboo.jpg"],
+      "options": [],
+      "variants": [
+        {
+          "title": "With Ceramic Pot (12-16 inches)",
+          "prices": [{ "currency_code": "usd", "amount": 3200 }],
+          "inventory_quantity": 50
+        }
+      ]
+    }
+  ],
+  "collections": [
+    {
+      "title": "Health & Protection",
+      "handle": "feng-shui-health"
+    },
+    {
+      "title": "Wealth & Abundance",
+      "handle": "feng-shui-wealth"
+    },
+    {
+      "title": "Space Protection",
+      "handle": "feng-shui-protection"
+    },
+    {
+      "title": "Harmony & Balance",
+      "handle": "feng-shui-harmony"
+    },
+    {
+      "title": "Love & Relationships",
+      "handle": "feng-shui-love"
+    }
+  ],
+  "regions": [
+    {
+      "name": "United States",
+      "currency_code": "usd",
+      "tax_rate": 0,
+      "payment_providers": ["manual"],
+      "fulfillment_providers": ["manual"],
+      "countries": ["us"]
+    }
+  ]
+}

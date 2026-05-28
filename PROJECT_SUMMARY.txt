@@ -1,0 +1,197 @@
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                         TAOINSIGHT PROJECT SUMMARY                           ║
+║                    I Ching & Feng Shui E-Commerce Platform                   ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+📦 DELIVERABLES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. 🌐 tao-insight-demo.html (73.0 KB)
+   └─ 完整的主站单页应用，包含4个核心页面
+
+2. 🌐 guide.html (56.2 KB) ⭐ NEW
+   └─ 六爻硬币卜卦交互式教程页面
+
+3. ⚛️ Next.js 源码 (app/)
+   └─ 生产级React组件代码
+
+4. 📝 README.md
+   └─ 项目文档和使用说明
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🗺️ SITE MAP
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  HOME (主页)                                                                │
+│  ├── Hero: 太极动画 + 品牌标语                                              │
+│  ├── Three Pillars: 易经知识 / 六爻算卦 / 风水商城                          │
+│  ├── Featured Products: 4款精选风水物件                                     │
+│  ├── Testimonials: 3条用户评价                                              │
+│  └── Newsletter: 邮件订阅                                                   │
+├─────────────────────────────────────────────────────────────────────────────┤
+│  WISDOM (易经知识)                                                          │
+│  ├── 道的本源 (Tao)                                                         │
+│  ├── 阴阳对立统一 (Yin-Yang)                                                │
+│  ├── 五行变化 (Five Elements)                                               │
+│  ├── 八卦 (Bagua)                                                          │
+│  ├── 天干地支 (Heavenly Stems)                                              │
+│  ├── 易经预测 (Divination Methods)                                          │
+│  ├── 风水基础 (Feng Shui)                                                   │
+│  └── 八宅明镜 (Eight Mansions)                                              │
+├─────────────────────────────────────────────────────────────────────────────┤
+│  DIVINATION (六爻算卦)                                                      │
+│  ├── How It Works (3步流程)                                                 │
+│  ├── Question Input (问题输入)                                              │
+│  ├── Coin Casting (3硬币动画掷卦)                                           │
+│  ├── Hexagram Display (卦象可视化)                                          │
+│  └── Result & Interpretation (解读 + 付费咨询CTA)                           │
+├─────────────────────────────────────────────────────────────────────────────┤
+│  SHOP (风水商城)                                                            │
+│  ├── 12 Products (5 categories)                                             │
+│  ├── Filter & Sort                                                          │
+│  ├── Product Cards (rating, price, tags)                                    │
+│  └── Trust Section (Authentic/Energy/Refund)                                │
+├─────────────────────────────────────────────────────────────────────────────┤
+│  GUIDE (卜卦教程) ⭐ NEW                                                    │
+│  ├── Quick Reference Card (硬币→爻线对照表)                                  │
+│  ├── 6-Step Tutorial (完整流程)                                             │
+│  │   ├── Step 1: Preparation & Sacred Space                               │
+│  │   ├── Step 2: Formulate Your Question                                   │
+│  │   ├── Step 3: The Casting Ritual                                        │
+│  │   ├── Step 4: Record the Result                                         │
+│  │   ├── Step 5: Build the Hexagram                                       │
+│  │   └── Step 6: Interpretation & Reading                                 │
+│  ├── Interactive Demo (可交互练习)                                          │
+│  ├── Video Guide Placeholder (视频占位)                                     │
+│  ├── FAQ Section (6个常见问题)                                               │
+│  └── Reference Images (6张教学图片)                                        │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎨 DESIGN SYSTEM
+
+Colors:
+  Ink      #1a1a1a  ── 主深色，用于文字和背景
+  Rice     #f5f0e8  ── 主浅色，用于背景和卡片
+  Cinnabar #c41e3a  ── 行动按钮，强调色
+  Bronze   #4a6741  ── 次要强调，自然感
+  Gold     #c9a227  ── 高亮，评分，装饰
+
+Typography:
+  Serif: Playfair Display (标题，品牌)
+  Sans:  Inter (正文，UI)
+
+Visual Elements:
+  • 旋转太极SVG动画
+  • 阴阳爻符号 (⚊ ⚋)
+  • 水墨渐变背景
+  • 六爻卦象可视化 (实线/断线)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💰 REVENUE MODEL
+
+┌──────────────────┬─────────┬────────────────────────────┐
+│ Service          │ Price   │ Type                       │
+├──────────────────┼─────────┼────────────────────────────┤
+│ Free AI Reading  │ $0      │ Lead Generation            │
+│ Master Consult   │ $29     │ Service (per reading)      │
+│ Monthly Sub      │ $9.90   │ Recurring (weekly insights)│
+│ Feng Shui Items  │ $18-89  │ Physical Products          │
+│ Space Analysis   │ $99     │ Premium Service            │
+└──────────────────┴─────────┴────────────────────────────┘
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🚀 NEXT STEPS (Priority Order)
+
+Phase 1 - Content (Week 1-2)
+  □ 拍摄/采购真实风水物件产品图片
+  □ 撰写64卦完整解读文本
+  □ 制作卜卦指导视频 (2-3个)
+  □ 添加更多用户评价
+
+Phase 2 - Functionality (Week 3-4)
+  □ 接入 AI API (OpenAI/DeepSeek) 生成个性化卦辞
+  □ 集成 Stripe 支付系统
+  □ 添加用户注册/登录
+  □ 卦象历史记录功能
+
+Phase 3 - Growth (Week 5-8)
+  □ SEO优化 (关键词: I Ching reading, Feng Shui store)
+  □ 博客内容营销
+  □ 社交媒体整合
+  □ 邮件自动化序列
+  □ 联盟营销计划
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📁 FILE STRUCTURE
+
+tao-insight/
+├── 📄 README.md                          项目文档
+├── 🌐 tao-insight-demo.html              主站 (73KB)
+├── 🌐 guide.html                         卜卦教程 (56KB) ⭐
+├── 📄 package.json                       Next.js配置
+├── 📄 next.config.js                     构建设置
+├── 📄 tailwind.config.ts                 主题配置
+├── 📄 tsconfig.json                      TypeScript配置
+├── 📁 app/
+│   ├── 🎨 globals.css                    全局样式
+│   ├── ⚛️ layout.tsx                     根布局
+│   ├── ⚛️ page.tsx                       主页
+│   ├── 📁 divination/
+│   │   └── ⚛️ page.tsx                   算卦页
+│   ├── 📁 shop/
+│   │   └── ⚛️ page.tsx                   商城页
+│   └── 📁 wisdom/
+│       └── ⚛️ page.tsx                   知识页
+└── 📁 public/images/
+    ├── 🖼️ 3_How_to_Consult...png        美分硬币图解
+    ├── 🖼️ 5__.png                        传统铜钱正反面
+    ├── 🖼️ 1__.png                        四象结果图
+    ├── 🖼️ 2_How_to_Consult...png       硬币组合表
+    └── 🖼️ 4__.png                        五角硬币图解
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎯 KEY FEATURES
+
+✓ 完整响应式设计 (移动端友好)
+✓ 无刷新页面切换
+✓ 交互式六爻算卦 (含动画)
+✓ 64卦数据库 (完整名称和解读)
+✓ 商品分类筛选和排序
+✓ 知识板块手风琴展开
+✓ 卜卦教程交互式演示
+✓ 6张教学参考图片
+✓ FAQ可折叠问答
+✓ 邮件订阅表单
+✓ 社交媒体分享准备
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💡 UNIQUE SELLING POINTS
+
+1. "Authenticity First" - 所有内容基于传统经典，非现代臆造
+2. "East Meets West" - 用西方心理学框架包装东方智慧
+3. "Interactive Experience" - 不是静态内容，而是可参与的仪式
+4. "Educational + Commercial" - 先教育建立信任，再引导消费
+5. "Community Driven" - 用户评价和案例建立社会证明
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📧 CONTACT & SUPPORT
+
+Questions about this project?
+- Review README.md for technical details
+- Open guide.html in browser to test all features
+- Check app/ directory for production-ready React code
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+                    Built with intention. Powered by ancient wisdom.
+                              © 2024 TaoInsight
