@@ -67,6 +67,24 @@ const QuickReference = () => (
             </div>
           </div>
         </div>
+
+        {/* Reference Images */}
+        <div className="mt-8 grid md:grid-cols-2 gap-6">
+          <div className="bg-white rounded-lg border border-ink/10 p-4">
+            <h4 className="font-medium text-ink mb-3 text-center">US Penny Example (WikiHow)</h4>
+            <div className="aspect-[4/3] bg-ink/5 rounded-lg flex items-center justify-center overflow-hidden">
+              <img src="/images/us_coins_guide.png" alt="US penny coin divination guide showing 3 heads = Old Yang" className="w-full h-full object-contain" />
+            </div>
+            <p className="text-xs text-ink/50 mt-2 text-center">3 Heads = 9 (Old Yang) | 3 Tails = 6 (Old Yin) | 2H1T = 8 (Young Yin) | 1H2T = 7 (Young Yang)</p>
+          </div>
+          <div className="bg-white rounded-lg border border-ink/10 p-4">
+            <h4 className="font-medium text-ink mb-3 text-center">Traditional Chinese Coins</h4>
+            <div className="aspect-[4/3] bg-ink/5 rounded-lg flex items-center justify-center overflow-hidden">
+              <img src="/images/coin_sides.png" alt="Traditional Chinese coins - character side (Yang) vs reverse side (Yin)" className="w-full h-full object-contain" />
+            </div>
+            <p className="text-xs text-ink/50 mt-2 text-center">Character side (字) = Yang | Reverse side (背) = Yin</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
