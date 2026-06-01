@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Divination Scroll - The Oracle's Response</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Caveat:wght@400;500;600;700&family=Homemade+Apple&family=MedievalSharp&family=UnifrakturMaguntia&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+/* ===== 基础设置 ===== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    min-height: 100vh;
+    background: #0a0806;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* ===== 烛光氛围背景 ===== */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: 
+        radial-gradient(ellipse at 30% 20%, rgba(139, 90, 43, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 80%, rgba(139, 90, 43, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(218, 165, 32, 0.03) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* ===== 浮动尘埃粒子 ===== */
+.dust-particle {
+    position: fixed;
+    width: 2px;
+    height: 2px;
+    background: rgba(218, 165, 32, 0.3);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: float 15s infinite ease-in-out;
+    z-index: 2;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
+    10% { opacity: 0.6; }
+    50% { transform: translateY(-100px) translateX(30px); opacity: 0.3; }
+    90% { opacity: 0.6; }
+}
+
+/* ===== 羊皮纸容器 ===== */
+.scroll-container {
+    position: relative;
+    z-index: 10;
+    max-width: 700px;
+    width: 100%;
+    transform: rotate(-0.5deg);
+}
+
+.parchment {
+    background: 
+        linear-gradient(135deg, #d4a574 0%, #c4956a 20%, #d4a574 40%, #b8935f 60%, #c9a070 80%, #d4a574 100%),
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.15'/%3E%3C/svg%3E");
+    background-blend-mode: multiply;
+    padding: 60px 50px 80px;
+    position: relative;
+    box-shadow: 
+        0 0 60px rgba(139, 90, 43, 0.3),
+        0 20px 40px rgba(0, 0, 0, 0.5),
+        inset 0 0 100px rgba(139, 69, 19, 0.1);
+    border-radius: 2px;
+    clip-path: polygon(
+        0% 2%, 3% 0%, 7% 1%, 12% 0%, 18% 2%, 25% 0%, 35% 1%, 45% 0%, 
+        55% 1%, 65% 0%, 75% 2%, 85% 0%, 92% 1%, 97% 0%, 100% 2%,
+        100% 98%, 97% 100%, 92% 99%, 85% 100%, 75% 98%, 65% 100%, 
+        55% 99%, 45% 100%, 35% 99%, 25% 100%, 18% 98%, 12% 100%, 
+        7% 99%, 3% 100%, 0% 98%
+    );
+}
+
+.parchment::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: 
+        radial-gradient(ellipse at 20% 30%, rgba(139, 90, 43, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 70%, rgba(101, 67, 33, 0.06) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(160, 82, 45, 0.04) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.parchment::after {
+    content: '';
+    position: absolute;
+    top: 15%; right: 10%;
+    width: 80px; height: 60px;
+    background: radial-gradient(ellipse, rgba(139, 90, 43, 0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    transform: rotate(-20deg);
+    pointer-events: none;
+}
+
+/* ===== 卷轴边缘装饰 ===== */
+.scroll-edge-top, .scroll-edge-bottom {
+    position: absolute;
+    left: -10px; right: -10px;
+    height: 30px;
+    background: linear-gradient(to bottom, 
+        #8b4513 0%, #a0522d 30%, #cd853f 50%, #a0522d 70%, #8b4513 100%);
+    border-radius: 50%;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.scroll-edge-top { top: -15px; }
+.scroll-edge-bottom { bottom: -15deg); transform: rotate(180deg); }
+
+/* ===== 蜡封信戳 ===== */
+.wax-seal {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    width: 70px;
+    height: 70px;
+    background: radial-gradient(circle at 30% 30%, #c41e3a, #8b0000);
+    border-radius: 50%;
+    box-shadow: 
+        0 4px 8px rgba(0,0,0,0.3),
+        inset 0 -3px 10px rgba(0,0,0,0.2),
+        inset 0 3px 10px rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(-15deg);
+    z-index: 20;
+}
+
+.wax-seal::before {
+    content: '☯';
+    font-size: 32px;
+    color: rgba(255, 215, 0, 0.8);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+.wax-seal::after {
+    content: '';
+    position: absolute;
+    top: -5px; left: -5px; right: -5px; bottom: -5px;
+    border: 2px solid rgba(196, 30, 58, 0.3);
+    border-radius: 50%;
+}
+
+.seal-ribbon {
+    position: absolute;
+    top: 60px;
+    right: 75px;
+    width: 2px;
+    height: 150px;
+    background: linear-gradient(to bottom, #8b0000, #c41e3a, #8b0000);
+    transform: rotate(-15deg);
+    opacity: 0.6;
+    z-index: 15;
+}
+
+/* ===== 字体设置 ===== */
+.font-title { font-family: 'Cinzel Decorative', cursive; }
+.font-handwritten { font-family: 'Caveat', cursive; }
+.font-script { font-family: 'Pinyon Script', cursive; }
+.font-gothic { font-family: 'UnifrakturMaguntia', cursive; }
+.font-medieval { font-family: 'MedievalSharp', cursive; }
+
+/* ===== 信头 ===== */
+.letter-header {
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.letter-date {
+    font-family: 'Pinyon Script', cursive;
+    font-size: 24px;
+    color: #5c3a21;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.letter-title {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 28px;
+    color: #3d2314;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    border-bottom: 2px solid #8b4513;
+    border-top: 2px solid #8b4513;
+    padding: 15px 0;
+    margin: 20px 0;
+}
+
+.letter-subtitle {
+    font-family: 'MedievalSharp', cursive;
+    font-size: 16px;
+    color: #6b4423;
+    letter-spacing: 2px;
+}
+
+/* ===== 六爻卦象 ===== */
+.hexagram-display {
+    text-align: center;
+    margin: 30px 0;
+    padding: 20px;
+    background: rgba(139, 90, 43, 0.05);
+    border: 1px solid rgba(139, 90, 43, 0.2);
+    border-radius: 4px;
+}
+
+.hexagram-number {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 14px;
+    color: #8b4513;
+    letter-spacing: 3px;
+    margin-bottom: 15px;
+}
+
+.hexagram-lines {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 8px;
+    margin: 15px 0;
+}
+
+.hex-line {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.line-yang {
+    width: 120px;
+    height: 4px;
+    background: linear-gradient(to right, #3d2314, #5c3a21, #3d2314);
+    border-radius: 2px;
+    position: relative;
+}
+
+.line-yang::before,
+.line-yang::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    background: #3d2314;
+    border-radius: 50%;
+}
+
+.line-yang::before { left: -4px; }
+.line-yang::after { right: -4px; }
+
+.line-yin {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.line-yin-part {
+    width: 50px;
+    height: 4px;
+    background: linear-gradient(to right, #3d2314, #5c3a21, #3d2314);
+    border-radius: 2px;
+}
+
+.line-changing {
+    color: #c41e3a;
+    font-family: 'Caveat', cursive;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+/* ===== 手写正文 - 墨水晕染 + 故意写歪 ===== */
+.letter-body {
+    font-family: 'Caveat', cursive;
+    font-size: 26px;
+    line-height: 1.5;
+    color: #3d2314;
+    margin: 30px 0;
+    letter-spacing: 0.5px;
+}
+
+.letter-body p {
+    margin-bottom: 20px;
+    text-indent: 1.5em;
+    position: relative;
+}
+
+/* 墨水晕染效果 - 某些段落 */
+.letter-body p.ink-blur {
+    filter: url('#ink-blur');
+}
+
+.letter-body p.ink-blur::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 10%;
+    width: 60%;
+    height: 15px;
+    background: radial-gradient(ellipse, rgba(61, 35, 20, 0.15) 0%, transparent 70%);
+    pointer-events: none;
+    filter: blur(3px);
+}
+
+/* 故意写歪 - 随机旋转 */
+.letter-body p:nth-child(1) { transform: rotate(-0.5deg); }
+.letter-body p:nth-child(2) { transform: rotate(0.8deg) translateX(3px); }
+.letter-body p:nth-child(3) { transform: rotate(-0.3deg); }
+.letter-body p:nth-child(4) { transform: rotate(0.5deg) translateX(-2px); }
+.letter-body p:nth-child(5) { transform: rotate(-0.7deg); }
+.letter-body p:nth-child(6) { transform: rotate(0.4deg) translateX(4px); }
+.letter-body p:nth-child(7) { transform: rotate(-0.2deg); }
+.letter-body p:nth-child(8) { transform: rotate(0.6deg) translateX(-3px); }
+
+/* 某些字故意写大/写小 */
+.letter-body p .big-letter {
+    font-size: 1.3em;
+    display: inline-block;
+    transform: rotate(-3deg);
+}
+
+.letter-body p .small-letter {
+    font-size: 0.85em;
+    display: inline-block;
+    transform: rotate(2deg);
+}
+
+.letter-body p .tilted {
+    display: inline-block;
+    transform: rotate(-4deg) translateY(-2px);
+}
+
+.letter-body p:first-child {
+    text-indent: 0;
+}
+
+.letter-body p:first-child::first-letter {
+    font-family: 'UnifrakturMaguntia', cursive;
+    font-size: 56px;
+    float: left;
+    line-height: 0.7;
+    margin-right: 8px;
+    margin-top: 5px;
+    color: #8b4513;
+}
+
+/* ===== 墨水晕染SVG滤镜 ===== */
+.ink-filter {
+    position: absolute;
+    width: 0;
+    height: 0;
+}
+
+/* ===== 引用框 ===== */
+.divination-quote {
+    margin: 30px 20px;
+    padding: 20px 25px;
+    border-left: 3px solid #8b4513;
+    background: rgba(139, 90, 43, 0.05);
+    font-style: italic;
+    position: relative;
+    transform: rotate(-0.5deg);
+}
+
+.divination-quote::before {
+    content: '"';
+    font-family: 'UnifrakturMaguntia', cursive;
+    font-size: 48px;
+    color: #8b4513;
+    position: absolute;
+    top: -15px;
+    left: 10px;
+    opacity: 0.4;
+}
+
+.divination-quote p {
+    text-indent: 0 !important;
+    margin-bottom: 0 !important;
+    transform: none !important;
+    font-size: 28px;
+}
+
+/* ===== 签名 ===== */
+.letter-signature {
+    margin-top: 50px;
+    text-align: right;
+    padding-right: 30px;
+}
+
+.signature-script {
+    font-family: 'Pinyon Script', cursive;
+    font-size: 42px;
+    color: #5c3a21;
+    transform: rotate(-5deg);
+    display: inline-block;
+}
+
+.signature-title {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 12px;
+    color: #8b4513;
+    letter-spacing: 3px;
+    margin-top: 10px;
+}
+
+/* ===== 底部印章 ===== */
+.bottom-seal {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(139, 90, 43, 0.3);
+}
+
+.seal-mark {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 11px;
+    color: #8b4513;
+    letter-spacing: 4px;
+    opacity: 0.6;
+}
+
+/* ===== 墨水滴 ===== */
+.ink-drop {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: rgba(61, 35, 20, 0.4);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.ink-drop-1 { top: 15%; left: 8%; }
+.ink-drop-2 { top: 45%; right: 12%; width: 2px; height: 2px; }
+.ink-drop-3 { bottom: 25%; left: 15%; width: 4px; height: 4px; opacity: 0.3; }
+
+/* 墨水晕染斑点 */
+.ink-splatter {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(61, 35, 20, 0.2) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.ink-splatter-1 {
+    width: 40px; height: 30px;
+    top: 25%; left: 5%;
+    transform: rotate(30deg);
+}
+
+.ink-splatter-2 {
+    width: 25px; height: 20px;
+    bottom: 35%; right: 8%;
+    transform: rotate(-20deg);
+}
+
+.ink-splatter-3 {
+    width: 50px; height: 40px;
+    top: 60%; left: 85%;
+    transform: rotate(45deg);
+    opacity: 0.5;
+}
+
+/* ===== 下载按钮 ===== */
+.download-section {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 2px dashed rgba(139, 90, 43, 0.3);
+}
+
+.download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #8b4513, #a0522d);
+    color: #f5f0e8;
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 14px;
+    letter-spacing: 2px;
+    padding: 12px 30px;
+    border-radius: 4px;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(139, 69, 19, 0.4);
+    transition: all 0.3s ease;
+    border: 2px solid #d4a574;
+}
+
+.download-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(139, 69, 19, 0.5);
+    background: linear-gradient(135deg, #a0522d, #8b4513);
+}
+
+.download-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+.download-note {
+    font-family: 'Caveat', cursive;
+    font-size: 18px;
+    color: #6b4423;
+    margin-top: 15px;
+    font-style: italic;
+}
+
+/* ===== 响应式 ===== */
+@media (max-width: 600px) {
+    .parchment { padding: 40px 25px 60px; }
+    .letter-title { font-size: 22px; }
+    .letter-body { font-size: 22px; }
+    .wax-seal { width: 50px; height: 50px; top: 20px; right: 20px; }
+    .wax-seal::before { font-size: 24px; }
+    .signature-script { font-size: 32px; }
+    .divination-quote p { font-size: 24px; }
+    .download-btn { font-size: 12px; padding: 10px 20px; }
+}
+
+/* ===== 动画 ===== */
+@keyframes flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.95; }
+    75% { opacity: 0.98; }
+}
+
+.parchment {
+    animation: flicker 4s infinite ease-in-out;
+}
+
+/* 墨水晕染动画 */
+@keyframes inkSpread {
+    0% { transform: scale(0.8); opacity: 0.3; }
+    50% { transform: scale(1.1); opacity: 0.5; }
+    100% { transform: scale(0.9); opacity: 0.3; }
+}
+
+.ink-splatter {
+    animation: inkSpread 8s infinite ease-in-out;
+}
+
+.ink-splatter-1 { animation-delay: 0s; }
+.ink-splatter-2 { animation-delay: 3s; }
+.ink-splatter-3 { animation-delay: 6s; }
+</style>
+</head>
+<body>
+
+<!-- SVG滤镜定义 -->
+<svg class="ink-filter">
+    <defs>
+        <filter id="ink-blur">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="0.5" result="blur" />
+            <feColorMatrix in="blur" type="matrix" values="
+                1 0 0 0 0
+                0 1 0 0 0
+                0 0 1 0 0
+                0 0 0 18 -7" result="goo" />
+            <feComposite in="SourceGraphic" in2="goo" operator="atop"/>
+        </filter>
+    </defs>
+</svg>
+
+<!-- 浮动尘埃粒子 -->
+<div class="dust-particle" style="top: 10%; left: 20%; animation-delay: 0s;"></div>
+<div class="dust-particle" style="top: 30%; left: 70%; animation-delay: 3s;"></div>
+<div class="dust-particle" style="top: 60%; left: 40%; animation-delay: 7s;"></div>
+<div class="dust-particle" style="top: 80%; left: 80%; animation-delay: 11s;"></div>
+
+<div class="scroll-container">
+    <div class="scroll-edge-top"></div>
+    <div class="wax-seal"></div>
+    <div class="seal-ribbon"></div>
+
+    <div class="parchment">
+        <!-- 墨水滴 -->
+        <div class="ink-drop ink-drop-1"></div>
+        <div class="ink-drop ink-drop-2"></div>
+        <div class="ink-drop ink-drop-3"></div>
+
+        <!-- 墨水晕染斑点 -->
+        <div class="ink-splatter ink-splatter-1"></div>
+        <div class="ink-splatter ink-splatter-2"></div>
+        <div class="ink-splatter ink-splatter-3"></div>
+
+        <div class="letter-header">
+            <div class="letter-date">The Twenty-Seventh Day of the Fifth Moon, Year of the Dragon</div>
+            <div class="letter-title">The Oracle's Response</div>
+            <div class="letter-subtitle">A Divination by the I Ching, the Book of Changes</div>
+        </div>
+
+        <div class="hexagram-display">
+            <div class="hexagram-number">HEXAGRAM XXIII — SPLITTING APART</div>
+            <div class="hexagram-lines">
+                <div class="hex-line">
+                    <div class="line-yang"></div>
+                    <span class="line-changing">○</span>
+                </div>
+                <div class="hex-line">
+                    <div class="line-yin">
+                        <div class="line-yin-part"></div>
+                        <div class="line-yin-part"></div>
+                    </div>
+                </div>
+                <div class="hex-line">
+                    <div class="line-yin">
+                        <div class="line-yin-part"></div>
+                        <div class="line-yin-part"></div>
+                    </div>
+                </div>
+                <div class="hex-line">
+                    <div class="line-yang"></div>
+                </div>
+                <div class="hex-line">
+                    <div class="line-yin">
+                        <div class="line-yin-part"></div>
+                        <div class="line-yin-part"></div>
+                    </div>
+                    <span class="line-changing">×</span>
+                </div>
+                <div class="hex-line">
+                    <div class="line-yang"></div>
+                </div>
+            </div>
+            <div style="font-family: 'Caveat', cursive; font-size: 18px; color: #6b4423; margin-top: 10px;">
+                Changing Lines: Line 1 (Old Yang) • Line 5 (Old Yin)
+            </div>
+        </div>
+
+        <div class="letter-body">
+            <p>
+                To the Seeker who has cast these coins with a sincere heart,
+            </p>
+            <p class="ink-blur">
+                The <span class="big-letter">O</span>racle has spoken through the ancient pattern of the <span class="tilted">Splitting Apart</span> (剝), 
+                the <span class="small-letter">twenty-third</span> hexagram of the Book of Changes. The mountain rests upon the earth, 
+                and the gentle wind of decay touches all things. This is not a sign of destruction, 
+                but of the natural cycle wherein the old must yield to make way for the new.
+            </p>
+
+            <div class="divination-quote">
+                <p>
+                    The bed is split apart at its legs. Those who are firm and correct will meet with disaster. 
+                    Yet if they remain still and do not act, they shall find fortune in the end.
+                </p>
+            </div>
+
+            <p>
+                The <span class="big-letter">c</span>hanging lines reveal the path of transformation. The Old Yang at the foundation 
+                speaks of a strength that has reached its limit — like a mountain eroded by wind and rain, 
+                what once stood firm now <span class="tilted">crumbles</span>. The Old Yin at the summit whispers of a gentleness that 
+                has endured too long, inviting the necessary dissolution.
+            </p>
+
+            <p class="ink-blur">
+                In matters of your inquiry, the <span class="big-letter">O</span>racle advises patience above all. The mountain does not 
+                resist the wind; it yields gradually, and in that yielding, preserves its essence. What appears 
+                as loss is but the shedding of that which no longer serves. Do not grasp at what is departing, 
+                for your hands must be empty to receive what approaches.
+            </p>
+
+            <div class="divination-quote">
+                <p>
+                    The superior person takes heed of the signs of decay and fortifies the spirit. 
+                    By understanding the pattern of decline, one may prepare for the return.
+                </p>
+            </div>
+
+            <p>
+                The second hexagram, revealed by the transformation of the changing lines, speaks of <span class="tilted">Return</span> (復). 
+                After the mountain has yielded, the thunder awakens beneath the earth. The light returns after 
+                darkness, as it has done since the beginning of time. Your path, though it passes through shadow, 
+                leads inevitably toward <span class="big-letter">r</span>enewal.
+            </p>
+
+            <p class="ink-blur">
+                Cast your coins again when the moon has completed her cycle, should you seek further counsel. 
+                The <span class="big-letter">O</span>racle does not speak twice to the same question, for wisdom is wasted upon the impatient.
+            </p>
+        </div>
+
+        <div class="letter-signature">
+            <div class="signature-script">The Oracle</div>
+            <div class="signature-title">KEEPER OF THE BOOK OF CHANGES</div>
+        </div>
+
+        <div class="bottom-seal">
+            <div class="seal-mark">☯ AS ABOVE, SO BELOW ☯</div>
+        </div>
+
+        <!-- 下载区域 -->
+        <div class="download-section">
+            <a href="data:text/html;charset=utf-8,%3C!DOCTYPE%20html%3E..." download="oracle-response.html" class="download-btn" onclick="downloadScroll()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="7 10 12 15 17 10"/>
+                    <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                Download This Scroll
+            </a>
+            <div class="download-note">Preserve the Oracle's wisdom for future reflection...</div>
+        </div>
+    </div>
+
+    <div class="scroll-edge-bottom"></div>
+</div>
+
+<script>
+function downloadScroll() {
+    // 获取当前HTML内容
+    const html = document.documentElement.outerHTML;
+    const blob = new Blob([html], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+
+    // 创建临时下载链接
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'oracle-response-' + new Date().toISOString().slice(0,10) + '.html';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
+</script>
+
+</body>
+</html>
