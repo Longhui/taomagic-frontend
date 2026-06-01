@@ -26,29 +26,27 @@ const Navigation = () => {
   }, [])
 
   const navItems = [
-    { name: 'Wisdom', href: '#wisdom', icon: BookOpen },
-    { name: 'Divination', href: '#divination', icon: Sparkles },
-    { name: 'Feng Shui', href: '#fengshui', icon: HomeIcon },
+    { name: 'Home', href: '/', icon: HomeIcon },
+    { name: 'Wisdom', href: '/wisdom', icon: BookOpen },
+    { name: 'Divination', href: '/divination', icon: Sparkles },
+    { name: 'Feng Shui', href: '/shop', icon: HomeIcon },
   ]
 
   return (
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-ink/95 backdrop-blur-md shadow-lg' : 'bg-transparent'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <div className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2">
             <YinYangSVG size={32} className="!animation-none" />
             <span className="text-rice font-serif text-xl font-bold tracking-wider">TaoInsight</span>
-          </div>
+          </Link>
 
           <div className="hidden md:flex items-center gap-8">
             {navItems.map((item) => (
-              <a key={item.name} href={item.href} className="text-rice/80 hover:text-gold transition-colors text-sm tracking-wide uppercase">
+              <Link key={item.name} href={item.href} className="text-rice/80 hover:text-gold transition-colors text-sm tracking-wide uppercase">
                 {item.name}
-              </a>
+              </Link>
             ))}
-            <Link href="/divination" className="bg-cinnabar text-rice px-4 py-2 rounded-sm text-sm hover:bg-cinnabar/80 transition-colors">
-              Free Reading
-            </Link>
           </div>
 
           <button className="md:hidden text-rice" onClick={() => setIsOpen(!isOpen)}>
@@ -60,9 +58,9 @@ const Navigation = () => {
       {isOpen && (
         <div className="md:hidden bg-ink/95 backdrop-blur-md">
           {navItems.map((item) => (
-            <a key={item.name} href={item.href} className="block px-4 py-3 text-rice/80 hover:text-gold" onClick={() => setIsOpen(false)}>
+            <Link key={item.name} href={item.href} className="block px-4 py-3 text-rice/80 hover:text-gold" onClick={() => setIsOpen(false)}>
               {item.name}
-            </a>
+            </Link>
           ))}
         </div>
       )}

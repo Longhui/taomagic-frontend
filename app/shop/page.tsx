@@ -230,9 +230,16 @@ export default function ShopPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl md:text-5xl font-serif mb-4">Feng Shui Store</h1>
           <p className="text-rice/60 max-w-2xl mx-auto">
-            Authentic objects curated for energy, purpose, and transformation. 
+            Authentic objects curated for energy, purpose, and transformation.
             Each item is selected based on traditional Feng Shui principles and blessed with intention.
           </p>
+          <Link
+            href="/fengshui"
+            className="mt-6 inline-flex items-center gap-2 bg-bronze text-rice px-6 py-3 rounded-sm text-sm hover:bg-bronze/80 transition-all"
+          >
+            <span>🎯</span>
+            Take Indoor Feng Shui Evaluation
+          </Link>
         </div>
       </div>
 
