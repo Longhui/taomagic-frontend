@@ -24,8 +24,8 @@ export default function CartDrawer({
 }: CartDrawerProps) {
   const items = cart?.items || []
   const itemCount = items.reduce((sum, item) => sum + item.quantity, 0)
-  const subtotal = cart?.subtotal != null ? cart.subtotal / 100 : items.reduce((sum, item) => sum + (item.unit_price / 100) * item.quantity, 0)
-  const total = cart?.total != null ? cart.total / 100 : subtotal
+  const subtotal = cart?.subtotal != null ? cart.subtotal : items.reduce((sum, item) => sum + (item.unit_price) * item.quantity, 0)
+  const total = cart?.total != null ? cart.total : subtotal
 
   return (
     <>
@@ -104,14 +104,14 @@ export default function CartDrawer({
               {cart?.discount_total != null && cart.discount_total > 0 && (
                 <div className="flex items-center justify-between text-sm">
                   <span className="text-green-600">Discount</span>
-                  <span className="text-green-600">-${(cart.discount_total / 100).toFixed(2)}</span>
+                  <span className="text-green-600">-${(cart.discount_total).toFixed(2)}</span>
                 </div>
               )}
               {cart?.shipping_total != null && cart.shipping_total >= 0 && (
                 <div className="flex items-center justify-between text-sm">
                   <span className="text-ink/60">Shipping</span>
                   <span className="text-ink/70">
-                    {cart.shipping_total === 0 ? 'Calculated at checkout' : `$${(cart.shipping_total / 100).toFixed(2)}`}
+                    {cart.shipping_total === 0 ? 'Calculated at checkout' : `$${(cart.shipping_total).toFixed(2)}`}
                   </span>
                 </div>
               )}
@@ -185,7 +185,7 @@ function CartItem({
     }
   }
 
-  const lineTotal = (item.unit_price / 100) * item.quantity
+  const lineTotal = item.unit_price * item.quantity
   const imageUrl = item.thumbnail || item.product?.thumbnail
 
   return (
@@ -211,7 +211,7 @@ function CartItem({
         {item.variant?.title && item.variant.title !== 'Default' && (
           <p className="text-xs text-ink/40 mt-0.5">{item.variant.title}</p>
         )}
-        <p className="text-sm text-gold font-serif mt-1">${(item.unit_price / 100).toFixed(2)}</p>
+        <p className="text-sm text-gold font-serif mt-1">${(item.unit_price).toFixed(2)}</p>
 
         <div className="flex items-center justify-between mt-2">
           <div className="flex items-center gap-1 border border-ink/10 rounded-sm">

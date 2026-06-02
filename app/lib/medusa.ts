@@ -17,7 +17,7 @@ const PUBLISHABLE_KEY =
 // Global singleton SDK instance
 let sdk: Medusa
 
-function getSDK() {
+export function getSDK() {
   if (!sdk) {
     sdk = new Medusa({
       baseUrl: BACKEND_URL,
@@ -201,16 +201,20 @@ export function useCollections() {
 }
 
 /** Cart management */
-export function useCart() {
+export function useCart(regionId?: string | null) {
   const [cart, setCart] = useState<MedusaCart | null>(null)
   const [loading, setLoading] = useState(false)
 
   const createCart = useCallback(async () => {
-    const { cart } = await getSDK().store.cart.create({})
+    const body: any = {}
+    if (regionId) {
+      body.region_id = regionId
+    }
+    const { cart } = await getSDK().store.cart.create(body)
     localStorage.setItem("cart_id", cart.id)
     setCart(cart)
     return cart as MedusaCart
-  }, [])
+  }, [regionId])
 
   const addToCart = useCallback(
     async (variantId: string, quantity: number = 1) => {
@@ -229,6 +233,9 @@ export function useCart() {
         )
         setCart(updatedCart as MedusaCart)
         return updatedCart as MedusaCart
+      } catch (err: any) {
+        console.error('addToCart error:', err)
+        throw new Error(err?.message || JSON.stringify(err) || 'Failed to add item to cart')
       } finally {
         setLoading(false)
       }
@@ -287,7 +294,52 @@ export function useCart() {
     }
   }, [])
 
-  return { cart, loading, addToCart, updateItemQuantity, removeFromCart, createCart, getCartCount }
+  return { cart, loading, addToCart, updateItemQuantity, removeFromCart, createCart, getCartCount, setCart }
+}
+
+/** Update cart with shipping address */
+export async function updateCartAddress(
+  cartId: string,
+  data: {
+    email?: string
+    shipping_address?: Record<string, any>
+  }
+): Promise<MedusaCart> {
+  const { cart } = await getSDK().store.cart.update(cartId, data)
+  return cart as MedusaCart
+}
+
+/** Get shipping options for cart */
+export async function getShippingOptions(cartId: string) {
+  const response = await getSDK().store.fulfillment.listCartOptions({ cart_id: cartId })
+  return (response as any).shipping_options || []
+}
+
+/** Add shipping method to cart */
+export async function addShippingMethodToCart(cartId: string, optionId: string, data?: Record<string, any>) {
+  const { cart } = await getSDK().store.cart.addShippingMethod(cartId, { option_id: optionId, data })
+  return cart as MedusaCart
+}
+
+/** List payment providers for a region */
+export async function listPaymentProviders(regionId: string) {
+  const response = await getSDK().store.payment.listPaymentProviders({ region_id: regionId })
+  return (response as any).payment_providers || []
+}
+
+/** Initiate payment session */
+export async function initiatePaymentSession(cart: MedusaCart, providerId: string) {
+  const { payment_collection } = await getSDK().store.payment.initiatePaymentSession(
+    cart as any,
+    { provider_id: providerId }
+  )
+  return payment_collection
+}
+
+/** Complete cart / place order */
+export async function completeCart(cartId: string) {
+  const data = await getSDK().store.cart.complete(cartId)
+  return data as any
 }
 
 /** Map Medusa API products to UI items (for component use) */

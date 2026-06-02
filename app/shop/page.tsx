@@ -1,9 +1,9 @@
 'use client'
 
 import React, { useState, useMemo } from 'react'
-import { ArrowLeft, ShoppingCart, Star, Filter, Search, X } from 'lucide-react'
+import { ArrowLeft, ShoppingCart, Star, Search, X } from 'lucide-react'
 import Link from 'next/link'
-import { useMappedProducts, useCart, useCollections } from '../lib/medusa'
+import { useMappedProducts, useCart, useCollections, useDefaultRegion } from '../lib/medusa'
 import CartDrawer from './cart-drawer'
 import type { ProductItem } from '../lib/medusa-types'
 
@@ -153,9 +153,19 @@ export default function ShopPage() {
   const [addingId, setAddingId] = useState<string | null>(null)
 
   // Medusa data hooks
+  const { regionId } = useDefaultRegion()
   const { products: mappedProducts, loading: productsLoading, error: productsError } = useMappedProducts()
   const { collections, loading: collectionsLoading } = useCollections()
-  const { cart, loading: cartLoading, addToCart, updateItemQuantity, removeFromCart, getCartCount } = useCart()
+  const { cart, loading: cartLoading, addToCart, updateItemQuantity, removeFromCart, getCartCount } = useCart(regionId)
+
+  // Map of collection handle → emoji icon
+  const COLLECTION_ICONS: Record<string, string> = {
+    wealth: '💰',
+    protection: '🛡️',
+    harmony: '☯️',
+    health: '🌿',
+    love: '💕',
+  }
 
   // Build categories: from Medusa collections if available, else fallback
   const categories = useMemo(() => {
@@ -163,7 +173,7 @@ export default function ShopPage() {
       const collectionCats = collections.map(c => ({
         id: c.handle,
         name: c.title,
-        icon: '✦',
+        icon: COLLECTION_ICONS[c.handle] || '✦',
       }))
       return [{ id: 'all', name: 'All Items', icon: '✦' }, ...collectionCats]
     }
@@ -196,12 +206,16 @@ export default function ShopPage() {
 
   const handleAddToCart = async (productId: string, variantId?: string) => {
     if (!variantId) {
-      // Try to find variant from API data if in Medusa mode
+      console.warn(`Cannot add "${productId}" to cart: no variantId available (using demo data?)`)
+      alert('Demo products cannot be added to cart. Connect to a Medusa backend to enable purchases.')
       return
     }
     setAddingId(productId)
     try {
       await addToCart(variantId, 1)
+    } catch (err) {
+      console.error('Add to cart failed:', err)
+      alert('Failed to add item to cart. Check that the Medusa backend is running on port 9000.')
     } finally {
       setAddingId(null)
     }
@@ -264,39 +278,25 @@ export default function ShopPage() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Filters */}
-        <div className="flex flex-col md:flex-row gap-4 mb-8">
-          <div className="flex gap-2 overflow-x-auto pb-2 md:pb-0">
-            {categories.map(cat => (
-              <button
-                key={cat.id}
-                onClick={() => setActiveCategory(cat.id)}
-                className={`px-4 py-2 rounded-sm text-sm whitespace-nowrap transition-colors ${
-                  activeCategory === cat.id
-                    ? 'bg-ink text-rice'
-                    : 'bg-white text-ink/70 hover:bg-ink/5 border border-ink/10'
-                }`}
-              >
-                <span className="mr-1">{cat.icon}</span>
-                {cat.name}
-              </button>
-            ))}
-          </div>
-
-          <div className="flex items-center gap-2 ml-auto">
-            <Filter size={16} className="text-ink/40" />
-            <select
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}
-              className="bg-white border border-ink/10 rounded-sm px-3 py-2 text-sm text-ink/70 focus:outline-none"
+        {/* Category Tabs */}
+        <div className="flex gap-2 flex-wrap mb-3">
+          {categories.map(cat => (
+            <button
+              key={cat.id}
+              onClick={() => setActiveCategory(cat.id)}
+              className={`px-4 py-2 rounded-sm text-sm whitespace-nowrap transition-colors ${
+                activeCategory === cat.id
+                  ? 'bg-ink text-rice'
+                  : 'bg-white text-ink/70 hover:bg-ink/5 border border-ink/10'
+              }`}
             >
-              <option value="popular">Most Popular</option>
-              <option value="rating">Highest Rated</option>
-              <option value="price-low">Price: Low to High</option>
-              <option value="price-high">Price: High to Low</option>
-            </select>
-          </div>
+              <span className="mr-1">{cat.icon}</span>
+              {cat.name}
+            </button>
+          ))}
         </div>
+        {/* Decorative line */}
+        <div className="h-0.5 bg-bronze/30 mb-6"></div>
 
         {/* Status indicator */}
         <div className="text-center py-2 mb-4">
@@ -314,7 +314,7 @@ export default function ShopPage() {
 
         {/* Products Grid */}
         {!productsLoading && (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {filteredProducts.map(product => (
               <ProductCard
                 key={product.id}

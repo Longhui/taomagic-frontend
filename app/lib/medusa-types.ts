@@ -166,6 +166,7 @@ export interface MedusaShippingMethod {
   name: string
   amount: number
   data?: Record<string, unknown>
+  shipping_option_id?: string
 }
 
 export interface MedusaPaymentCollection {
