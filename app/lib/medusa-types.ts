@@ -226,6 +226,7 @@ export interface ProductItem {
   description: string
   material: string
   size: string
+  weight?: string
   tags: string[]
   bestseller: boolean
   thumbnail?: string
@@ -233,4 +234,22 @@ export interface ProductItem {
   handle: string
   variantId?: string
   inventoryQuantity?: number
+}
+
+// ---- Review Types ----
+
+export interface ReviewItem {
+  id: string
+  productId: string
+  rating: number
+  title: string
+  content: string
+  author: string
+  isVerifiedPurchase: boolean
+  date: string
+  helpfulCount: number
+}
+
+export interface RatingDistribution {
+  [star: number]: number // 1-5 star counts
 }

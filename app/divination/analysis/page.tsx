@@ -4,6 +4,7 @@ import React, { useEffect, useState, useCallback, useRef } from 'react'
 import { ArrowLeft, Sparkles, BookOpen, Check, AlertCircle, RotateCcw, Download } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import Navigation from '@/app/components/Navigation'
 
 interface StoredData {
   hexagram: { name: string; chinese: string; trigrams: string; meaning: string; num: number }
@@ -142,7 +143,8 @@ export default function AnalysisPage() {
   // =========== Loading ===========
   if (data?.status === 'loading') {
     return (
-      <div className="min-h-screen bg-[#0a0806] flex items-center justify-center">
+      <div className="min-h-screen bg-[#0a0806] pt-16 flex items-center justify-center">
+        <Navigation />
         <div className="max-w-sm mx-auto px-4 text-center">
           <div className="w-16 h-16 rounded-full bg-[#d4a574]/20 flex items-center justify-center mx-auto mb-6">
             <Sparkles size={32} className="text-[#d4a574]" />
@@ -170,7 +172,8 @@ export default function AnalysisPage() {
   // =========== Error ===========
   if (data?.status === 'error') {
     return (
-      <div className="min-h-screen bg-[#0a0806] flex items-center justify-center">
+      <div className="min-h-screen bg-[#0a0806] pt-16 flex items-center justify-center">
+        <Navigation />
         <div className="max-w-sm mx-auto px-4 text-center">
           <AlertCircle size={40} className="text-[#c41e3a] mx-auto mb-4" />
           <h2 className="text-2xl font-serif text-[#d4a574] mb-2" style={{ fontFamily: "'Cinzel Decorative', cursive" }}>Consultation Unavailable</h2>
@@ -206,20 +209,13 @@ export default function AnalysisPage() {
     const isChanging = (v: number) => v === 6 || v === 9
 
     return (
-      <div className="min-h-screen relative overflow-x-hidden" style={candleGradient}>
+      <div className="min-h-screen pt-16 relative overflow-x-hidden" style={candleGradient}>
+        <Navigation />
         {/* Floating dust particles */}
         <div className="fixed w-[2px] h-[2px] bg-[rgba(218,165,32,0.3)] rounded-full pointer-events-none z-[2]" style={{ top: '10%', left: '20%', animation: 'float 15s infinite ease-in-out' }} />
         <div className="fixed w-[2px] h-[2px] bg-[rgba(218,165,32,0.3)] rounded-full pointer-events-none z-[2]" style={{ top: '30%', left: '70%', animation: 'float 15s infinite ease-in-out 3s' }} />
         <div className="fixed w-[2px] h-[2px] bg-[rgba(218,165,32,0.3)] rounded-full pointer-events-none z-[2]" style={{ top: '60%', left: '40%', animation: 'float 15s infinite ease-in-out 7s' }} />
         <div className="fixed w-[2px] h-[2px] bg-[rgba(218,165,32,0.3)] rounded-full pointer-events-none z-[2]" style={{ top: '80%', left: '80%', animation: 'float 15s infinite ease-in-out 11s' }} />
-
-        {/* Nav */}
-        <div className="relative z-30" style={{ background: 'linear-gradient(to bottom, #1a0e06, #0a0806)' }}>
-          <div className="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
-            <Link href="/divination" className="flex items-center gap-2 text-[#d4a574]/70 hover:text-[#d4a574] transition-colors"><ArrowLeft size={20} /> Back</Link>
-            <Link href="/" className="text-[#c9a070]/50 hover:text-[#d4a574] transition-colors text-sm">Home</Link>
-          </div>
-        </div>
 
         <div className="relative z-10 flex justify-center py-16 px-4">
           {/* SVG filter (ink blur) */}

@@ -5,6 +5,7 @@ import { ArrowLeft, RotateCcw, Sparkles, BookOpen, Star, ChevronRight, Check, Br
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { analyzeLiuYao, generateAIPrompt } from '../lib/liuyao'
+import Navigation from '@/app/components/Navigation'
 
 // Hexagram data - 64卦
 const HEXAGRAMS = [
@@ -245,24 +246,12 @@ export default function DivinationPage() {
   // =========== INTRO ===========
   if (step === 'intro') {
     return (
-      <div className="min-h-screen bg-rice">
-        <div className="bg-ink text-rice py-4">
-          <div className="max-w-4xl mx-auto px-4 flex items-center gap-4">
-            <Link href="/" className="flex items-center gap-2 text-rice/70 hover:text-gold transition-colors">
-              <ArrowLeft size={20} />
-              Back to Home
-            </Link>
-            <a href="/guide" target="_blank" className="ml-auto text-sm text-rice/50 hover:text-gold transition-colors inline-flex items-center gap-1">
-              <BookOpen size={14} />
-              View Detailed Guide
-            </a>
-          </div>
-        </div>
+      <div className="min-h-screen bg-rice pt-16">
+        <Navigation solid />
         <div className="max-w-4xl mx-auto px-4 py-16">
           <div className="text-center mb-12">
             <Sparkles size={48} className="text-cinnabar mx-auto mb-4" />
-            <h1 className="text-4xl md:text-5xl font-serif text-ink mb-4">I Ching Divination</h1>
-            <p className="text-xl text-ink/60">六爻算卦 · Liu Yao Divination</p>
+            <h1 className="text-4xl md:text-5xl font-serif text-ink mb-4">I Ching Guidance</h1>
           </div>
           <div className="bg-white rounded-lg border border-ink/10 p-8 mb-8">
             <div className="flex items-center justify-between mb-4">
@@ -313,7 +302,8 @@ export default function DivinationPage() {
   // =========== CASTING ===========
   if (step === 'casting') {
     return (
-      <div className="min-h-screen bg-ink text-rice">
+      <div className="min-h-screen bg-ink text-rice pt-16">
+        <Navigation />
         <div className="max-w-2xl mx-auto px-4 py-16">
           <div className="text-center mb-8">
             <h2 className="text-2xl font-serif mb-2">Casting Line {currentLine + 1} of 6</h2>
@@ -401,18 +391,8 @@ export default function DivinationPage() {
     const guidance = getGuidance(hexagram.num, lines as LineValue[])
 
     return (
-      <div className="min-h-screen bg-rice">
-        <div className="bg-ink text-rice py-4">
-          <div className="max-w-4xl mx-auto px-4 flex items-center justify-between">
-            <Link href="/" className="flex items-center gap-2 text-rice/70 hover:text-gold transition-colors">
-              <ArrowLeft size={20} /> Home
-            </Link>
-            <button onClick={reset} className="flex items-center gap-2 text-rice/70 hover:text-gold transition-colors">
-              <RotateCcw size={16} /> New Reading
-            </button>
-          </div>
-        </div>
-
+      <div className="min-h-screen bg-rice pt-16">
+        <Navigation />
         <div className="max-w-4xl mx-auto px-4 py-12">
           <div className="text-center mb-12">
             <div className="inline-block bg-gold/10 text-gold px-3 py-1 rounded-sm text-sm mb-4">Hexagram {hexagram.num} of 64</div>

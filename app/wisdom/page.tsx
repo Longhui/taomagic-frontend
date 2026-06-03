@@ -3,6 +3,7 @@
 import React, { useState } from 'react'
 import { ArrowLeft, BookOpen, ChevronRight, ChevronDown, Circle, Square, Triangle, Wind, Flame, Droplets, Mountain } from 'lucide-react'
 import Link from 'next/link'
+import Navigation from '@/app/components/Navigation'
 
 const WISDOM_SECTIONS = [
   {
@@ -323,16 +324,8 @@ export default function WisdomPage() {
   const [openSection, setOpenSection] = useState<string | null>('tao')
 
   return (
-    <div className="min-h-screen bg-rice">
-      {/* Header */}
-      <div className="bg-ink text-rice">
-        <div className="max-w-4xl mx-auto px-4 py-4 flex items-center gap-4">
-          <Link href="/" className="flex items-center gap-2 text-rice/70 hover:text-gold transition-colors">
-            <ArrowLeft size={20} />
-            Back to Home
-          </Link>
-        </div>
-      </div>
+    <div className="min-h-screen bg-rice pt-16">
+      <Navigation solid />
 
       {/* Hero */}
       <div className="bg-ink text-rice py-16">

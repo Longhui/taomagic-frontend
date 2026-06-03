@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { ArrowLeft, ShoppingCart, ChevronRight, ChevronLeft, CreditCard, Truck, MapPin, Check, Loader2, AlertCircle } from 'lucide-react'
 import Link from 'next/link'
+import Navigation from '@/app/components/Navigation'
 import { useRouter } from 'next/navigation'
 import { useDefaultRegion, getSDK } from '@/app/lib/medusa'
 import type { MedusaCart, MedusaLineItem } from '@/app/lib/medusa-types'
@@ -247,11 +248,14 @@ export default function CheckoutPage() {
 
   if (cartLoading) {
     return (
-      <div className="min-h-screen bg-rice flex items-center justify-center">
-        <div className="text-center">
+      <div className="min-h-screen bg-rice pt-16">
+        <Navigation solid />
+        <div className="flex items-center justify-center min-h-[calc(100vh-4rem)]">
+          <div className="text-center">
           <Loader2 size="32" className="animate-spin text-bronze mx-auto mb-4" />
           <p className="text-ink/50">Loading your cart...</p>
         </div>
+      </div>
       </div>
     )
   }
@@ -260,7 +264,8 @@ export default function CheckoutPage() {
 
   if (!cart || !cart.items?.length) {
     return (
-      <div className="min-h-screen bg-rice">
+      <div className="min-h-screen bg-rice pt-16">
+        <Navigation solid />
         <div className="max-w-2xl mx-auto px-4 py-16 text-center">
           <ShoppingCart size={48} className="text-ink/20 mx-auto mb-4" />
           <h1 className="text-2xl font-serif text-ink mb-2">Your cart is empty</h1>
@@ -278,8 +283,10 @@ export default function CheckoutPage() {
   if (orderResult) {
     const order = orderResult.order || orderResult
     return (
-      <div className="min-h-screen bg-rice flex items-center justify-center">
-        <div className="max-w-lg mx-auto px-4 text-center">
+      <div className="min-h-screen bg-rice pt-16">
+        <Navigation solid />
+        <div className="flex items-center justify-center min-h-[calc(100vh-4rem)]">
+          <div className="max-w-lg mx-auto px-4 text-center">
           <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-6">
             <Check size={32} className="text-green-600" />
           </div>
@@ -291,6 +298,7 @@ export default function CheckoutPage() {
           <Link href="/shop" className="inline-flex items-center gap-2 bg-bronze text-rice px-6 py-3 rounded-sm hover:bg-bronze/80 transition-colors">
             Continue Shopping
           </Link>
+        </div>
         </div>
       </div>
     )
@@ -304,22 +312,8 @@ export default function CheckoutPage() {
   const total = subtotal + shippingCost
 
   return (
-    <div className="min-h-screen bg-rice">
-      {/* Header */}
-      <div className="bg-ink text-rice">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <Link href="/cart" className="flex items-center gap-2 text-rice/70 hover:text-gold transition-colors">
-              <ArrowLeft size={20} />
-              <span className="font-serif">Back</span>
-            </Link>
-            <div className="flex items-center gap-2">
-              <Truck size={18} className="text-gold" />
-              <span className="font-serif text-lg">Checkout</span>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div className="min-h-screen bg-rice pt-16">
+      <Navigation solid />
 
       {/* Step Indicators */}
       <div className="bg-white border-b border-ink/10">

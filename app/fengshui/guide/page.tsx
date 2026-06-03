@@ -7,38 +7,13 @@ import {
   Home, Compass, Users, Info, ShoppingBag, Calendar, Search,
   RotateCcw, Moon, Sun, Shield, Heart, Zap, Gem, Layers,
 } from 'lucide-react'
+import Navigation from '@/app/components/Navigation'
 import {
   calcMingGua, getDirectionFortunes, getHouseGroup,
   directionToAngle, directionToLabel,
   type Gender, type Direction, type DirectionFortune,
 } from '../../lib/fengshui'
 
-// ========== Navigation ==========
-const Navigation = () => {
-  return (
-    <nav className="fixed top-0 w-full z-50 bg-ink/95 backdrop-blur-md shadow-lg">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <Link href="/" className="flex items-center gap-2">
-            <svg width="32" height="32" viewBox="0 0 200 200" className="yin-yang-rotate">
-              <circle cx="100" cy="100" r="98" fill="#1a1a1a" stroke="#c9a227" strokeWidth="2" />
-              <path d="M100,2 A49,49 0 0,1 100,98 A49,49 0 0,0 100,198 A98,98 0 0,1 100,2" fill="#f5f0e8" />
-              <circle cx="100" cy="50" r="15" fill="#1a1a1a" />
-              <circle cx="100" cy="150" r="15" fill="#f5f0e8" />
-            </svg>
-            <span className="text-rice font-serif text-xl font-bold tracking-wider">TaoInsight</span>
-          </Link>
-          <div className="hidden md:flex items-center gap-8">
-            <Link href="/" className="text-rice/80 hover:text-gold transition-colors text-sm tracking-wide uppercase">Home</Link>
-            <Link href="/wisdom" className="text-rice/80 hover:text-gold transition-colors text-sm tracking-wide uppercase">Wisdom</Link>
-            <Link href="/divination" className="text-rice/80 hover:text-gold transition-colors text-sm tracking-wide uppercase">Divination</Link>
-            <Link href="/shop" className="text-rice/80 hover:text-gold transition-colors text-sm tracking-wide uppercase">Feng Shui</Link>
-          </div>
-        </div>
-      </div>
-    </nav>
-  )
-}
 
 // ========== Reusable Components ==========
 const StepCard = ({ num, title, children }: { num: number; title: string; children: React.ReactNode }) => (
@@ -1006,7 +981,7 @@ const Footer = () => (
 export default function FengShuiGuidePage() {
   return (
     <div className="min-h-screen bg-rice">
-      <Navigation />
+      <Navigation solid />
 
       {/* ===== Hero ===== */}
       <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden bg-ink pt-16">

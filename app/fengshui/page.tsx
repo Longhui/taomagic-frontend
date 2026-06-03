@@ -1,8 +1,9 @@
 'use client'
 
-import React, { useState, useMemo, useEffect } from 'react'
+import React, { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { ArrowLeft, Sparkles, ChevronRight, Check, RotateCcw, ShoppingBag, Info, Home, Compass, Users, BookOpen, Star, Mail, Menu, X } from 'lucide-react'
+import { ArrowLeft, Sparkles, ChevronRight, Check, RotateCcw, ShoppingBag, Info, Home, Compass, Users, BookOpen, Star, Mail } from 'lucide-react'
+import Navigation from '@/app/components/Navigation'
 import {
   calcMingGua, getDirectionFortunes, roomDiagnosis,
   getBraceletRecommendations, getHouseGroup,
@@ -20,60 +21,6 @@ const YinYangSVG = ({ size = 200, className = '' }) => (
     <circle cx="100" cy="150" r="15" fill="#f5f0e8"/>
   </svg>
 )
-
-// ========== Navigation ==========
-const Navigation = () => {
-  const [isOpen, setIsOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50)
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
-  const navItems = [
-    { name: 'Home', href: '/', icon: Home },
-    { name: 'Wisdom', href: '/wisdom', icon: BookOpen },
-    { name: 'Divination', href: '/divination', icon: Sparkles },
-    { name: 'Feng Shui', href: '/shop', icon: Compass },
-  ]
-
-  return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-ink/95 backdrop-blur-md shadow-lg' : 'bg-transparent'}`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <Link href="/" className="flex items-center gap-2">
-            <YinYangSVG size={32} />
-            <span className="text-rice font-serif text-xl font-bold tracking-wider">TaoInsight</span>
-          </Link>
-
-          <div className="hidden md:flex items-center gap-8">
-            {navItems.map((item) => (
-              <Link key={item.name} href={item.href} className="text-rice/80 hover:text-gold transition-colors text-sm tracking-wide uppercase">
-                {item.name}
-              </Link>
-            ))}
-          </div>
-
-          <button className="md:hidden text-rice" onClick={() => setIsOpen(!isOpen)}>
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
-      </div>
-
-      {isOpen && (
-        <div className="md:hidden bg-ink/95 backdrop-blur-md">
-          {navItems.map((item) => (
-            <Link key={item.name} href={item.href} className="block px-4 py-3 text-rice/80 hover:text-gold" onClick={() => setIsOpen(false)}>
-              {item.name}
-            </Link>
-          ))}
-        </div>
-      )}
-    </nav>
-  )
-}
 
 // ========== Constants ==========
 const ROOM_ICONS: Record<RoomType, string> = {

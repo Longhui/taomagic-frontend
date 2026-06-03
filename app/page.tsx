@@ -1,8 +1,8 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { BookOpen, Sparkles, HomeIcon, ChevronRight, Star, Mail, Menu, X } from 'lucide-react'
+import { BookOpen, Sparkles, HomeIcon, ChevronRight, Star, Mail } from 'lucide-react'
+import Navigation from '@/app/components/Navigation'
 
 // Yin Yang SVG Component
 const YinYangSVG = ({ size = 200, className = '' }) => (
@@ -14,59 +14,6 @@ const YinYangSVG = ({ size = 200, className = '' }) => (
   </svg>
 )
 
-// Navigation Component
-const Navigation = () => {
-  const [isOpen, setIsOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50)
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
-  const navItems = [
-    { name: 'Home', href: '/', icon: HomeIcon },
-    { name: 'Wisdom', href: '/wisdom', icon: BookOpen },
-    { name: 'Divination', href: '/divination', icon: Sparkles },
-    { name: 'Feng Shui', href: '/shop', icon: HomeIcon },
-  ]
-
-  return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-ink/95 backdrop-blur-md shadow-lg' : 'bg-transparent'}`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <Link href="/" className="flex items-center gap-2">
-            <YinYangSVG size={32} className="!animation-none" />
-            <span className="text-rice font-serif text-xl font-bold tracking-wider">TaoInsight</span>
-          </Link>
-
-          <div className="hidden md:flex items-center gap-8">
-            {navItems.map((item) => (
-              <Link key={item.name} href={item.href} className="text-rice/80 hover:text-gold transition-colors text-sm tracking-wide uppercase">
-                {item.name}
-              </Link>
-            ))}
-          </div>
-
-          <button className="md:hidden text-rice" onClick={() => setIsOpen(!isOpen)}>
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
-      </div>
-
-      {isOpen && (
-        <div className="md:hidden bg-ink/95 backdrop-blur-md">
-          {navItems.map((item) => (
-            <Link key={item.name} href={item.href} className="block px-4 py-3 text-rice/80 hover:text-gold" onClick={() => setIsOpen(false)}>
-              {item.name}
-            </Link>
-          ))}
-        </div>
-      )}
-    </nav>
-  )
-}
 
 // Hero Section
 const HeroSection = () => {
@@ -126,7 +73,7 @@ const ThreePillars = () => {
     {
       id: 'wisdom',
       title: 'Yi Jing Wisdom',
-      subtitle: '易经知识',
+      subtitle: 'Eastern Philosophy · Self-Reflection',
       description: 'Explore the Tao, Yin-Yang, Five Elements, and the 64 Hexagrams. Understand the ancient framework that has guided decisions for millennia.',
       icon: BookOpen,
       color: 'bronze',
@@ -136,23 +83,23 @@ const ThreePillars = () => {
     },
     {
       id: 'divination',
-      title: 'Liu Yao Divination',
-      subtitle: '六爻预测',
-      description: "Experience authentic I Ching divination. Cast your coins, receive your hexagram, and unlock personalized guidance for life's important questions.",
+      title: 'I Ching Guidance',
+      subtitle: 'Personalized Insights · Daily Reflection',
+      description: "Experience authentic I Ching tradition. Explore your hexagram, receive structured interpretation, and unlock personalized guidance for life's important questions.",
       icon: Sparkles,
       color: 'cinnabar',
-      features: ['Free AI-Powered Reading', 'Authentic Coin Method', 'Detailed Hexagram Analysis', 'Master Consultation Available', 'Reading History'],
-      cta: 'Cast Your Coins',
+      features: ['Free AI-Powered Reading', 'Authentic Coin Method', 'Detailed Hexagram Analysis', '1-on-1 Energy Session', 'Reading History'],
+      cta: 'Explore Your Hexagram',
       href: '/divination'
     },
     {
       id: 'fengshui',
       title: 'Feng Shui Store',
-      subtitle: '风水改运',
-      description: 'Transform your living space with authentic Feng Shui objects. From wealth corners to protective charms, curated items blessed with purpose.',
+      subtitle: 'Intentional Objects · Mindful Spaces',
+      description: 'Transform your living space with intentionally crafted objects. From wealth corners to guardian pieces, curated items designed with purpose.',
       icon: HomeIcon,
       color: 'gold',
-      features: ['Wealth & Abundance Items', 'Protective Charms', 'Five Elements Decor', 'Bagua Mirrors', 'Personal Lucky Objects'],
+      features: ['Wealth & Abundance Items', 'Guardian Objects', 'Five Elements Decor', 'Bagua Mirrors', 'Personal Intention Objects'],
       cta: 'Shop Collection',
       href: '/shop'
     }
@@ -182,21 +129,21 @@ const ThreePillars = () => {
                 </div>
 
                 <h3 className="text-2xl font-serif text-ink mb-1">{pillar.title}</h3>
-                <p className="text-sm text-ink/40 mb-4 font-serif">{pillar.subtitle}</p>
+                <p className="text-sm text-ink/40 mb-4 font-serif italic">{pillar.subtitle}</p>
                 <p className="text-ink/70 mb-6 leading-relaxed">{pillar.description}</p>
 
                 <ul className="space-y-2 mb-8">
                   {pillar.features.map((feature) => (
                     <li key={feature} className="flex items-center gap-2 text-sm text-ink/60">
-                      <Star size={12} className="text-gold" />
+                      <span className="text-gold shrink-0">✦</span>
                       {feature}
                     </li>
                   ))}
                 </ul>
 
-                <a href={pillar.href} className="inline-flex items-center gap-2 text-ink font-medium hover:text-cinnabar transition-colors group-hover:gap-3">
+                <Link href={pillar.href} className="inline-flex items-center gap-2 text-ink font-medium hover:text-cinnabar transition-colors group-hover:gap-3">
                   {pillar.cta} <ChevronRight size={16} />
-                </a>
+                </Link>
               </div>
             )
           })}
@@ -359,52 +306,61 @@ const Footer = () => {
   return (
     <footer className="bg-ink text-rice/60 py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-center md:justify-start gap-2 mb-8">
+          <YinYangSVG size={28} className="!animation-none" />
+          <span className="text-rice font-serif text-xl font-bold">TaoInsight</span>
+        </div>
+        <p className="text-sm leading-relaxed max-w-xl mb-12 text-center md:text-left">
+          Bridging 5,000 years of Chinese wisdom with modern seekers worldwide.
+        </p>
+
         <div className="grid md:grid-cols-4 gap-8 mb-12">
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <YinYangSVG size={24} className="!animation-none" />
-              <span className="text-rice font-serif text-lg font-bold">TaoInsight</span>
-            </div>
-            <p className="text-sm leading-relaxed">Bridging 5,000 years of Chinese wisdom with modern seekers worldwide.</p>
-          </div>
-
-          <div>
-            <h4 className="text-rice font-medium mb-4">Explore</h4>
+            <h4 className="text-rice font-medium mb-4 text-sm uppercase tracking-wider">Shop</h4>
             <ul className="space-y-2 text-sm">
-              <li><a href="/wisdom" className="hover:text-gold transition-colors">Yi Jing Wisdom</a></li>
-              <li><a href="/divination" className="hover:text-gold transition-colors">I Ching Divination</a></li>
-              <li><a href="/shop" className="hover:text-gold transition-colors">Feng Shui Store</a></li>
-              <li><a href="/blog" className="hover:text-gold transition-colors">Blog & Articles</a></li>
+              <li><Link href="/shop" className="hover:text-gold transition-colors">All Products</Link></li>
+              <li><Link href="/shop" className="hover:text-gold transition-colors">New Arrivals</Link></li>
+              <li><Link href="/shop" className="hover:text-gold transition-colors">Best Sellers</Link></li>
+              <li><Link href="/shop" className="hover:text-gold transition-colors">Gift Cards</Link></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="text-rice font-medium mb-4">Services</h4>
+            <h4 className="text-rice font-medium mb-4 text-sm uppercase tracking-wider">I Ching</h4>
             <ul className="space-y-2 text-sm">
-              <li><a href="#" className="hover:text-gold transition-colors">Free AI Reading</a></li>
-              <li><a href="#" className="hover:text-gold transition-colors">Master Consultation</a></li>
-              <li><a href="#" className="hover:text-gold transition-colors">Space Analysis</a></li>
-              <li><a href="#" className="hover:text-gold transition-colors">Corporate Feng Shui</a></li>
+              <li><Link href="/divination" className="hover:text-gold transition-colors">Free Reading</Link></li>
+              <li><Link href="/divination" className="hover:text-gold transition-colors">How It Works</Link></li>
+              <li><Link href="/divination/analysis" className="hover:text-gold transition-colors">History</Link></li>
+              <li><Link href="/wisdom" className="hover:text-gold transition-colors">Blog</Link></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="text-rice font-medium mb-4">Connect</h4>
+            <h4 className="text-rice font-medium mb-4 text-sm uppercase tracking-wider">Support</h4>
             <ul className="space-y-2 text-sm">
-              <li><a href="#" className="hover:text-gold transition-colors">About Us</a></li>
-              <li><a href="#" className="hover:text-gold transition-colors">Contact</a></li>
-              <li><a href="#" className="hover:text-gold transition-colors">FAQ</a></li>
-              <li><a href="#" className="hover:text-gold transition-colors">Shipping & Returns</a></li>
+              <li><Link href="/contact" className="hover:text-gold transition-colors">Contact Us</Link></li>
+              <li><Link href="/faq" className="hover:text-gold transition-colors">FAQ</Link></li>
+              <li><Link href="/shipping-info" className="hover:text-gold transition-colors">Shipping</Link></li>
+              <li><Link href="/shop" className="hover:text-gold transition-colors">Track Order</Link></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-rice font-medium mb-4 text-sm uppercase tracking-wider">Legal</h4>
+            <ul className="space-y-2 text-sm">
+              <li><Link href="/privacy-policy" className="hover:text-gold transition-colors">Privacy Policy</Link></li>
+              <li><Link href="/disclaimer" className="hover:text-gold transition-colors">Terms of Service</Link></li>
+              <li><Link href="/return-policy" className="hover:text-gold transition-colors">Return Policy</Link></li>
+              <li><Link href="/disclaimer" className="hover:text-gold transition-colors">Disclaimer</Link></li>
             </ul>
           </div>
         </div>
 
         <div className="border-t border-rice/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm">© 2024 TaoInsight. All rights reserved.</p>
-          <div className="flex gap-6 text-sm">
-            <a href="#" className="hover:text-gold transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-gold transition-colors">Terms of Service</a>
-          </div>
+          <p className="text-sm">&copy; 2026 TaoInsight. All rights reserved.</p>
+          <a href="mailto:support@taoinsight.com" className="text-sm text-rice/50 hover:text-gold transition-colors">
+            support@taoinsight.com
+          </a>
         </div>
       </div>
     </footer>
