@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import Image from 'next/image'
 import { X, ShoppingCart, Minus, Plus, Trash2, ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 import type { MedusaCart, MedusaLineItem } from '../lib/medusa-types'
@@ -191,12 +192,14 @@ function CartItem({
   return (
     <div className="flex gap-4 bg-white rounded-sm border border-ink/10 p-3">
       {/* Image */}
-      <div className="w-20 h-20 rounded-sm bg-rice flex-shrink-0 overflow-hidden">
+      <div className="w-20 h-20 rounded-sm bg-rice flex-shrink-0 overflow-hidden relative">
         {imageUrl ? (
-          <img
+          <Image
             src={imageUrl}
             alt={item.title}
-            className="w-full h-full object-cover"
+            fill
+            sizes="80px"
+            className="object-cover"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center">

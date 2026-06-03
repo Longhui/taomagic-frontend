@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useEffect, useCallback } from 'react'
+import Image from 'next/image'
 import { ArrowLeft, ShoppingCart, ChevronRight, ChevronLeft, CreditCard, Truck, MapPin, Check, Loader2, AlertCircle } from 'lucide-react'
 import Link from 'next/link'
 import Navigation from '@/app/components/Navigation'
@@ -660,9 +661,9 @@ export default function CheckoutPage() {
                   <div className="space-y-3">
                     {items.map(item => (
                       <div key={item.id} className="flex items-center gap-3">
-                        <div className="w-12 h-12 rounded-sm bg-rice overflow-hidden shrink-0">
+                        <div className="w-12 h-12 rounded-sm bg-rice overflow-hidden shrink-0 relative">
                           {(item.thumbnail || item.product?.thumbnail) ? (
-                            <img src={item.thumbnail || item.product?.thumbnail || ''} alt={item.title} className="w-full h-full object-cover" />
+                            <Image src={item.thumbnail || item.product?.thumbnail || ''} alt={item.title} fill sizes="48px" className="object-cover" />
                           ) : (
                             <div className="w-full h-full flex items-center justify-center"><ShoppingCart size={16} className="text-ink/20" /></div>
                           )}
@@ -704,9 +705,9 @@ export default function CheckoutPage() {
               <div className="space-y-3 mb-4">
                 {items.map(item => (
                   <div key={item.id} className="flex items-start gap-3">
-                    <div className="w-14 h-14 rounded-sm bg-rice overflow-hidden shrink-0">
+                    <div className="w-14 h-14 rounded-sm bg-rice overflow-hidden shrink-0 relative">
                       {(item.thumbnail || item.product?.thumbnail) ? (
-                        <img src={item.thumbnail || item.product?.thumbnail || ''} alt={item.title} className="w-full h-full object-cover" />
+                        <Image src={item.thumbnail || item.product?.thumbnail || ''} alt={item.title} fill sizes="56px" className="object-cover" />
                       ) : (
                         <div className="w-full h-full flex items-center justify-center"><ShoppingCart size={18} className="text-ink/20" /></div>
                       )}

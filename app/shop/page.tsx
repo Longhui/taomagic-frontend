@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useMemo } from 'react'
+import Image from 'next/image'
 import { ShoppingCart, Star, Search } from 'lucide-react'
 import Link from 'next/link'
 import Navigation from '@/app/components/Navigation'
@@ -30,12 +31,13 @@ const ProductCard = ({ product, onAddToCart, addingId }: {
       <Link href={`/shop/${product.handle}`}>
         <div className="aspect-square bg-gradient-to-br from-rice to-rice/80 relative overflow-hidden">
           {hasImage ? (
-            <img
-              src={product.thumbnail}
+            <Image
+              src={product.thumbnail!}
               alt={product.name}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              fill
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+              className="object-cover group-hover:scale-105 transition-transform duration-500"
               onError={() => setImgError(true)}
-              loading="lazy"
             />
           ) : (
             <div className="absolute inset-0 flex items-center justify-center">
@@ -167,14 +169,22 @@ export default function ShopPage() {
     return FALLBACK_CATEGORIES
   }, [collections])
 
-  // Products: use API data if connected successfully, else fallback to demo
-  const hasApiData = !productsError && !productsLoading && mappedProducts.length > 0
-  const apiLoading = productsLoading || collectionsLoading
-  const products = hasApiData ? mappedProducts : DEMO_PRODUCTS
+  // Products: only show real API data or demo fallback when API has clearly failed
+  const isLoading = productsLoading || collectionsLoading
+  const apiConnected = !productsError && mappedProducts.length > 0
+  const apiFailed = !!productsError
+  const showDemoFallback = apiFailed && !isLoading
+
+  // When loading: show empty array (spinner takes over UI)
+  // When connected: show real products
+  // When failed: show demo fallback
+  const displayProducts = apiConnected
+    ? mappedProducts
+    : showDemoFallback ? DEMO_PRODUCTS : []
 
   // Filter + Sort
   const filteredProducts = useMemo(() => {
-    return products.filter(product => {
+    return displayProducts.filter(product => {
       const matchesCategory = activeCategory === 'all' || product.category === activeCategory
       const matchesSearch = !searchQuery ||
         product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -187,7 +197,7 @@ export default function ShopPage() {
       if (sortBy === 'rating') return b.rating - a.rating
       return b.reviews - a.reviews
     })
-  }, [products, activeCategory, searchQuery, sortBy])
+  }, [displayProducts, activeCategory, searchQuery, sortBy])
 
   const handleAddToCart = async (productId: string, variantId?: string) => {
     if (!variantId) {
@@ -267,14 +277,14 @@ export default function ShopPage() {
         {/* Status indicator */}
         <div className="text-center py-2 mb-4">
           {productsLoading && (
-            <p className="text-xs text-ink/40">Connecting to Medusa backend...</p>
+            <p className="text-xs text-ink/40">Loading products from our collection...</p>
           )}
         </div>
 
         {productsLoading && (
           <div className="text-center py-16">
             <div className="w-8 h-8 border-2 border-bronze border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-            <p className="text-ink/50">Loading products...</p>
+            <p className="text-ink/50">Curating the finest Feng Shui items...</p>
           </div>
         )}
 
@@ -292,7 +302,7 @@ export default function ShopPage() {
           </div>
         )}
 
-        {!productsLoading && filteredProducts.length === 0 && (
+        {!productsLoading && !isLoading && filteredProducts.length === 0 && (
           <div className="text-center py-16">
             <Star size={48} className="text-ink/20 mx-auto mb-4" />
             <p className="text-ink/50">No items found matching your criteria.</p>

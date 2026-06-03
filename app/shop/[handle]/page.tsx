@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { ArrowLeft, ShoppingCart } from 'lucide-react'
 import Navigation from '@/app/components/Navigation'
-import { useProduct, useMappedProducts, mapProduct } from '@/app/lib/medusa'
+import { useProduct, useRelatedProducts, mapProduct } from '@/app/lib/medusa'
 import { useCartContext } from '@/app/lib/CartContext'
 import { getDemoProduct } from '@/app/lib/demo-data'
 import type { ProductItem } from '@/app/lib/medusa-types'
@@ -101,8 +101,12 @@ export default function ProductDetailPage() {
   // Cart hooks
   const { addToCart, cartCount } = useCartContext()
 
-  // Related products
-  const { products: allProducts, loading: relatedLoading } = useMappedProducts()
+  // Related products — fetch limited set (no dependency on product)
+  const { products: allProducts, loading: relatedLoading } = useRelatedProducts()
+  const relatedProducts = React.useMemo(() => {
+    if (!product) return []
+    return allProducts.filter(p => p.id !== product.id).slice(0, 6)
+  }, [allProducts, product])
 
   // Fetch product
   const { product: medusaProduct, loading: apiLoading } = useProduct(handle)
@@ -279,9 +283,9 @@ export default function ProductDetailPage() {
         </div>
 
         {/* ===== Related Products ===== */}
-        {!relatedLoading && allProducts.length > 0 && (
+        {!relatedLoading && relatedProducts.length > 0 && (
           <RelatedProducts
-            products={allProducts}
+            products={relatedProducts}
             currentProductId={product.id}
           />
         )}

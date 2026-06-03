@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { Star, ShoppingCart } from 'lucide-react'
 import type { ProductItem } from '@/app/lib/medusa-types'
@@ -36,10 +37,12 @@ export default function RelatedProducts({ products, currentProductId }: RelatedP
               {/* Image */}
               <div className="aspect-square bg-gradient-to-br from-rice to-rice/80 relative overflow-hidden">
                 {hasImage ? (
-                  <img
-                    src={product.thumbnail}
+                  <Image
+                    src={product.thumbnail!}
                     alt={product.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    fill
+                    sizes="280px"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 ) : (
                   <div className="absolute inset-0 flex items-center justify-center">

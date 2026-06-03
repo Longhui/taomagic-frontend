@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
+import Image from 'next/image'
 import { Star, ChevronLeft, ChevronRight } from 'lucide-react'
 
 interface ImageGalleryProps {
@@ -50,10 +51,12 @@ export default function ImageGallery({ images, productName }: ImageGalleryProps)
         onMouseMove={handleMouseMove}
       >
         {hasImages && !isCurrentImageError ? (
-          <img
+          <Image
             src={currentImage!}
             alt={`${productName} - Image ${selectedIndex + 1}`}
-            className={`w-full h-full object-cover transition-transform duration-200 ${
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
+            className={`object-cover transition-transform duration-200 ${
               isZoomed ? 'scale-150' : 'scale-100'
             }`}
             style={
@@ -118,17 +121,19 @@ export default function ImageGallery({ images, productName }: ImageGalleryProps)
               <button
                 key={index}
                 onClick={() => setSelectedIndex(index)}
-                className={`flex-shrink-0 w-16 h-16 rounded-sm border-2 overflow-hidden transition-all ${
+                className={`flex-shrink-0 w-16 h-16 rounded-sm border-2 overflow-hidden relative transition-all ${
                   index === selectedIndex
                     ? 'border-gold shadow-sm'
                     : 'border-ink/10 hover:border-ink/30'
                 }`}
               >
                 {!hasError ? (
-                  <img
+                  <Image
                     src={img}
                     alt={`${productName} thumbnail ${index + 1}`}
-                    className="w-full h-full object-cover"
+                    fill
+                    sizes="64px"
+                    className="object-cover"
                     onError={() => handleImageError(index)}
                   />
                 ) : (

@@ -7,12 +7,38 @@ import type {
   MedusaCollection,
   ProductItem,
 } from "./medusa-types"
+import { withCache } from "./request-cache"
+import { setLocalCache, getLocalCache } from "./local-cache"
 
 const BACKEND_URL =
   process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL || "http://localhost:9000"
 
 const PUBLISHABLE_KEY =
   process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY || ""
+
+// ========== Field definitions for Medusa API ==========
+// Only request what each page needs — avoids loading deep relations (options.values,
+// variants.options) that are only needed on PDP and slow down the query 10x.
+const LISTING_FIELDS = [
+  'id', 'title', 'handle', 'description', 'thumbnail',
+  'images.url',
+  'collection.handle',
+  'variants.id',
+  'variants.calculated_price',
+  'variants.inventory_quantity',
+  'tags.value',
+  'metadata',
+]
+
+const DETAIL_FIELDS = [
+  ...LISTING_FIELDS,
+  // PDP-level fields (not needed on listing)
+  'variants.prices',
+  'options.id',
+  'options.title',
+  'options.values.value',
+  'variants.options',
+]
 
 // Global singleton SDK instance
 let sdk: Medusa
@@ -96,28 +122,93 @@ function mapProduct(p: MedusaProduct): ProductItem {
 
 // ========== Hooks ==========
 
-/** Fetch default region (first available) */
+// ========== Shared region singleton ==========
+// Module-level state so all components share the same region fetch
+let _regionId: string | null = null
+let _regionLoading = true
+let _regionPromise: Promise<void> | null = null
+let _regionListeners: Array<() => void> = []
+
+function notifyRegionListeners() {
+  _regionListeners.forEach(fn => fn())
+}
+
+/** Fetch default region once, shared across all callers */
+function fetchDefaultRegion(): Promise<void> {
+  if (_regionPromise) return _regionPromise
+  _regionPromise = withCache("default-region", async () => {
+    const { regions }: any = await getSDK().store.region.list()
+    if (regions?.length > 0) {
+      _regionId = regions[0].id
+    }
+    _regionLoading = false
+    notifyRegionListeners()
+  })
+  return _regionPromise
+}
+
+// ========== Eager product + collection pre-fetch ==========
+// Start fetching immediately on module load.
+// Products WAIT for region so we only fetch once with the correct key.
+let _eagerProductsPromise: Promise<any> | null = null
+let _eagerCollectionsPromise: Promise<any> | null = null
+
+function eagerFetchProducts() {
+  if (!_eagerProductsPromise) {
+    _eagerProductsPromise = (async () => {
+      // Wait for region first so we fetch with correct key (no refetch needed)
+      await _regionPromise
+      if (!_regionId) return null
+      const query: any = { region_id: _regionId, fields: LISTING_FIELDS }
+      return withCache(`products:${JSON.stringify(query)}`, () =>
+        getSDK().store.product.list(query) as Promise<any>
+      )
+    })().then((result) => {
+      // On success, cache in localStorage for instant repeat views
+      if (result?.products?.length) {
+        setLocalCache('products', result.products, 5 * 60 * 1000)
+      }
+      return result
+    }).catch(() => null)
+  }
+  return _eagerProductsPromise
+}
+
+function eagerFetchCollections() {
+  if (!_eagerCollectionsPromise) {
+    _eagerCollectionsPromise = withCache('collections', () =>
+      getSDK().store.collection.list() as Promise<any>
+    ).catch(() => null)
+  }
+  return _eagerCollectionsPromise
+}
+
+// Kick off all fetches immediately on module load (client-side only)
+if (typeof window !== "undefined") {
+  fetchDefaultRegion().catch(() => {
+    _regionLoading = false
+    notifyRegionListeners()
+  })
+  eagerFetchCollections()
+  // Products starts immediately too but internally awaits region
+  eagerFetchProducts()
+}
+
+/** Fetch default region (first available) — singleton, shared state */
 export function useDefaultRegion() {
-  const [regionId, setRegionId] = useState<string | null>(null)
-  const [loading, setLoading] = useState(true)
+  const [, setTick] = useState(0)
 
   useEffect(() => {
-    let cancelled = false
-    getSDK()
-      .store.region.list()
-      .then(({ regions }: any) => {
-        if (!cancelled && regions?.length > 0) {
-          setRegionId(regions[0].id)
-        }
-      })
-      .catch(() => {})
-      .finally(() => {
-        if (!cancelled) setLoading(false)
-      })
-    return () => { cancelled = true }
+    // If already resolved, no need to listen
+    if (!_regionLoading) return
+    const listener = () => setTick(n => n + 1)
+    _regionListeners.push(listener)
+    return () => {
+      _regionListeners = _regionListeners.filter(l => l !== listener)
+    }
   }, [])
 
-  return { regionId, loading }
+  return { regionId: _regionId, loading: _regionLoading }
 }
 
 /** Fetch product list from Medusa */
@@ -126,18 +217,45 @@ export function useProducts(collectionId?: string, regionId?: string | null) {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<Error | null>(null)
 
+  // Hydrate from localStorage cache after first render (avoid hydration mismatch)
   useEffect(() => {
+    const cached = getLocalCache<MedusaProduct[]>('products')
+    if (cached?.length) {
+      setProducts(cached)
+      setLoading(false)  // Show cached data immediately
+    }
+  }, [])
+
+  useEffect(() => {
+    // Don't fetch without a region — prevents wasteful region-less fetch
+    // that would be discarded when region arrives (eager fetch handles it)
+    if (!regionId) return
+
     let cancelled = false
     const fetchProducts = async () => {
       try {
-        setLoading(true)
-        setError(null)
-        const query: any = { ...(collectionId ? { collection_id: [collectionId] } : {}) }
-        if (regionId) {
-          query.region_id = regionId
+        // Only show spinner if we have no data at all (not even cached)
+        if (products.length === 0 && !getLocalCache<MedusaProduct[]>('products')?.length) {
+          setLoading(true)
         }
-        const { products } = await getSDK().store.product.list(query)
-        if (!cancelled) setProducts(products || [])
+        setError(null)
+        const query: any = {
+          ...(collectionId ? { collection_id: [collectionId] } : {}),
+          region_id: regionId,
+          fields: LISTING_FIELDS,
+        }
+        const cacheKey = `products:${JSON.stringify(query)}`
+        const result = await withCache(cacheKey, () =>
+          getSDK().store.product.list(query) as Promise<{ products: MedusaProduct[] }>
+        )
+        const fetched = result.products
+        if (!cancelled) {
+          setProducts(fetched || [])
+          // Cache in localStorage for repeat visits
+          if (fetched?.length) {
+            setLocalCache('products', fetched, 5 * 60 * 1000)
+          }
+        }
       } catch (err) {
         console.warn("Medusa products fetch failed:", err)
         if (!cancelled) setError(err as Error)
@@ -163,7 +281,9 @@ export function useProduct(handle: string) {
     const fetchProduct = async () => {
       try {
         setLoading(true)
-        const { products } = await getSDK().store.product.list({ handle })
+        const { products } = await withCache(`product:${handle}`, () =>
+          getSDK().store.product.list({ handle, fields: DETAIL_FIELDS }) as Promise<any>
+        )
         if (!cancelled) setProduct(products?.[0] || null)
       } catch (err) {
         console.error(err)
@@ -185,8 +305,9 @@ export function useCollections() {
 
   useEffect(() => {
     let cancelled = false
-    getSDK()
-      .store.collection.list()
+    withCache("collections", () =>
+      getSDK().store.collection.list() as Promise<any>
+    )
       .then(({ collections }: any) => {
         if (!cancelled) setCollections(collections || [])
       })
@@ -287,8 +408,9 @@ export function useCart(regionId?: string | null) {
   useEffect(() => {
     const existingCartId = localStorage.getItem("cart_id")
     if (existingCartId) {
-      getSDK()
-        .store.cart.retrieve(existingCartId)
+      withCache(`cart:${existingCartId}`, () =>
+        getSDK().store.cart.retrieve(existingCartId) as Promise<any>
+      )
         .then(({ cart }: any) => setCart(cart as MedusaCart))
         .catch(() => localStorage.removeItem("cart_id"))
     }
@@ -345,10 +467,51 @@ export async function completeCart(cartId: string) {
 /** Map Medusa API products to UI items (for component use) */
 export function useMappedProducts(collectionId?: string) {
   const { regionId, loading: regionLoading } = useDefaultRegion()
-  const regionReady = !!regionId || !regionLoading
   const { products, loading, error } = useProducts(collectionId, regionId)
   const mapped = products.map(mapProduct)
-  return { products: mapped, rawProducts: products, loading: loading || !regionReady, error }
+  // Use the products hook's own loading state — it starts as true
+  // and only becomes false after data arrives
+  return { products: mapped, rawProducts: products, loading, error }
+}
+
+/** Fetch a limited set of related products (for detail page) */
+export function useRelatedProducts(collectionHandle?: string, excludeId?: string, limit: number = 6) {
+  const { regionId, loading: regionLoading } = useDefaultRegion()
+  const [products, setProducts] = useState<ProductItem[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    let cancelled = false
+    const fetchRelated = async () => {
+      try {
+        setLoading(true)
+        const query: any = {
+          limit: limit + 6, // fetch extra to filter out current
+          region_id: regionId,
+          fields: LISTING_FIELDS,
+        }
+
+        const { products: raw } = await withCache(`related:${collectionHandle || 'all'}:${limit}`, () =>
+          getSDK().store.product.list(query) as Promise<any>
+        )
+        if (cancelled) return
+
+        let result = (raw || []).map(mapProduct)
+        if (excludeId) {
+          result = result.filter((p: ProductItem) => p.id !== excludeId)
+        }
+        setProducts(result.slice(0, limit))
+      } catch (err) {
+        console.warn("Related products fetch failed:", err)
+      } finally {
+        if (!cancelled) setLoading(false)
+      }
+    }
+    fetchRelated()
+    return () => { cancelled = true }
+  }, [collectionHandle, excludeId, limit, regionId])
+
+  return { products, loading }
 }
 
 export { mapProduct, resolveImageUrl }
