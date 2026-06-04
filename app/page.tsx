@@ -321,7 +321,6 @@ const Footer = () => {
               <li><Link href="/shop" className="hover:text-gold transition-colors">All Products</Link></li>
               <li><Link href="/shop" className="hover:text-gold transition-colors">New Arrivals</Link></li>
               <li><Link href="/shop" className="hover:text-gold transition-colors">Best Sellers</Link></li>
-              <li><Link href="/shop" className="hover:text-gold transition-colors">Gift Cards</Link></li>
             </ul>
           </div>
 
@@ -329,7 +328,6 @@ const Footer = () => {
             <h4 className="text-rice font-medium mb-4 text-sm uppercase tracking-wider">I Ching</h4>
             <ul className="space-y-2 text-sm">
               <li><Link href="/iching" className="hover:text-gold transition-colors">Free Reading</Link></li>
-              <li><Link href="/iching" className="hover:text-gold transition-colors">How It Works</Link></li>
               <li><Link href="/iching/analysis" className="hover:text-gold transition-colors">History</Link></li>
               <li><Link href="/wisdom" className="hover:text-gold transition-colors">Blog</Link></li>
             </ul>
@@ -338,10 +336,9 @@ const Footer = () => {
           <div>
             <h4 className="text-rice font-medium mb-4 text-sm uppercase tracking-wider">Support</h4>
             <ul className="space-y-2 text-sm">
-              <li><Link href="/contact" className="hover:text-gold transition-colors">Contact Us</Link></li>
-              <li><Link href="/faq" className="hover:text-gold transition-colors">FAQ</Link></li>
               <li><Link href="/shipping-info" className="hover:text-gold transition-colors">Shipping</Link></li>
               <li><Link href="/shop" className="hover:text-gold transition-colors">Track Order</Link></li>
+              <li><Link href="/contact" className="hover:text-gold transition-colors">Contact Us</Link></li>
             </ul>
           </div>
 
@@ -349,7 +346,6 @@ const Footer = () => {
             <h4 className="text-rice font-medium mb-4 text-sm uppercase tracking-wider">Legal</h4>
             <ul className="space-y-2 text-sm">
               <li><Link href="/privacy-policy" className="hover:text-gold transition-colors">Privacy Policy</Link></li>
-              <li><Link href="/disclaimer" className="hover:text-gold transition-colors">Terms of Service</Link></li>
               <li><Link href="/return-policy" className="hover:text-gold transition-colors">Return Policy</Link></li>
               <li><Link href="/disclaimer" className="hover:text-gold transition-colors">Disclaimer</Link></li>
             </ul>

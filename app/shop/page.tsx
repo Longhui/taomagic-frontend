@@ -316,8 +316,8 @@ export default function ShopPage() {
           <div className="grid md:grid-cols-3 gap-8 text-center">
             {[
               { title: 'Authentic Sourcing', desc: 'All items sourced from traditional craftsmen and blessed with proper intention.' },
-              { title: 'Energy Cleansed', desc: 'Every object is energetically cleansed with sage and sound before shipping.' },
-              { title: '30-Day Harmony', desc: 'Not feeling the energy? Return within 30 days for full refund.' }
+              { title: 'Ceremonially Blessed', desc: 'Each item is blessed by a qualified Taoist priest through traditional consecration rites before shipping.' },
+              { title: '30-Day Guarantee', desc: 'Not satisfied? Return within 30 days. See policy for details.' }
             ].map((item, i) => (
               <div key={i}>
                 <h3 className="font-serif text-gold text-xl mb-2">{item.title}</h3>
