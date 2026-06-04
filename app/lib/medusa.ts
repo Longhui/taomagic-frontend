@@ -28,17 +28,24 @@ const LISTING_FIELDS = [
   'variants.inventory_quantity',
   'tags.value',
   'metadata',
-]
+].join(',')
 
 const DETAIL_FIELDS = [
-  ...LISTING_FIELDS,
+  'id', 'title', 'handle', 'description', 'thumbnail',
+  'images.url',
+  'collection.handle',
+  'variants.id',
+  'variants.calculated_price',
+  'variants.inventory_quantity',
+  'tags.value',
+  'metadata',
   // PDP-level fields (not needed on listing)
   'variants.prices',
   'options.id',
   'options.title',
   'options.values.value',
   'variants.options',
-]
+].join(',')
 
 // Global singleton SDK instance
 let sdk: Medusa
@@ -240,7 +247,7 @@ export function useProducts(collectionId?: string, regionId?: string | null) {
         }
         setError(null)
         const query: any = {
-          ...(collectionId ? { collection_id: [collectionId] } : {}),
+          ...(collectionId ? { collection_id: collectionId } : {}),
           region_id: regionId,
           fields: LISTING_FIELDS,
         }

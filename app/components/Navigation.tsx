@@ -39,7 +39,7 @@ export default function Navigation({ solid = false, rightSlot }: NavigationProps
   const navItems = [
     { name: 'Home', href: '/' },
     { name: 'Shop', href: '/shop' },
-    { name: 'I Ching', href: '/divination' },
+    { name: 'I Ching', href: '/iching' },
     { name: 'Wisdom', href: '/wisdom' },
   ]
 

@@ -99,7 +99,7 @@ tao-insight/
 ├── app/                    # Next.js 前端
 │   ├── page.tsx            # 主页
 │   ├── shop/page.tsx       # 商城页
-│   ├── divination/page.tsx # 算卦页
+│   ├── iching/page.tsx # 算卦页
 │   └── lib/medusa.ts       # Medusa API hooks
 ├── medusa-backend/         # Medusa 后端
 │   ├── medusa-config.js    # 后端配置

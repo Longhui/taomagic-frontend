@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
 
     if (!apiUrl || !apiKey) {
       return NextResponse.json({
-        analysis: `## Master's Divination Analysis
+        analysis: `## Master's Hexagram Analysis
 
 **Hexagram Analysis for: ${question || 'Your Question'}**
 
@@ -39,7 +39,7 @@ Once configured, a complete seven-step Liu Yao analysis will be displayed here.`
       body: JSON.stringify({
         model: modelName,
         messages: [
-          { role: 'system', content: 'You are a master of Liu Yao divination and I Ching. Provide professional analysis in clear English. Answer in English.' },
+          { role: 'system', content: 'You are a master of Liu Yao hexagram analysis and I Ching. Provide professional analysis in clear English. Answer in English.' },
           { role: 'user', content: prompt },
         ],
         max_tokens: 4000,
@@ -57,7 +57,7 @@ Once configured, a complete seven-step Liu Yao analysis will be displayed here.`
 
     return NextResponse.json({ analysis })
   } catch (err) {
-    console.error('Divination API error:', err)
+    console.error('I Ching API error:', err)
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }

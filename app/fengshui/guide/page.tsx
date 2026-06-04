@@ -942,7 +942,7 @@ const Footer = () => (
           <h4 className="text-rice font-medium mb-4">Explore</h4>
           <ul className="space-y-2 text-sm">
             <li><Link href="/wisdom" className="hover:text-gold transition-colors">Yi Jing Wisdom</Link></li>
-            <li><Link href="/divination" className="hover:text-gold transition-colors">I Ching Divination</Link></li>
+            <li><Link href="/iching" className="hover:text-gold transition-colors">I Ching Guidance</Link></li>
             <li><Link href="/shop" className="hover:text-gold transition-colors">Feng Shui Store</Link></li>
             <li><Link href="/fengshui" className="hover:text-gold transition-colors">Indoor Feng Shui</Link></li>
           </ul>
@@ -952,7 +952,7 @@ const Footer = () => (
           <ul className="space-y-2 text-sm">
             <li><Link href="/guide" className="hover:text-gold transition-colors">I Ching Coin Guide</Link></li>
             <li><Link href="/fengshui/guide" className="hover:text-gold transition-colors">Ba Zhai Feng Shui Guide</Link></li>
-            <li><Link href="/divination" className="hover:text-gold transition-colors">Free AI Reading</Link></li>
+            <li><Link href="/iching" className="hover:text-gold transition-colors">Free AI Reading</Link></li>
             <li><Link href="/shop" className="hover:text-gold transition-colors">Feng Shui Objects</Link></li>
           </ul>
         </div>

@@ -76,9 +76,9 @@ html { scroll-behavior: smooth; }
 </a>
 <div class="hidden md:flex items-center gap-8">
 <a href="#" onclick="showPage('wisdom')" class="text-rice/80 hover:text-gold transition-colors text-sm tracking-wide uppercase">Wisdom</a>
-<a href="#" onclick="showPage('divination')" class="text-rice/80 hover:text-gold transition-colors text-sm tracking-wide uppercase">Divination</a>
+<a href="#" onclick="showPage('iching')" class="text-rice/80 hover:text-gold transition-colors text-sm tracking-wide uppercase">I Ching</a>
 <a href="#" onclick="showPage('shop')" class="text-rice/80 hover:text-gold transition-colors text-sm tracking-wide uppercase">Feng Shui</a>
-<button onclick="showPage('divination')" class="bg-cinnabar text-rice px-4 py-2 rounded-sm text-sm hover:bg-cinnabar/80 transition-colors">Free Reading</button>
+<button onclick="showPage('iching')" class="bg-cinnabar text-rice px-4 py-2 rounded-sm text-sm hover:bg-cinnabar/80 transition-colors">Free Reading</button>
 </div>
 <button class="md:hidden text-rice" onclick="toggleMobileMenu()">
 <svg width="24" height="24"><use href="#icon-menu"/></svg>
@@ -87,7 +87,7 @@ html { scroll-behavior: smooth; }
 </div>
 <div id="mobile-menu" class="hidden md:hidden bg-ink/95 backdrop-blur-md">
 <a href="#" onclick="showPage('wisdom');toggleMobileMenu()" class="block px-4 py-3 text-rice/80 hover:text-gold">Wisdom</a>
-<a href="#" onclick="showPage('divination');toggleMobileMenu()" class="block px-4 py-3 text-rice/80 hover:text-gold">Divination</a>
+<a href="#" onclick="showPage('iching');toggleMobileMenu()" class="block px-4 py-3 text-rice/80 hover:text-gold">I Ching</a>
 <a href="#" onclick="showPage('shop');toggleMobileMenu()" class="block px-4 py-3 text-rice/80 hover:text-gold">Feng Shui Store</a>
 </div>
 </nav>
@@ -112,7 +112,7 @@ Discover the I Ching, master Feng Shui, and transform your space with
 5,000 years of Taoist philosophy. Your journey to harmony begins here.
 </p>
 <div class="flex flex-col sm:flex-row gap-4 justify-center">
-<button onclick="showPage('divination')" class="bg-cinnabar text-rice px-8 py-4 rounded-sm text-lg hover:bg-cinnabar/80 transition-all flex items-center justify-center gap-2">
+<button onclick="showPage('iching')" class="bg-cinnabar text-rice px-8 py-4 rounded-sm text-lg hover:bg-cinnabar/80 transition-all flex items-center justify-center gap-2">
 <svg width="20" height="20"><use href="#icon-sparkles"/></svg>
 Get Free I Ching Reading
 </button>
@@ -154,14 +154,14 @@ Explore Wisdom
 <span class="inline-flex items-center gap-2 text-ink font-medium hover:text-cinnabar transition-colors group-hover:gap-3">Start Learning <svg width="16" height="16"><use href="#icon-arrow"/></svg></span>
 </div>
 
-<!-- Divination -->
-<div class="group bg-white rounded-lg border border-ink/10 p-8 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer" onclick="showPage('divination')">
+<!-- I Ching -->
+<div class="group bg-white rounded-lg border border-ink/10 p-8 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer" onclick="showPage('iching')">
 <div class="inline-flex p-3 rounded-lg mb-6 bg-cinnabar/10 text-cinnabar border border-cinnabar/30">
 <svg width="28" height="28"><use href="#icon-sparkles"/></svg>
 </div>
-<h3 class="text-2xl font-serif text-ink mb-1">Liu Yao Divination</h3>
+<h3 class="text-2xl font-serif text-ink mb-1">Liu Yao Hexagram Analysis</h3>
 <p class="text-sm text-ink/40 mb-4 font-serif">六爻预测</p>
-<p class="text-ink/70 mb-6 leading-relaxed">Experience authentic I Ching divination. Cast your coins, receive your hexagram, and unlock personalized guidance for life's important questions.</p>
+<p class="text-ink/70 mb-6 leading-relaxed">Experience authentic I Ching guidance. Cast your coins, receive your hexagram, and unlock personalized guidance for life's important questions.</p>
 <ul class="space-y-2 mb-8">
 <li class="flex items-center gap-2 text-sm text-ink/60"><svg width="12" height="12" class="text-gold"><use href="#icon-star"/></svg>Free AI-Powered Reading</li>
 <li class="flex items-center gap-2 text-sm text-ink/60"><svg width="12" height="12" class="text-gold"><use href="#icon-star"/></svg>Authentic Coin Method</li>
@@ -335,8 +335,8 @@ View All <svg width="16" height="16"><use href="#icon-arrow"/></svg>
 </section>
 </div>
 
-<!-- ==================== DIVINATION PAGE ==================== -->
-<div id="page-divination" class="page">
+<!-- ==================== I CHING PAGE ==================== -->
+<div id="page-iching" class="page">
 <div class="min-h-screen bg-rice">
 <div class="bg-ink text-rice py-4">
 <div class="max-w-4xl mx-auto px-4 flex items-center justify-between">
@@ -349,10 +349,10 @@ Back to Home
 <div class="max-w-4xl mx-auto px-4 py-16">
 <div class="text-center mb-12">
 <svg width="48" height="48" class="text-cinnabar mx-auto mb-4"><use href="#icon-sparkles"/></svg>
-<h1 class="text-4xl md:text-5xl font-serif text-ink mb-4">I Ching Divination</h1>
-<p class="text-xl text-ink/60">六爻算卦 · Liu Yao Divination</p>
+<h1 class="text-4xl md:text-5xl font-serif text-ink mb-4">I Ching Guidance</h1>
+<p class="text-xl text-ink/60">六爻算卦 · Liu Yao Hexagram Analysis</p>
 </div>
-<div id="divination-intro" class="bg-white rounded-lg border border-ink/10 p-8 mb-8">
+<div id="iching-intro" class="bg-white rounded-lg border border-ink/10 p-8 mb-8">
 <div class="flex items-center justify-between mb-4">
 <h2 class="text-2xl font-serif text-ink">How It Works</h2>
 <a href="guide.html" target="_blank" class="text-sm text-cinnabar hover:text-cinnabar/80 transition-colors inline-flex items-center gap-1">
@@ -381,18 +381,18 @@ View Detailed Guide
 <div class="bg-bronze/5 rounded-lg p-4 mb-4 flex items-center gap-3">
 <svg width="20" height="20" class="text-bronze"><use href="#icon-coins"/></svg>
 <div>
-<p class="text-sm text-ink/80">New to coin divination? Learn the <a href="guide.html" target="_blank" class="text-cinnabar hover:underline">proper casting method</a> with our step-by-step guide.</p>
+<p class="text-sm text-ink/80">New to coin casting? Learn the <a href="guide.html" target="_blank" class="text-cinnabar hover:underline">proper casting method</a> with our step-by-step guide.</p>
 </div>
 </div>
 <label class="block text-sm font-medium text-ink mb-2">Your Question (Optional)</label>
 <textarea id="question-input" placeholder="What guidance do you seek?" class="w-full px-4 py-3 rounded-sm border border-ink/20 focus:outline-none focus:border-bronze mb-4 resize-none" rows="3"></textarea>
-<button onclick="startDivination()" class="w-full bg-cinnabar text-rice py-4 rounded-sm text-lg hover:bg-cinnabar/80 transition-colors flex items-center justify-center gap-2">
+<button onclick="startIching()" class="w-full bg-cinnabar text-rice py-4 rounded-sm text-lg hover:bg-cinnabar/80 transition-colors flex items-center justify-center gap-2">
 <svg width="20" height="20"><use href="#icon-sparkles"/></svg>
-Begin Divination
+Begin Reading
 </button>
 </div>
 </div>
-<div id="divination-casting" class="hidden">
+<div id="iching-casting" class="hidden">
 <div class="bg-ink text-rice rounded-lg p-8 mb-8">
 <div class="text-center mb-6">
 <h2 class="text-2xl font-serif mb-2">Casting Line <span id="current-line">1</span> of 6</h2>
@@ -462,7 +462,7 @@ Shake & Cast Line <span id="random-line-num">1</span>
 <div class="flex items-center gap-3">
 <svg width="20" height="20" class="text-gold"><use href="#icon-book"/></svg>
 <div>
-<p class="text-rice text-sm font-medium">New to coin divination?</p>
+<p class="text-rice text-sm font-medium">New to coin casting?</p>
 <p class="text-rice/60 text-xs">Learn the proper casting method with our step-by-step guide</p>
 </div>
 </div>
@@ -487,14 +487,14 @@ View Guide
 </div>
 
 <div class="flex justify-center gap-4">
-<button onclick="resetDivination()" class="border border-rice/30 text-rice px-6 py-3 rounded-sm hover:bg-rice/10 transition-colors flex items-center gap-2">
+<button onclick="resetIching()" class="border border-rice/30 text-rice px-6 py-3 rounded-sm hover:bg-rice/10 transition-colors flex items-center gap-2">
 <svg width="16" height="16"><use href="#icon-rotate"/></svg>
 Reset
 </button>
 </div>
 </div>
 </div>
-<div id="divination-result" class="hidden">
+<div id="iching-result" class="hidden">
 <div class="text-center mb-12">
 <div class="inline-block bg-gold/10 text-gold px-3 py-1 rounded-sm text-sm mb-4">Hexagram <span id="hex-num">1</span> of 64</div>
 <h1 id="hex-name" class="text-4xl md:text-5xl font-serif text-ink mb-2">The Creative</h1>
@@ -526,7 +526,7 @@ Reset
 <svg width="18" height="18"><use href="#icon-star"/></svg>
 Master Consultation $29
 </button>
-<button onclick="resetDivination()" class="border border-rice/30 text-rice px-6 py-3 rounded-sm hover:bg-rice/10 transition-colors">New Reading</button>
+<button onclick="resetIching()" class="border border-rice/30 text-rice px-6 py-3 rounded-sm hover:bg-rice/10 transition-colors">New Reading</button>
 </div>
 </div>
 </div>
@@ -536,7 +536,7 @@ Master Consultation $29
 About the Method
 </h3>
 <p class="text-ink/70 text-sm leading-relaxed">
-The I Ching (Book of Changes) is one of the oldest divination systems, dating back over 3,000 years. 
+The I Ching (Book of Changes) is one of the oldest wisdom systems, dating back over 3,000 years.
 Our digital method faithfully replicates the traditional three-coin technique used to generate one of 64 hexagrams.
 </p>
 </div>
@@ -650,7 +650,7 @@ to practical wisdom you can apply immediately.
 <h3 class="text-2xl font-serif text-ink mb-4">Ready to Apply This Wisdom?</h3>
 <p class="text-ink/70 mb-6">Knowledge becomes power when put into practice. Try a free I Ching reading or explore our curated Feng Shui objects.</p>
 <div class="flex flex-col sm:flex-row gap-4 justify-center">
-<button onclick="showPage('divination')" class="bg-cinnabar text-rice px-6 py-3 rounded-sm hover:bg-cinnabar/80 transition-colors inline-flex items-center justify-center gap-2">
+<button onclick="showPage('iching')" class="bg-cinnabar text-rice px-6 py-3 rounded-sm hover:bg-cinnabar/80 transition-colors inline-flex items-center justify-center gap-2">
 <svg width="18" height="18"><use href="#icon-flame"/></svg>
 Try I Ching Reading
 </button>
@@ -679,7 +679,7 @@ Browse Feng Shui Store
 <h4 class="text-rice font-medium mb-4">Explore</h4>
 <ul class="space-y-2 text-sm">
 <li><a href="#" onclick="showPage('wisdom')" class="hover:text-gold transition-colors">Yi Jing Wisdom</a></li>
-<li><a href="#" onclick="showPage('divination')" class="hover:text-gold transition-colors">I Ching Divination</a></li>
+<li><a href="#" onclick="showPage('iching')" class="hover:text-gold transition-colors">I Ching Guidance</a></li>
 <li><a href="#" onclick="showPage('shop')" class="hover:text-gold transition-colors">Feng Shui Store</a></li>
 <li><a href="#" class="hover:text-gold transition-colors">Blog & Articles</a></li>
 </ul>
@@ -738,7 +738,7 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// ========== DIVINATION ==========
+// ========== I CHING ==========
 const HEXAGRAMS = [
     { num: 1, name: "The Creative", chinese: "乾", trigrams: "☰☰", meaning: "Pure yang energy, creative power, initiative. The dragon rising." },
     { num: 2, name: "The Receptive", chinese: "坤", trigrams: "☷☷", meaning: "Pure yin energy, nurturing, following. Fertile ground receiving seeds." },
@@ -806,17 +806,17 @@ const HEXAGRAMS = [
     { num: 64, name: "Before Completion", chinese: "未济", trigrams: "☲☵", meaning: "Incompletion, transition. The cycle begins again." }
 ];
 
-let divinationLines = [];
-let divinationCurrentLine = 0;
+let ichingLines = [];
+let ichingCurrentLine = 0;
 let isCasting = false;
 let currentMethod = 'manual'; // 'manual' or 'random'
 let manualCoins = ['H', 'H', 'H']; // Current manual coin states
 
-function startDivination() {
-    document.getElementById('divination-intro').classList.add('hidden');
-    document.getElementById('divination-casting').classList.remove('hidden');
-    divinationLines = [];
-    divinationCurrentLine = 0;
+function startIching() {
+    document.getElementById('iching-intro').classList.add('hidden');
+    document.getElementById('iching-casting').classList.remove('hidden');
+    ichingLines = [];
+    ichingCurrentLine = 0;
     currentMethod = 'manual';
     manualCoins = ['H', 'H', 'H'];
     updateHexagramDisplay();
@@ -837,7 +837,7 @@ function setCastingMethod(method) {
         randomBtn.className = 'px-4 py-2 rounded-sm text-sm bg-rice/10 text-rice/70 hover:bg-rice/20 transition-colors';
         manualArea.classList.remove('hidden');
         randomArea.classList.add('hidden');
-        desc.textContent = '🪙 Shake three real coins, then record the result below (Recommended for authentic divination)';
+        desc.textContent = '🪙 Shake three real coins, then record the result below (Recommended for authentic reading)';
     } else {
         manualBtn.className = 'px-4 py-2 rounded-sm text-sm bg-rice/10 text-rice/70 hover:bg-rice/20 transition-colors';
         randomBtn.className = 'px-4 py-2 rounded-sm text-sm bg-cinnabar text-rice transition-colors';
@@ -867,30 +867,30 @@ function updateManualDisplay() {
 }
 
 function castManualLine() {
-    if (divinationCurrentLine >= 6) return;
+    if (ichingCurrentLine >= 6) return;
 
     const heads = manualCoins.filter(c => c === 'H').length;
     const lineValue = calculateLineValue(heads);
 
-    divinationLines.push(lineValue);
-    divinationCurrentLine++;
+    ichingLines.push(lineValue);
+    ichingCurrentLine++;
 
     updateHexagramDisplay();
-    document.getElementById('current-line').textContent = Math.min(divinationCurrentLine + 1, 6);
-    document.getElementById('manual-line-num').textContent = Math.min(divinationCurrentLine + 1, 6);
-    document.getElementById('random-line-num').textContent = Math.min(divinationCurrentLine + 1, 6);
+    document.getElementById('current-line').textContent = Math.min(ichingCurrentLine + 1, 6);
+    document.getElementById('manual-line-num').textContent = Math.min(ichingCurrentLine + 1, 6);
+    document.getElementById('random-line-num').textContent = Math.min(ichingCurrentLine + 1, 6);
 
     // Reset coins for next cast
     manualCoins = ['H', 'H', 'H'];
     updateManualDisplay();
 
-    if (divinationCurrentLine >= 6) {
+    if (ichingCurrentLine >= 6) {
         setTimeout(showResult, 500);
     }
 }
 
 function castRandomLine() {
-    if (isCasting || divinationCurrentLine >= 6) return;
+    if (isCasting || ichingCurrentLine >= 6) return;
     isCasting = true;
 
     const btn = document.getElementById('random-cast-btn');
@@ -908,8 +908,8 @@ function castRandomLine() {
         const heads = values.filter(v => v === 'H').length;
         const lineValue = calculateLineValue(heads);
 
-        divinationLines.push(lineValue);
-        divinationCurrentLine++;
+        ichingLines.push(lineValue);
+        ichingCurrentLine++;
 
         // Update display
         coins.forEach((coin, i) => {
@@ -920,15 +920,15 @@ function castRandomLine() {
         });
 
         updateHexagramDisplay();
-        document.getElementById('current-line').textContent = Math.min(divinationCurrentLine + 1, 6);
-        document.getElementById('manual-line-num').textContent = Math.min(divinationCurrentLine + 1, 6);
-        document.getElementById('random-line-num').textContent = Math.min(divinationCurrentLine + 1, 6);
+        document.getElementById('current-line').textContent = Math.min(ichingCurrentLine + 1, 6);
+        document.getElementById('manual-line-num').textContent = Math.min(ichingCurrentLine + 1, 6);
+        document.getElementById('random-line-num').textContent = Math.min(ichingCurrentLine + 1, 6);
 
         btn.disabled = false;
-        btn.innerHTML = '<svg width="20" height="20"><use href="#icon-hand"/></svg> Shake & Cast Line ' + Math.min(divinationCurrentLine + 1, 6);
+        btn.innerHTML = '<svg width="20" height="20"><use href="#icon-hand"/></svg> Shake & Cast Line ' + Math.min(ichingCurrentLine + 1, 6);
         isCasting = false;
 
-        if (divinationCurrentLine >= 6) {
+        if (ichingCurrentLine >= 6) {
             setTimeout(showResult, 500);
         }
     }, 1000);
@@ -963,7 +963,7 @@ function updateHexagramDisplay() {
     const container = document.getElementById('hexagram-lines');
     container.innerHTML = '';
     for (let i = 0; i < 6; i++) {
-        const line = divinationLines[i];
+        const line = ichingLines[i];
         let html = '';
         if (line === undefined) {
             html = '<div class="h-3 w-48 rounded-sm bg-rice/20"></div>';
@@ -982,11 +982,11 @@ function updateHexagramDisplay() {
 }
 
 function showResult() {
-    document.getElementById('divination-casting').classList.add('hidden');
-    document.getElementById('divination-result').classList.remove('hidden');
+    document.getElementById('iching-casting').classList.add('hidden');
+    document.getElementById('iching-result').classList.remove('hidden');
 
     // Calculate hexagram number based on lines
-    const hexNum = calculateHexagramNumber(divinationLines);
+    const hexNum = calculateHexagramNumber(ichingLines);
     const hex = HEXAGRAMS[hexNum - 1];
 
     document.getElementById('hex-num').textContent = hex.num;
@@ -1001,7 +1001,7 @@ function showResult() {
     }
 
     // Build changing lines description
-    const changingLines = divinationLines.map((line, idx) => {
+    const changingLines = ichingLines.map((line, idx) => {
         if (line === 6 || line === 9) {
             return `Line ${idx + 1}: ${getLineName(line)} ${getLineSymbol(line)}`;
         }
@@ -1020,7 +1020,7 @@ function showResult() {
 
     const resultContainer = document.getElementById('result-lines');
     resultContainer.innerHTML = '';
-    divinationLines.forEach(line => {
+    ichingLines.forEach(line => {
         const isYang = line === 7 || line === 9;
         const isChanging = line === 6 || line === 9;
         const color = isChanging ? 'bg-cinnabar' : 'bg-ink';
@@ -1047,16 +1047,16 @@ function calculateHexagramNumber(lines) {
     return ((upperVal * 8 + lowerVal) % 64) + 1;
 }
 
-function resetDivination() {
-    divinationLines = [];
-    divinationCurrentLine = 0;
+function resetIching() {
+    ichingLines = [];
+    ichingCurrentLine = 0;
     isCasting = false;
     currentMethod = 'manual';
     manualCoins = ['H', 'H', 'H'];
 
-    document.getElementById('divination-result').classList.add('hidden');
-    document.getElementById('divination-casting').classList.add('hidden');
-    document.getElementById('divination-intro').classList.remove('hidden');
+    document.getElementById('iching-result').classList.add('hidden');
+    document.getElementById('iching-casting').classList.add('hidden');
+    document.getElementById('iching-intro').classList.remove('hidden');
     document.getElementById('current-line').textContent = '1';
 
     // Reset manual coins display
@@ -1205,7 +1205,7 @@ const WISDOM_DATA = [
     {
         id: 'bagua', title: 'Bagua · 八卦', subtitle: 'The Eight Trigrams', icon: 'square', color: 'bronze',
         content: [
-            "The Bagua (Eight Trigrams) are the building blocks of I Ching divination and Feng Shui practice. Each trigram consists of three lines — solid (Yang) or broken (Yin).",
+            "The Bagua (Eight Trigrams) are the building blocks of I Ching guidance and Feng Shui practice. Each trigram consists of three lines — solid (Yang) or broken (Yin).",
             "Qian (Heaven) ☰ — Pure Yang: Creativity, strength, leadership | Northwest",
             "Kun (Earth) ☷ — Pure Yin: Receptivity, nurturing, support | Southwest",
             "Zhen (Thunder) ☳ — Yang below Yin: Initiation, movement, new beginnings | East",
@@ -1220,7 +1220,7 @@ const WISDOM_DATA = [
     {
         id: 'heavenly', title: 'Heavenly Stems & Earthly Branches · 天干地支', subtitle: 'The Chinese Time System', icon: 'wind', color: 'cinnabar',
         content: [
-            "The Heavenly Stems (天干) and Earthly Branches (地支) form the traditional Chinese calendar system used in astrology, divination, and Feng Shui.",
+            "The Heavenly Stems (天干) and Earthly Branches (地支) form the traditional Chinese calendar system used in astrology, I Ching, and Feng Shui.",
             "Ten Heavenly Stems (天干):",
             "1. Jia (甲) — Yang Wood | 2. Yi (乙) — Yin Wood | 3. Bing (丙) — Yang Fire",
             "4. Ding (丁) — Yin Fire | 5. Wu (戊) — Yang Earth | 6. Ji (己) — Yin Earth",
@@ -1236,10 +1236,10 @@ const WISDOM_DATA = [
         ]
     },
     {
-        id: 'divination', title: 'I Ching Divination · 易经预测', subtitle: 'The Book of Changes', icon: 'flame', color: 'gold',
+        id: 'iching', title: 'I Ching Guidance · 易经预测', subtitle: 'The Book of Changes', icon: 'flame', color: 'gold',
         content: [
-            "The I Ching (易经) is one of the oldest books in the world, used for divination and philosophical guidance for over 3,000 years.",
-            "How Divination Works:",
+            "The I Ching (易经) is one of the oldest books in the world, used for philosophical guidance for over 3,000 years.",
+            "How the I Ching Works:",
             "1. Formulate Your Question: Ask something specific and meaningful.",
             "2. Generate a Hexagram: Traditionally done with 50 yarrow stalks or three coins.",
             "3. Read the Text: Each hexagram has a main text and six line texts.",

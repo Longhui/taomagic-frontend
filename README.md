@@ -1,25 +1,25 @@
 # TaoInsight - I Ching & Feng Shui E-Commerce Platform
 
-A modern e-commerce platform bringing 5,000 years of Chinese wisdom (I Ching divination, Feng Shui, Taoist philosophy) to the Western market.
+A modern e-commerce platform bringing 5,000 years of Chinese wisdom (I Ching guidance, Feng Shui, Taoist philosophy) to the Western market.
 
 ## Project Files
 
 | File | Description |
 |------|-------------|
-| `tao-insight-demo.html` | **Main website** - Complete single-page application with Home, Divination, Shop, and Wisdom pages |
-| `guide.html` | **Coin Casting Guide** - Interactive tutorial for I Ching coin divination with practice demo |
+| `tao-insight-demo.html` | **Main website** - Complete single-page application with Home, I Ching, Shop, and Wisdom pages |
+| `guide.html` | **Coin Casting Guide** - Interactive tutorial for I Ching coin casting with practice demo |
 | `app/` | Next.js source code for production development |
 
 ## Pages
 
 ### 1. Home Page (`tao-insight-demo.html`)
 - Hero section with rotating Yin-Yang animation
-- Three core pillars: Wisdom, Divination, Feng Shui Store
+- Three core pillars: Wisdom, I Ching, Feng Shui Store
 - Featured products showcase
 - Customer testimonials
 - Newsletter subscription
 
-### 2. I Ching Divination (`tao-insight-demo.html#divination`)
+### 2. I Ching Guidance (`tao-insight-demo.html#iching`)
 - Free AI-powered hexagram casting
 - Authentic 3-coin method simulation
 - 64 hexagram database with interpretations
@@ -38,7 +38,7 @@ A modern e-commerce platform bringing 5,000 years of Chinese wisdom (I Ching div
   - Five Elements (五行)
   - Bagua Trigrams (八卦)
   - Heavenly Stems & Earthly Branches (天干地支)
-  - I Ching Divination (易经预测)
+  - I Ching Guidance (易经预测)
   - Feng Shui (风水)
   - Eight Mansions (八宅明镜)
 

@@ -1,4 +1,4 @@
-// ==================== Liu Yao Divination System (六爻预测) ====================
+// ==================== Liu Yao Hexagram System (六爻体系) ====================
 
 // Five Elements
 const ELEMENTS = ['Metal', 'Wood', 'Water', 'Fire', 'Earth'] as const
@@ -383,7 +383,7 @@ export interface LineAnalysis {
   analysis: string       // English interpretation
 }
 
-export interface AIDivinationAnalysis {
+export interface AIGuidanceAnalysis {
   hexagramName: string
   hexagramNameEn: string
   palace: string
@@ -412,7 +412,7 @@ function getElementRelationVerb(palaceEl: Element, yaoEl: Element): string {
   return `${yaoEl} relates to ${palaceEl}`
 }
 
-export function generateLiuYaoAnalysis(result: LiuYaoResult, question: string): AIDivinationAnalysis {
+export function generateLiuYaoAnalysis(result: LiuYaoResult, question: string): AIGuidanceAnalysis {
   const movingLines = result.lines.filter(l => l.isMoving)
   const staticLines = result.lines.filter(l => !l.isMoving)
 
@@ -558,9 +558,9 @@ export function generateAIPrompt(result: LiuYaoResult, question: string): string
     return `Line ${l.position}: ${symbol} Stem:${l.stem} Branch:${l.branch}(${l.element}) Relation:${l.relation} Spirit:${l.spirit} ${moving} ${empty}`
   }).join("\n")
 
-  return `You are a master of Liu Yao divination and I Ching. Analyze the following hexagram for the querent's question.
+  return `You are a master of Liu Yao hexagram analysis and I Ching. Analyze the following hexagram for the querent's question.
 
-## Divination Data
+## Guidance Data
 - Question: ${question}
 - Date: ${result.dateStr}
 - Year Pillar: ${result.yearStem}${result.yearBranch}

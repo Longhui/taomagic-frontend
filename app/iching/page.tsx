@@ -134,7 +134,7 @@ const HexagramLine = ({ value, isChanging }: { value?: LineValue; isChanging?: b
   )
 }
 
-export default function DivinationPage() {
+export default function IChingGuidancePage() {
   const router = useRouter()
   const [step, setStep] = useState<'intro' | 'casting' | 'result'>('intro')
   const [lines, setLines] = useState<LineValue[]>([])
@@ -240,7 +240,7 @@ export default function DivinationPage() {
       status: 'loading',
       date: liuYaoResult.dateStr,
     }))
-    router.push('/divination/analysis')
+    router.push('/iching/analysis')
   }
 
   // =========== INTRO ===========
@@ -251,7 +251,10 @@ export default function DivinationPage() {
         <div className="max-w-4xl mx-auto px-4 py-16">
           <div className="text-center mb-12">
             <Sparkles size={48} className="text-cinnabar mx-auto mb-4" />
-            <h1 className="text-4xl md:text-5xl font-serif text-ink mb-4">I Ching Guidance</h1>
+            <h1 className="text-4xl md:text-5xl font-serif text-ink mb-3">I Ching Guidance</h1>
+            <p className="text-ink/50 text-xs md:text-sm italic font-serif max-w-xl mx-auto leading-relaxed">
+              Rooted in the classical hexagram deduction system of the I Ching and the philosophical traditions of Yin-Yang and the Five Elements, this tool illuminates questions of life, career, and relationships through the lens of ancient Eastern wisdom.
+            </p>
           </div>
           <div className="bg-white rounded-lg border border-ink/10 p-8 mb-8">
             <div className="flex items-center justify-between mb-4">
@@ -277,13 +280,13 @@ export default function DivinationPage() {
             <div className="border-t border-ink/10 pt-6">
               <div className="bg-bronze/5 rounded-lg p-4 mb-4 flex items-center gap-3">
                 <BookOpen size={20} className="text-bronze shrink-0" />
-                <p className="text-sm text-ink/80">New to coin divination? Learn the <a href="/guide" target="_blank" className="text-cinnabar hover:underline">proper casting method</a> with our step-by-step guide.</p>
+                <p className="text-sm text-ink/80">New to coin casting? Learn the <a href="/guide" target="_blank" className="text-cinnabar hover:underline">proper casting method</a> with our step-by-step guide.</p>
               </div>
               <label className="block text-sm font-medium text-ink mb-2">Your Question</label>
               <textarea value={question} onChange={(e) => setQuestion(e.target.value)} placeholder="What guidance do you seek?" className="w-full px-4 py-3 rounded-sm border border-ink/20 focus:outline-none focus:border-bronze mb-4 resize-none" rows={3} />
               <button onClick={() => question.trim() ? setStep('casting') : null} className={`w-full py-4 rounded-sm text-lg transition-colors flex items-center justify-center gap-2 ${question.trim() ? 'bg-cinnabar text-rice hover:bg-cinnabar/80 cursor-pointer' : 'bg-cinnabar/50 text-rice/60 cursor-not-allowed'}`}>
                 <Sparkles size={20} />
-                {question.trim() ? 'Begin Divination' : 'Enter Your Question First'}
+                {question.trim() ? 'Begin Reading' : 'Enter Your Question First'}
               </button>
             </div>
           </div>
@@ -292,7 +295,7 @@ export default function DivinationPage() {
               <BookOpen size={20} className="text-bronze" />
               About the Method
             </h3>
-            <p className="text-ink/70 text-sm leading-relaxed">The I Ching (Book of Changes) is one of the oldest divination systems, dating back over 3,000 years. Our digital method faithfully replicates the traditional three-coin technique used to generate one of 64 hexagrams.</p>
+            <p className="text-ink/70 text-sm leading-relaxed">The I Ching (Book of Changes) is one of the oldest wisdom systems, dating back over 3,000 years. Our digital method faithfully replicates the traditional three-coin technique used to generate one of 64 hexagrams.</p>
           </div>
         </div>
       </div>
@@ -355,7 +358,7 @@ export default function DivinationPage() {
               <div className="flex items-center gap-3">
                 <BookOpen size={20} className="text-gold shrink-0" />
                 <div>
-                  <p className="text-sm font-medium">New to coin divination?</p>
+                  <p className="text-sm font-medium">New to coin casting?</p>
                   <p className="text-rice/60 text-xs">Learn the proper casting method with our step-by-step guide</p>
                 </div>
               </div>
@@ -425,7 +428,7 @@ export default function DivinationPage() {
             <Brain size={36} className="text-gold mx-auto mb-4" />
             <h3 className="text-rice font-serif text-2xl mb-2">Master Consultation</h3>
             <p className="text-rice/60 mb-6 max-w-xl mx-auto">
-              A comprehensive Liu Yao divination analysis based on traditional Five Elements (五行),
+              A comprehensive Liu Yao hexagram analysis based on traditional Five Elements (五行),
               Six Relations (六亲), and Six Spirits (六神) theories.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

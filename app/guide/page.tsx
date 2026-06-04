@@ -74,7 +74,7 @@ const QuickReference = () => (
           <div className="bg-white rounded-lg border border-ink/10 p-4">
             <h4 className="font-medium text-ink mb-3 text-center">US Penny Example (WikiHow)</h4>
             <div className="aspect-[4/3] bg-ink/5 rounded-lg flex items-center justify-center overflow-hidden">
-              <img src="/images/us_coins_guide.png" alt="US penny coin divination guide showing 3 heads = Old Yang" className="w-full h-full object-contain" />
+              <img src="/images/us_coins_guide.png" alt="US penny coin casting guide showing 3 heads = Old Yang" className="w-full h-full object-contain" />
             </div>
             <p className="text-xs text-ink/50 mt-2 text-center">3 Heads = 9 (Old Yang) | 3 Tails = 6 (Old Yin) | 2H1T = 8 (Young Yin) | 1H2T = 7 (Young Yang)</p>
           </div>
@@ -350,7 +350,7 @@ const InteractiveDemo = () => {
           <div className="flex justify-center gap-4">
             {isComplete && (
               <Link
-                href="/divination"
+                href="/iching"
                 className="bg-cinnabar text-rice px-6 py-3 rounded-sm hover:bg-cinnabar/80 transition-colors inline-flex items-center gap-2"
               >
                 <Sparkles size={18} />
@@ -453,7 +453,7 @@ export default function GuidePage() {
             How to Cast I Ching with <span className="text-gold">Coins</span>
           </h1>
           <p className="text-xl text-rice/70 max-w-2xl mx-auto mb-8">
-            A step-by-step guide to authentic Liu Yao divination using three coins. Master the ancient art of hexagram casting.
+            A step-by-step guide to authentic Liu Yao hexagram analysis using three coins. Master the ancient art of hexagram casting.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="#interactive-demo" className="bg-cinnabar text-rice px-8 py-4 rounded-sm text-lg hover:bg-cinnabar/80 transition-all flex items-center justify-center gap-2">
@@ -475,7 +475,7 @@ export default function GuidePage() {
         <div className="max-w-5xl mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-serif text-rice text-center mb-4">The Complete Casting Process</h2>
           <p className="text-rice/60 text-center mb-16 max-w-2xl mx-auto">
-            Follow these six phases to perform an authentic I Ching divination. Each phase builds upon the last, creating a ritual of focus and intention.
+            Follow these six phases to receive authentic I Ching guidance. Each phase builds upon the last, creating a ritual of focus and intention.
           </p>
 
           {/* Progress Indicator */}
@@ -717,7 +717,7 @@ export default function GuidePage() {
           <div className="grid md:grid-cols-2 gap-8">
             {[
               { title: 'Part 1: Understanding the Basics', desc: 'Learn the fundamentals: Yin and Yang, line values, and how coins form hexagrams.', tags: 'Coin identification • Line values • Recording methods' },
-              { title: 'Part 2: Full Casting Ritual', desc: 'Watch a complete divination from preparation through interpretation in real time.', tags: 'Preparation • Six casts • Hexagram assembly • Reading' },
+              { title: 'Part 2: Full Casting Ritual', desc: 'Watch a complete reading from preparation through interpretation in real time.', tags: 'Preparation • Six casts • Hexagram assembly • Reading' },
             ].map((video, i) => (
               <div key={i} className="bg-rice/5 rounded-lg border border-rice/10 overflow-hidden">
                 <div className="aspect-video bg-gradient-to-br from-ink to-ink/80 flex items-center justify-center">
@@ -763,11 +763,11 @@ export default function GuidePage() {
         <div className="max-w-3xl mx-auto px-4 text-center">
           <Sparkles size={48} className="text-bronze mx-auto mb-4" />
           <h2 className="text-3xl font-serif text-ink mb-4">Ready to Cast Your First Hexagram?</h2>
-          <p className="text-ink/70 mb-8">Now that you understand the method, try it yourself. Our digital divination tool faithfully replicates the coin-casting process.</p>
+          <p className="text-ink/70 mb-8">Now that you understand the method, try it yourself. Our digital reading tool faithfully replicates the coin-casting process.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/divination" className="bg-cinnabar text-rice px-8 py-4 rounded-sm text-lg hover:bg-cinnabar/80 transition-colors inline-flex items-center justify-center gap-2">
+            <Link href="/iching" className="bg-cinnabar text-rice px-8 py-4 rounded-sm text-lg hover:bg-cinnabar/80 transition-colors inline-flex items-center justify-center gap-2">
               <Sparkles size={20} />
-              Start Digital Divination
+              Start Digital Reading
             </Link>
             <Link href="/shop" className="border border-ink/30 text-ink px-8 py-4 rounded-sm text-lg hover:bg-ink/5 transition-colors inline-flex items-center justify-center gap-2">
               Browse Feng Shui Tools
@@ -796,7 +796,7 @@ export default function GuidePage() {
               <h4 className="text-rice font-medium mb-4">Explore</h4>
               <ul className="space-y-2 text-sm">
                 <li><Link href="/wisdom" className="hover:text-gold transition-colors">Yi Jing Wisdom</Link></li>
-                <li><Link href="/divination" className="hover:text-gold transition-colors">I Ching Divination</Link></li>
+                <li><Link href="/iching" className="hover:text-gold transition-colors">I Ching Guidance</Link></li>
                 <li><Link href="/shop" className="hover:text-gold transition-colors">Feng Shui Store</Link></li>
                 <li><Link href="/guide" className="hover:text-gold transition-colors">How to Cast</Link></li>
               </ul>
@@ -805,7 +805,7 @@ export default function GuidePage() {
               <h4 className="text-rice font-medium mb-4">Resources</h4>
               <ul className="space-y-2 text-sm">
                 <li><Link href="/guide" className="hover:text-gold transition-colors">Coin Guide</Link></li>
-                <li><Link href="/divination" className="hover:text-gold transition-colors">Hexagram Lookup</Link></li>
+                <li><Link href="/iching" className="hover:text-gold transition-colors">Hexagram Lookup</Link></li>
                 <li><a href="#interactive-demo" className="hover:text-gold transition-colors">Video Tutorials</a></li>
                 <li><a href="#faq" className="hover:text-gold transition-colors">FAQ</a></li>
               </ul>

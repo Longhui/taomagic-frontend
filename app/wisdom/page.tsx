@@ -96,7 +96,7 @@ Wood controls Earth, Earth controls Water, Water controls Fire, Fire controls Me
     subtitle: 'The Eight Trigrams',
     icon: Square,
     color: 'bronze',
-    content: `The Bagua (Eight Trigrams) are the building blocks of I Ching divination and Feng Shui practice. Each trigram consists of three lines — solid (Yang) or broken (Yin).
+    content: `The Bagua (Eight Trigrams) are the building blocks of I Ching guidance and Feng Shui practice. Each trigram consists of three lines — solid (Yang) or broken (Yin).
 
 The Eight Trigrams:
 
@@ -133,7 +133,7 @@ Dui (Lake) — Yin above Yang
 - Direction: West
 
 From Trigrams to Hexagrams:
-When two trigrams combine (one above, one below), they form one of 64 hexagrams — the complete system of I Ching divination.`
+When two trigrams combine (one above, one below), they form one of 64 hexagrams — the complete system of I Ching guidance.`
   },
   {
     id: 'heavenly',
@@ -141,7 +141,7 @@ When two trigrams combine (one above, one below), they form one of 64 hexagrams 
     subtitle: 'The Chinese Time System',
     icon: Wind,
     color: 'cinnabar',
-    content: `The Heavenly Stems (天干) and Earthly Branches (地支) form the traditional Chinese calendar system used in astrology, divination, and Feng Shui.
+    content: `The Heavenly Stems (天干) and Earthly Branches (地支) form the traditional Chinese calendar system used in astrology, numerology, and Feng Shui.
 
 Ten Heavenly Stems (天干):
 1. Jia (甲) — Yang Wood
@@ -173,14 +173,14 @@ The 60-Year Cycle:
 Stems and Branches combine to create a 60-year cycle (甲子). Your birth year stem-branch combination is part of your Ba Zi (八字) destiny chart.`
   },
   {
-    id: 'divination',
-    title: 'I Ching Divination · 易经预测',
+    id: 'iching',
+    title: 'I Ching Guidance · 易经指引',
     subtitle: 'The Book of Changes',
     icon: Flame,
     color: 'gold',
-    content: `The I Ching (易经) is one of the oldest books in the world, used for divination and philosophical guidance for over 3,000 years.
+    content: `The I Ching (易经) is one of the oldest books in the world, used for philosophical guidance and reflection for over 3,000 years.
 
-How Divination Works:
+How the System Works:
 
 1. Formulate Your Question: Ask something specific and meaningful. The I Ching responds to sincere inquiry.
 
@@ -304,7 +304,7 @@ const SectionCard = ({ section, isOpen, onToggle }: {
           <div className="bg-white/80 rounded-lg p-6">
             <div className="prose prose-stone max-w-none">
               {section.content.split('\n\n').map((paragraph, i) => {
-                if (paragraph.startsWith('Key Concepts:') || paragraph.startsWith('Yin Qualities:') || paragraph.startsWith('Yang Qualities:') || paragraph.startsWith('The Dynamic Balance:') || paragraph.startsWith('Practical Application:') || paragraph.startsWith('The Five Elements:') || paragraph.startsWith('Generating Cycle') || paragraph.startsWith('Controlling Cycle') || paragraph.startsWith('The Eight Trigrams:') || paragraph.startsWith('From Trigrams') || paragraph.startsWith('Ten Heavenly') || paragraph.startsWith('Twelve Earthly') || paragraph.startsWith('The 60-Year') || paragraph.startsWith('How Divination') || paragraph.startsWith('Types of Questions') || paragraph.startsWith('What NOT') || paragraph.startsWith('Core Principles:') || paragraph.startsWith('The Bagua Map') || paragraph.startsWith('Quick Fixes') || paragraph.startsWith('Calculate Your') || paragraph.startsWith('The Eight Directions:') || paragraph.startsWith('Four Auspicious') || paragraph.startsWith('Four Inauspicious') || paragraph.startsWith('Practical Application:')) {
+                if (paragraph.startsWith('Key Concepts:') || paragraph.startsWith('Yin Qualities:') || paragraph.startsWith('Yang Qualities:') || paragraph.startsWith('The Dynamic Balance:') || paragraph.startsWith('Practical Application:') || paragraph.startsWith('The Five Elements:') || paragraph.startsWith('Generating Cycle') || paragraph.startsWith('Controlling Cycle') || paragraph.startsWith('The Eight Trigrams:') || paragraph.startsWith('From Trigrams') || paragraph.startsWith('Ten Heavenly') || paragraph.startsWith('Twelve Earthly') || paragraph.startsWith('The 60-Year') || paragraph.startsWith('How the System') || paragraph.startsWith('Types of Questions') || paragraph.startsWith('What NOT') || paragraph.startsWith('Core Principles:') || paragraph.startsWith('The Bagua Map') || paragraph.startsWith('Quick Fixes') || paragraph.startsWith('Calculate Your') || paragraph.startsWith('The Eight Directions:') || paragraph.startsWith('Four Auspicious') || paragraph.startsWith('Four Inauspicious') || paragraph.startsWith('Practical Application:')) {
                   return <h4 key={i} className="font-serif text-lg mt-4 mb-2">{paragraph}</h4>
                 }
                 if (paragraph.startsWith('WOOD') || paragraph.startsWith('FIRE') || paragraph.startsWith('EARTH') || paragraph.startsWith('METAL') || paragraph.startsWith('WATER') || paragraph.startsWith('Qian') || paragraph.startsWith('Kun') || paragraph.startsWith('Zhen') || paragraph.startsWith('Xun') || paragraph.startsWith('Kan') || paragraph.startsWith('Li') || paragraph.startsWith('Gen') || paragraph.startsWith('Dui') || paragraph.startsWith('1.') || paragraph.startsWith('2.') || paragraph.startsWith('3.') || paragraph.startsWith('4.')) {
@@ -371,7 +371,7 @@ export default function WisdomPage() {
             or explore our curated Feng Shui objects.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/divination" className="bg-cinnabar text-rice px-6 py-3 rounded-sm hover:bg-cinnabar/80 transition-colors inline-flex items-center justify-center gap-2">
+            <Link href="/iching" className="bg-cinnabar text-rice px-6 py-3 rounded-sm hover:bg-cinnabar/80 transition-colors inline-flex items-center justify-center gap-2">
               <Flame size={18} />
               Try I Ching Reading
             </Link>

@@ -91,7 +91,7 @@ export default function AnalysisPage() {
     const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS)
 
     try {
-      const resp = await fetch('/api/divination', {
+      const resp = await fetch('/api/iching', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt: parsed.prompt, question: parsed.question }),
@@ -133,11 +133,11 @@ export default function AnalysisPage() {
   useEffect(() => {
     try {
       const raw = localStorage.getItem('master_consultation')
-      if (!raw) { router.replace('/divination'); return }
+      if (!raw) { router.replace('/iching'); return }
       const parsed: StoredData = JSON.parse(raw)
       setData(parsed)
       if (parsed.status === 'loading') doFetch(parsed)
-    } catch { router.replace('/divination') }
+    } catch { router.replace('/iching') }
   }, []) // eslint-disable-line
 
   // =========== Loading ===========
@@ -159,7 +159,7 @@ export default function AnalysisPage() {
             <div className="h-full bg-gradient-to-r from-[#8b4513] to-[#d4a574] rounded-full transition-all duration-700" style={{ width: `${Math.min(progress, 99)}%` }} />
           </div>
           <p className="text-xs text-[#c9a070]/40 mt-3">
-            {progress < 35 ? 'Connecting to divination master...' : progress < 60 ? 'Analyzing hexagram structure...' : progress < 80 ? 'Interpreting line relationships...' : 'Finalizing the reading...'}
+            {progress < 35 ? 'Connecting to I Ching master...' : progress < 60 ? 'Analyzing hexagram structure...' : progress < 80 ? 'Interpreting line relationships...' : 'Finalizing the reading...'}
           </p>
           {fetching && progress > 90 && (
             <p className="text-xs text-[#c9a070]/30 mt-2">Still processing... this may take a moment</p>
@@ -193,8 +193,8 @@ export default function AnalysisPage() {
             >
               <RotateCcw size={16} /> Retry Consultation
             </button>
-            <Link href="/divination" className="text-sm text-[#c9a070]/50 hover:text-[#d4a574] transition-colors">
-              Back to Divination
+            <Link href="/iching" className="text-sm text-[#c9a070]/50 hover:text-[#d4a574] transition-colors">
+              Back to I Ching
             </Link>
           </div>
         </div>
@@ -279,7 +279,7 @@ export default function AnalysisPage() {
                     The Master&apos;s Interpretation
                   </div>
                   <div className="font-medieval text-[16px] text-[#6b4423] tracking-[2px]">
-                    A Comprehensive Liu Yao Divination Analysis
+                    A Comprehensive Liu Yao Hexagram Analysis
                   </div>
                 </div>
 

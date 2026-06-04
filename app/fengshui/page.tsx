@@ -769,7 +769,7 @@ export default function FengShuiPage() {
               <h4 className="text-rice font-medium mb-4">Explore</h4>
               <ul className="space-y-2 text-sm">
                 <li><Link href="/wisdom" className="hover:text-gold transition-colors">Yi Jing Wisdom</Link></li>
-                <li><Link href="/divination" className="hover:text-gold transition-colors">I Ching Divination</Link></li>
+                <li><Link href="/iching" className="hover:text-gold transition-colors">I Ching Guidance</Link></li>
                 <li><Link href="/shop" className="hover:text-gold transition-colors">Feng Shui Store</Link></li>
                 <li><Link href="/fengshui" className="hover:text-gold transition-colors">Indoor Feng Shui</Link></li>
               </ul>
@@ -777,8 +777,8 @@ export default function FengShuiPage() {
             <div>
               <h4 className="text-rice font-medium mb-4">Services</h4>
               <ul className="space-y-2 text-sm">
-                <li><Link href="/divination" className="hover:text-gold transition-colors">Free AI Reading</Link></li>
-                <li><Link href="/divination/analysis" className="hover:text-gold transition-colors">Master Consultation</Link></li>
+                <li><Link href="/iching" className="hover:text-gold transition-colors">Free AI Reading</Link></li>
+                <li><Link href="/iching/analysis" className="hover:text-gold transition-colors">Master Consultation</Link></li>
                 <li><Link href="/fengshui" className="hover:text-gold transition-colors">Space Analysis</Link></li>
                 <li><Link href="/shop" className="hover:text-gold transition-colors">Feng Shui Objects</Link></li>
               </ul>

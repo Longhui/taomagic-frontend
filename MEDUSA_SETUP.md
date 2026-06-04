@@ -188,7 +188,7 @@ tao-insight/
 ├── 📁 app/
 │   ├── ⚛️ page.tsx                 主页
 │   ├── ⚛️ layout.tsx               根布局
-│   ├── 📁 divination/
+│   ├── 📁 iching/
 │   │   └── ⚛️ page.tsx             算卦页
 │   ├── 📁 shop/
 │   │   └── ⚛️ page.tsx             商城页

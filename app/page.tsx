@@ -41,7 +41,7 @@ const HeroSection = () => {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link href="/divination" className="bg-cinnabar text-rice px-8 py-4 rounded-sm text-lg hover:bg-cinnabar/80 transition-all flex items-center justify-center gap-2">
+          <Link href="/iching" className="bg-cinnabar text-rice px-8 py-4 rounded-sm text-lg hover:bg-cinnabar/80 transition-all flex items-center justify-center gap-2">
             <Sparkles size={20} />
             Get Free I Ching Reading
           </Link>
@@ -82,7 +82,7 @@ const ThreePillars = () => {
       href: '/wisdom'
     },
     {
-      id: 'divination',
+      id: 'iching',
       title: 'I Ching Guidance',
       subtitle: 'Personalized Insights · Daily Reflection',
       description: "Experience authentic I Ching tradition. Explore your hexagram, receive structured interpretation, and unlock personalized guidance for life's important questions.",
@@ -90,7 +90,7 @@ const ThreePillars = () => {
       color: 'cinnabar',
       features: ['Free AI-Powered Reading', 'Authentic Coin Method', 'Detailed Hexagram Analysis', '1-on-1 Energy Session', 'Reading History'],
       cta: 'Explore Your Hexagram',
-      href: '/divination'
+      href: '/iching'
     },
     {
       id: 'fengshui',
@@ -328,9 +328,9 @@ const Footer = () => {
           <div>
             <h4 className="text-rice font-medium mb-4 text-sm uppercase tracking-wider">I Ching</h4>
             <ul className="space-y-2 text-sm">
-              <li><Link href="/divination" className="hover:text-gold transition-colors">Free Reading</Link></li>
-              <li><Link href="/divination" className="hover:text-gold transition-colors">How It Works</Link></li>
-              <li><Link href="/divination/analysis" className="hover:text-gold transition-colors">History</Link></li>
+              <li><Link href="/iching" className="hover:text-gold transition-colors">Free Reading</Link></li>
+              <li><Link href="/iching" className="hover:text-gold transition-colors">How It Works</Link></li>
+              <li><Link href="/iching/analysis" className="hover:text-gold transition-colors">History</Link></li>
               <li><Link href="/wisdom" className="hover:text-gold transition-colors">Blog</Link></li>
             </ul>
           </div>
