@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { BookOpen, Sparkles, HomeIcon, ChevronRight, Star, Mail } from 'lucide-react'
 import Navigation from '@/app/components/Navigation'
+import FeaturedProducts from '@/app/components/FeaturedProducts'
 
 // Yin Yang SVG Component
 const YinYangSVG = ({ size = 200, className = '' }) => (
@@ -147,80 +148,6 @@ const ThreePillars = () => {
               </div>
             )
           })}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-// Featured Products Preview
-const FeaturedProducts = () => {
-  const products = [
-    {
-      name: 'Brass Wu Lou (Calabash)',
-      price: '$48',
-      category: 'Health & Protection',
-      description: 'Traditional Feng Shui cure for illness and negative energy.',
-      tag: 'Best Seller'
-    },
-    {
-      name: 'Obsidian Pixiu Bracelet',
-      price: '$36',
-      category: 'Wealth Attraction',
-      description: 'Legendary wealth beast paired with protective black obsidian.',
-      tag: 'Popular'
-    },
-    {
-      name: 'Bagua Mirror Set',
-      price: '$62',
-      category: 'Space Protection',
-      description: 'Complete set of flat, convex, and concave mirrors.',
-      tag: 'Essential'
-    },
-    {
-      name: 'Five Elements Crystal Grid',
-      price: '$89',
-      category: 'Energy Balance',
-      description: 'Curated crystals representing Wood, Fire, Earth, Metal, Water.',
-      tag: 'New'
-    }
-  ]
-
-  return (
-    <section className="py-24 bg-ink">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-end mb-12">
-          <div>
-            <h2 className="text-3xl md:text-4xl font-serif text-rice mb-2">Curated Feng Shui Objects</h2>
-            <p className="text-rice/60">Each item selected for authentic energy and purpose</p>
-          </div>
-          <a href="/shop" className="hidden md:inline-flex items-center gap-2 text-gold hover:text-rice transition-colors">
-            View All <ChevronRight size={16} />
-          </a>
-        </div>
-
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {products.map((product) => (
-            <div key={product.name} className="group bg-ink border border-rice/10 rounded-lg overflow-hidden hover:border-gold/50 transition-all">
-              <div className="aspect-square bg-gradient-to-br from-ink to-ink/80 flex items-center justify-center relative">
-                <div className="w-24 h-24 rounded-full bg-rice/5 border border-rice/20 flex items-center justify-center">
-                  <Sparkles size={32} className="text-gold/60" />
-                </div>
-                <span className="absolute top-3 right-3 bg-cinnabar text-rice text-xs px-2 py-1 rounded-sm">{product.tag}</span>
-              </div>
-              <div className="p-5">
-                <p className="text-xs text-bronze uppercase tracking-wider mb-1">{product.category}</p>
-                <h3 className="text-rice font-serif text-lg mb-2">{product.name}</h3>
-                <p className="text-rice/50 text-sm mb-4">{product.description}</p>
-                <div className="flex justify-between items-center">
-                  <span className="text-gold text-xl font-serif">{product.price}</span>
-                  <button className="text-sm text-rice/70 hover:text-gold transition-colors border border-rice/20 px-3 py-1 rounded-sm hover:border-gold">
-                    Add to Cart
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
         </div>
       </div>
     </section>
