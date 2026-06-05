@@ -57,7 +57,9 @@ export default function ImageGallery({ images, productName, category }: ImageGal
             src={currentImage!}
             alt={`${productName} - Image ${selectedIndex + 1}`}
             fill
-            sizes="(max-width: 768px) 100vw, 50vw"
+            priority
+            sizes="(max-width: 768px) 90vw, 40vw"
+            quality={80}
             className={`object-cover transition-transform duration-200 ${
               isZoomed ? 'scale-150' : 'scale-100'
             }`}
@@ -133,6 +135,7 @@ export default function ImageGallery({ images, productName, category }: ImageGal
                     alt={`${productName} thumbnail ${index + 1}`}
                     fill
                     sizes="64px"
+                    quality={50}
                     className="object-cover"
                     onError={() => handleImageError(index)}
                   />
