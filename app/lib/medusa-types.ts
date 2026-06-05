@@ -157,6 +157,7 @@ export interface MedusaLineItem {
   tax_total?: number
   discount_total?: number
   metadata?: Record<string, unknown>
+  variant_title?: string | null
   variant?: MedusaProductVariant
   product?: MedusaProduct
 }
@@ -234,6 +235,7 @@ export interface ProductItem {
   handle: string
   variantId?: string
   inventoryQuantity?: number
+  metaKeywords?: string
 }
 
 // ---- Review Types ----

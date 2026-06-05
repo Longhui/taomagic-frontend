@@ -25,9 +25,11 @@ const LISTING_FIELDS = [
   'collection.handle',
   'variants.id',
   'variants.calculated_price',
+  'variants.manage_inventory',
   'variants.inventory_quantity',
   'tags.value',
   'metadata',
+  'meta_keywords',
 ].join(',')
 
 const DETAIL_FIELDS = [
@@ -36,9 +38,11 @@ const DETAIL_FIELDS = [
   'collection.handle',
   'variants.id',
   'variants.calculated_price',
+  'variants.manage_inventory',
   'variants.inventory_quantity',
   'tags.value',
   'metadata',
+  'meta_keywords',
   // PDP-level fields (not needed on listing)
   'variants.prices',
   'options.id',
@@ -116,6 +120,7 @@ function mapProduct(p: MedusaProduct): ProductItem {
     reviews: (meta.reviews as number) || 0,
     description: p.description || meta.short_description as string || "",
     material: (meta.material as string) || "",
+    metaKeywords: (p as any).meta_keywords || (meta.meta_keywords as string) || "",
     size: (meta.size as string) || "",
     tags: p.tags?.map(t => t.value) || [],
     bestseller: (meta.bestseller as boolean) || false,
@@ -123,7 +128,7 @@ function mapProduct(p: MedusaProduct): ProductItem {
     images,
     handle: p.handle,
     variantId: variant?.id,
-    inventoryQuantity: variant?.inventory_quantity ?? 0,
+    inventoryQuantity: variant?.manage_inventory ? (variant?.inventory_quantity ?? 0) : undefined,
   }
 }
 

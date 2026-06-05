@@ -23,7 +23,7 @@ export default function ReturnPolicyPage() {
         <div className="bg-white border border-ink/10 rounded-lg p-8 space-y-6 text-ink/80 leading-relaxed">
           <p>
             We want you to love your purchase. If you&apos;re not satisfied,
-            we offer hassle-free returns within 30 days of delivery.
+            we offer hassle-free returns within 7 days of delivery.
           </p>
 
           <h2 className="text-xl font-serif text-ink pt-4">Eligibility</h2>

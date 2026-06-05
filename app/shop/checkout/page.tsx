@@ -662,10 +662,14 @@ export default function CheckoutPage() {
                     {items.map(item => (
                       <div key={item.id} className="flex items-center gap-3">
                         <div className="w-12 h-12 rounded-sm bg-rice overflow-hidden shrink-0 relative">
-                          {(item.thumbnail || item.product?.thumbnail) ? (
-                            <Image src={item.thumbnail || item.product?.thumbnail || ''} alt={item.title} fill sizes="48px" className="object-cover" />
+                          {(item.thumbnail) ? (
+                            <Image src={item.thumbnail} alt={item.title} fill sizes="48px" className="object-cover" />
                           ) : (
-                            <div className="w-full h-full flex items-center justify-center"><ShoppingCart size={16} className="text-ink/20" /></div>
+                            <div className="w-full h-full bg-gradient-to-br from-ink/5 to-ink/10 flex items-center justify-center rounded-sm">
+                              <span className="text-[10px] font-serif text-gold/40">
+                                {(item.product_title || item.title).split(' ').map(w => w[0]).filter(Boolean).slice(0, 2).join('').toUpperCase()}
+                              </span>
+                            </div>
                           )}
                         </div>
                         <div className="flex-1 min-w-0">
@@ -706,10 +710,14 @@ export default function CheckoutPage() {
                 {items.map(item => (
                   <div key={item.id} className="flex items-start gap-3">
                     <div className="w-14 h-14 rounded-sm bg-rice overflow-hidden shrink-0 relative">
-                      {(item.thumbnail || item.product?.thumbnail) ? (
-                        <Image src={item.thumbnail || item.product?.thumbnail || ''} alt={item.title} fill sizes="56px" className="object-cover" />
+                      {(item.thumbnail) ? (
+                        <Image src={item.thumbnail} alt={item.title} fill sizes="56px" className="object-cover" />
                       ) : (
-                        <div className="w-full h-full flex items-center justify-center"><ShoppingCart size={18} className="text-ink/20" /></div>
+                        <div className="w-full h-full bg-gradient-to-br from-ink/5 to-ink/10 flex items-center justify-center rounded-sm">
+                          <span className="text-xs font-serif text-gold/40">
+                            {(item.product_title || item.title).split(' ').map(w => w[0]).filter(Boolean).slice(0, 2).join('').toUpperCase()}
+                          </span>
+                        </div>
                       )}
                     </div>
                     <div className="flex-1 min-w-0">

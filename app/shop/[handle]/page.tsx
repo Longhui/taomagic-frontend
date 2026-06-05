@@ -4,6 +4,8 @@ import React, { useState, useEffect, useRef, useCallback } from 'react'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { ArrowLeft, ShoppingCart } from 'lucide-react'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 import Navigation from '@/app/components/Navigation'
 import { useProduct, useRelatedProducts, mapProduct } from '@/app/lib/medusa'
 import { useCartContext } from '@/app/lib/CartContext'
@@ -220,6 +222,7 @@ export default function ProductDetailPage() {
           <ImageGallery
             images={product.images}
             productName={product.name}
+            category={product.category}
           />
 
           {/* Right: Product Info + Add to Cart */}
@@ -233,7 +236,7 @@ export default function ProductDetailPage() {
               <AddToCartSection
                 productName={product.name}
                 price={product.price}
-                inventoryQuantity={product.inventoryQuantity ?? 0}
+                inventoryQuantity={product.inventoryQuantity}
                 variantId={product.variantId}
                 onAddToCart={handleAddToCart}
               />
@@ -262,14 +265,28 @@ export default function ProductDetailPage() {
           </div>
 
           <div className="py-6 min-h-[200px]">
-            <ul className="space-y-3">
-              {TAB_CONTENT[activeTab].map((line, i) => (
-                <li key={i} className="flex items-start gap-2 text-sm text-ink/70 leading-relaxed">
-                  <span className="text-gold mt-1 flex-shrink-0">✦</span>
-                  {line}
-                </li>
-              ))}
-            </ul>
+            {activeTab === 'details' && product.description ? (
+              <div className="prose prose-sm prose-ink max-w-none
+                [&_h3]:text-ink [&_h3]:text-sm [&_h3]:font-semibold [&_h3]:mt-5 [&_h3]:mb-2 [&_h3]:uppercase [&_h3]:tracking-wider
+                [&_strong]:text-ink
+                [&_ul]:mt-1 [&_ul]:space-y-1
+                [&_li]:text-ink/70 [&_li]:text-sm
+                [&_hr]:border-ink/10 [&_hr]:my-5
+                [&_p]:text-ink/70 [&_p]:text-sm [&_p]:leading-relaxed">
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                  {product.description}
+                </ReactMarkdown>
+              </div>
+            ) : (
+              <ul className="space-y-3">
+                {TAB_CONTENT[activeTab].map((line, i) => (
+                  <li key={i} className="flex items-start gap-2 text-sm text-ink/70 leading-relaxed">
+                    <span className="text-gold mt-1 flex-shrink-0">✦</span>
+                    {line}
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         </div>
 
@@ -304,7 +321,7 @@ export default function ProductDetailPage() {
           </div>
           <button
             onClick={handleStickyAddToCart}
-            disabled={!product.variantId || (product.inventoryQuantity ?? 0) <= 0 || addingSticky}
+            disabled={!product.variantId || (product.inventoryQuantity !== undefined && product.inventoryQuantity <= 0) || addingSticky}
             className="bg-cinnabar text-rice px-6 py-2.5 rounded-sm text-sm font-medium hover:bg-cinnabar/90 transition-colors disabled:opacity-50 flex items-center gap-2 flex-shrink-0"
           >
             {addingSticky ? (

@@ -6,7 +6,7 @@ import { ShoppingCart, Minus, Plus, Check } from 'lucide-react'
 interface AddToCartSectionProps {
   productName: string
   price: number
-  inventoryQuantity: number
+  inventoryQuantity?: number
   variantId?: string
   onAddToCart: (variantId: string, quantity: number) => Promise<void>
 }
@@ -22,12 +22,14 @@ export default function AddToCartSection({
   const [adding, setAdding] = useState(false)
   const [added, setAdded] = useState(false)
 
-  const inStock = (inventoryQuantity ?? 0) > 0
+  const unlimited = inventoryQuantity === undefined
+  const inStock = unlimited || inventoryQuantity > 0
   const canAdd = inStock && !!variantId && !adding
 
   const handleQuantityChange = (delta: number) => {
     const next = quantity + delta
-    if (next >= 1 && next <= (inventoryQuantity || 99)) {
+    const max = unlimited ? 99 : (inventoryQuantity || 99)
+    if (next >= 1 && next <= max) {
       setQuantity(next)
     }
   }
@@ -54,7 +56,7 @@ export default function AddToCartSection({
         <div className={`w-2 h-2 rounded-full ${inStock ? 'bg-bronze' : 'bg-cinnabar'}`} />
         <span className={`text-sm ${inStock ? 'text-bronze' : 'text-cinnabar'}`}>
           {inStock
-            ? `In Stock (${inventoryQuantity} available)`
+            ? unlimited ? 'In Stock' : `In Stock (${inventoryQuantity} available)`
             : 'Out of Stock'}
         </span>
       </div>
@@ -76,7 +78,7 @@ export default function AddToCartSection({
           </span>
           <button
             onClick={() => handleQuantityChange(1)}
-            disabled={quantity >= (inventoryQuantity || 99) || adding}
+            disabled={quantity >= (unlimited ? 99 : (inventoryQuantity || 99)) || adding}
             className="p-2.5 hover:bg-ink/5 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
             aria-label="Increase quantity"
           >
@@ -125,7 +127,7 @@ export default function AddToCartSection({
       {/* Trust signals */}
       <div className="mt-4 text-center text-xs text-ink/40 space-y-1">
         <p>✨ Free shipping on orders over $50</p>
-        <p>🔒 Secure checkout · 30-day returns</p>
+        <p>🔒 Secure checkout · 7-day returns</p>
       </div>
     </div>
   )

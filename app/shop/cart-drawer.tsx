@@ -1,6 +1,7 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 import Image from 'next/image'
 import { X, ShoppingCart, Minus, Plus, Trash2, ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
@@ -28,7 +29,10 @@ export default function CartDrawer({
   const subtotal = cart?.subtotal != null ? cart.subtotal : items.reduce((sum, item) => sum + (item.unit_price) * item.quantity, 0)
   const total = cart?.total != null ? cart.total : subtotal
 
-  return (
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
+
+  const drawer = (
     <>
       {/* Overlay */}
       {isOpen && (
@@ -140,6 +144,9 @@ export default function CartDrawer({
       </div>
     </>
   )
+
+  if (!mounted) return null
+  return createPortal(drawer, document.body)
 }
 
 function CartItem({
@@ -187,7 +194,7 @@ function CartItem({
   }
 
   const lineTotal = item.unit_price * item.quantity
-  const imageUrl = item.thumbnail || item.product?.thumbnail
+  const imageUrl = item.thumbnail
 
   return (
     <div className="flex gap-4 bg-white rounded-sm border border-ink/10 p-3">
@@ -202,8 +209,10 @@ function CartItem({
             className="object-cover"
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center">
-            <ShoppingCart size={20} className="text-ink/20" />
+          <div className="w-full h-full bg-gradient-to-br from-ink/5 to-ink/10 flex items-center justify-center">
+            <span className="text-lg font-serif text-gold/40">
+              {(item.product_title || item.title).split(' ').map(w => w[0]).filter(Boolean).slice(0, 2).join('').toUpperCase()}
+            </span>
           </div>
         )}
       </div>
@@ -211,8 +220,8 @@ function CartItem({
       {/* Info */}
       <div className="flex-1 min-w-0">
         <h4 className="text-sm font-medium text-ink truncate">{item.title}</h4>
-        {item.variant?.title && item.variant.title !== 'Default' && (
-          <p className="text-xs text-ink/40 mt-0.5">{item.variant.title}</p>
+        {item.variant_title && item.variant_title !== 'Default' && (
+          <p className="text-xs text-ink/40 mt-0.5">{item.variant_title}</p>
         )}
         <p className="text-sm text-gold font-serif mt-1">${(item.unit_price).toFixed(2)}</p>
 

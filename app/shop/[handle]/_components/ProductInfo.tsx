@@ -107,27 +107,21 @@ export default function ProductInfo({ product, onScrollToReviews }: ProductInfoP
         )}
       </div>
 
-      {/* Description */}
-      <div className="mb-6">
-        <h2 className="text-sm font-medium text-ink mb-2 uppercase tracking-wider">Description</h2>
-        <p className="text-ink/70 leading-relaxed text-sm">
-          {product.description}
-        </p>
-      </div>
-
-      {/* Tags */}
-      {product.tags.length > 0 && (
-        <div className="flex flex-wrap gap-1.5 mb-6">
-          {product.tags.map(tag => (
-            <span
-              key={tag}
-              className="text-xs bg-bronze/10 text-bronze px-2.5 py-1 rounded-sm"
-            >
-              {tag}
-            </span>
-          ))}
+      {/* Description — shown as excerpt on mobile; full content in Details tab */}
+      {product.description && (
+        <div className="mb-6 lg:hidden">
+          <h2 className="text-sm font-medium text-ink mb-3 uppercase tracking-wider">Description</h2>
+          <p className="text-ink/70 leading-relaxed text-sm line-clamp-3">
+            {product.description.replace(/[#*`\[\]()>|~\-_]/g, '').slice(0, 200)}
+          </p>
+          <p className="text-xs text-gold mt-1">See full details in the Details tab below</p>
         </div>
       )}
+
+      {/* SEO Keywords — visually hidden, present for search engines */}
+      <div className="sr-only" aria-hidden="true">
+        {product.metaKeywords || product.tags.join(', ')}
+      </div>
 
       {/* Decorative divider */}
       <div className="h-px bg-gradient-to-r from-gold/30 via-gold/10 to-transparent mb-6" />

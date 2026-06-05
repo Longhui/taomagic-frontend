@@ -3,13 +3,15 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 import { Star, ChevronLeft, ChevronRight } from 'lucide-react'
+import ProductImagePlaceholder from './ProductImagePlaceholder'
 
 interface ImageGalleryProps {
   images: string[]
   productName: string
+  category?: string
 }
 
-export default function ImageGallery({ images, productName }: ImageGalleryProps) {
+export default function ImageGallery({ images, productName, category }: ImageGalleryProps) {
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [imgErrors, setImgErrors] = useState<Set<number>>(new Set())
   const [isZoomed, setIsZoomed] = useState(false)
@@ -67,13 +69,11 @@ export default function ImageGallery({ images, productName }: ImageGalleryProps)
             onError={() => handleImageError(selectedIndex)}
           />
         ) : (
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-center">
-              <div className="w-32 h-32 mx-auto rounded-full bg-ink/5 border-2 border-ink/10 flex items-center justify-center mb-4">
-                <Star size={48} className="text-gold/40" />
-              </div>
-              <p className="text-sm text-ink/30">Product Image</p>
-            </div>
+          <div className="absolute inset-0">
+            <ProductImagePlaceholder
+              productName={productName}
+              category={category}
+            />
           </div>
         )}
 
