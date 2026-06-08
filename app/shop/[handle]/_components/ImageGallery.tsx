@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { Star, ChevronLeft, ChevronRight } from 'lucide-react'
 import ProductImagePlaceholder from './ProductImagePlaceholder'
@@ -9,13 +9,22 @@ interface ImageGalleryProps {
   images: string[]
   productName: string
   category?: string
+  /** External control: set to sync with variant selection (-1 = auto/manual) */
+  externalIndex?: number
 }
 
-export default function ImageGallery({ images, productName, category }: ImageGalleryProps) {
+export default function ImageGallery({ images, productName, category, externalIndex = -1 }: ImageGalleryProps) {
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [imgErrors, setImgErrors] = useState<Set<number>>(new Set())
   const [isZoomed, setIsZoomed] = useState(false)
   const [zoomPos, setZoomPos] = useState({ x: 0, y: 0 })
+
+  // Sync with external index when variant changes
+  useEffect(() => {
+    if (externalIndex >= 0 && externalIndex < images.length) {
+      setSelectedIndex(externalIndex)
+    }
+  }, [externalIndex, images.length])
 
   const hasImages = images.length > 0
   const currentImage = hasImages ? images[selectedIndex] : null

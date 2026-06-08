@@ -7,7 +7,7 @@ import { ArrowLeft, ShoppingCart } from 'lucide-react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import Navigation from '@/app/components/Navigation'
-import { useProduct, useRelatedProducts, mapProduct } from '@/app/lib/medusa'
+import { useProduct, useRelatedProducts, mapProduct, useDefaultRegion } from '@/app/lib/medusa'
 import { useCartContext } from '@/app/lib/CartContext'
 import { getDemoProduct } from '@/app/lib/demo-data'
 import type { ProductItem } from '@/app/lib/medusa-types'
@@ -96,6 +96,7 @@ export default function ProductDetailPage() {
   const [activeTab, setActiveTab] = useState<TabId>('details')
   const [stickyBar, setStickyBar] = useState(false)
   const [addingSticky, setAddingSticky] = useState(false)
+  const [selectedVariantIndex, setSelectedVariantIndex] = useState(0)
 
   const reviewsRef = useRef<HTMLDivElement>(null)
   const addToCartRef = useRef<HTMLDivElement>(null)
@@ -111,7 +112,8 @@ export default function ProductDetailPage() {
   }, [allProducts, product])
 
   // Fetch product
-  const { product: medusaProduct, loading: apiLoading } = useProduct(handle)
+  const { regionId } = useDefaultRegion()
+  const { product: medusaProduct, loading: apiLoading } = useProduct(handle, regionId)
 
   useEffect(() => {
     if (apiLoading) {
@@ -135,6 +137,17 @@ export default function ProductDetailPage() {
       }
     }
   }, [medusaProduct, apiLoading, handle])
+
+  // Reset variant selection when product changes
+  useEffect(() => {
+    setSelectedVariantIndex(0)
+  }, [product?.id])
+
+  // Derive currently selected variant
+  const selectedVariant = product?.variants[selectedVariantIndex] || product?.variants[0]
+  const currentVariantId = selectedVariant?.id || product?.variantId
+  const currentPrice = selectedVariant?.price ?? product?.price ?? 0
+  const currentInventory = selectedVariant?.inventoryQuantity ?? product?.inventoryQuantity
 
   // Sticky add-to-cart bar on scroll
   useEffect(() => {
@@ -161,10 +174,10 @@ export default function ProductDetailPage() {
   }
 
   const handleStickyAddToCart = async () => {
-    if (!product?.variantId || !product) return
+    if (!currentVariantId) return
     setAddingSticky(true)
     try {
-      await addToCart(product.variantId, 1)
+      await addToCart(currentVariantId, 1)
     } catch {
       // handled
     } finally {
@@ -218,26 +231,29 @@ export default function ProductDetailPage() {
 
         {/* Product layout */}
         <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
-          {/* Left: Gallery */}
+          {/* Left: Gallery — sync image with variant selection when counts match */}
           <ImageGallery
             images={product.images}
             productName={product.name}
             category={product.category}
+            externalIndex={product.images.length === product.variants.length ? selectedVariantIndex : -1}
           />
 
           {/* Right: Product Info + Add to Cart */}
           <div>
             <ProductInfo
               product={product}
+              selectedVariantIndex={selectedVariantIndex}
+              onSelectVariant={setSelectedVariantIndex}
               onScrollToReviews={scrollToReviews}
             />
 
             <div ref={addToCartRef}>
               <AddToCartSection
                 productName={product.name}
-                price={product.price}
-                inventoryQuantity={product.inventoryQuantity}
-                variantId={product.variantId}
+                price={currentPrice}
+                inventoryQuantity={currentInventory}
+                variantId={currentVariantId}
                 onAddToCart={handleAddToCart}
               />
             </div>
@@ -317,11 +333,11 @@ export default function ProductDetailPage() {
         <div className="flex items-center justify-between gap-4 max-w-7xl mx-auto">
           <div>
             <p className="text-sm text-ink font-medium truncate">{product.name}</p>
-            <p className="text-lg font-serif text-gold">${product.price.toFixed(2)}</p>
+            <p className="text-lg font-serif text-gold">${currentPrice.toFixed(2)}</p>
           </div>
           <button
             onClick={handleStickyAddToCart}
-            disabled={!product.variantId || (product.inventoryQuantity !== undefined && product.inventoryQuantity <= 0) || addingSticky}
+            disabled={!currentVariantId || (currentInventory !== undefined && currentInventory <= 0) || addingSticky}
             className="bg-cinnabar text-rice px-6 py-2.5 rounded-sm text-sm font-medium hover:bg-cinnabar/90 transition-colors disabled:opacity-50 flex items-center gap-2 flex-shrink-0"
           >
             {addingSticky ? (

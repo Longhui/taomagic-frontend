@@ -5,7 +5,9 @@ import type {
   MedusaCart,
   MedusaLineItem,
   MedusaCollection,
+  MedusaProductVariant,
   ProductItem,
+  ProductVariant,
 } from "./medusa-types"
 import { withCache } from "./request-cache"
 import { setLocalCache, getLocalCache } from "./local-cache"
@@ -24,6 +26,7 @@ const LISTING_FIELDS = [
   'images.url',
   'collection.handle',
   'variants.id',
+  'variants.title',
   'variants.calculated_price',
   'variants.manage_inventory',
   'variants.inventory_quantity',
@@ -37,6 +40,7 @@ const DETAIL_FIELDS = [
   'images.url',
   'collection.handle',
   'variants.id',
+  'variants.title',
   'variants.calculated_price',
   'variants.manage_inventory',
   'variants.inventory_quantity',
@@ -80,22 +84,73 @@ function resolveImageUrl(url: string): string {
   return `${BACKEND_URL_ORIGIN}/uploads/${url}`
 }
 
+/** Map common color names to CSS hex values for variant swatches */
+const COLOR_MAP: Record<string, string> = {
+  red: '#DC2626',
+  black: '#1a1a1a',
+  green: '#16A34A',
+  blue: '#2563EB',
+  white: '#F9FAFB',
+  gold: '#C9A227',
+  silver: '#9CA3AF',
+  rose: '#F43F5E',
+  purple: '#9333EA',
+  pink: '#EC4899',
+  brown: '#78350F',
+  grey: '#6B7280',
+  gray: '#6B7280',
+  yellow: '#EAB308',
+  orange: '#EA580C',
+  teal: '#0D9488',
+  navy: '#1E3A5F',
+  clear: 'transparent',
+  crystal: '#E8E0E0',
+  natural: '#D4C9B8',
+  obsidian: '#1a1a2e',
+}
+
+function variantColorFromTitle(title: string | null | undefined): string {
+  if (!title) return '#a0a0a0'
+  const lower = title.toLowerCase().trim()
+  return COLOR_MAP[lower] || `#${Array.from(lower).reduce((s, c) => (s + c.charCodeAt(0).toString(16)).slice(0, 6), 'a0a0a0')}`
+}
+
+function mapVariantPrice(v: MedusaProductVariant): { amount: number; currencyCode: string } {
+  let amount = 0
+  let currencyCode = 'usd'
+  if (v.calculated_price) {
+    amount = v.calculated_price.calculated_amount
+    currencyCode = v.calculated_price.currency_code || 'usd'
+  } else {
+    const price = v.prices?.find(pr => pr.currency_code === 'usd') || v.prices?.[0]
+    amount = price ? price.amount / 100 : 0
+    currencyCode = price?.currency_code || 'usd'
+  }
+  return { amount, currencyCode }
+}
+
 /** Map Medusa API product to UI ProductItem */
 function mapProduct(p: MedusaProduct): ProductItem {
   const variant = p.variants?.[0]
+  const { amount, currencyCode } = variant ? mapVariantPrice(variant) : { amount: 0, currencyCode: 'usd' }
 
-  // Medusa v2: calculated_price.calculated_amount is in main currency unit (e.g., 26 = $26)
-  // Legacy: variant.prices[].amount is in cents (e.g., 3200 = $32.00), need /100
-  let amount = 0
-  let currencyCode = "usd"
-  if (variant?.calculated_price) {
-    amount = variant.calculated_price.calculated_amount
-    currencyCode = variant.calculated_price.currency_code || "usd"
-  } else {
-    const price = variant?.prices?.find(pr => pr.currency_code === "usd") || variant?.prices?.[0]
-    amount = price ? price.amount / 100 : 0
-    currencyCode = price?.currency_code || "usd"
-  }
+  // Map all variants
+  const variants: ProductVariant[] = (p.variants || []).map(v => {
+    const { amount: vAmount } = mapVariantPrice(v)
+    const title = v.title?.charAt(0).toUpperCase() + v.title?.slice(1) || 'Default'
+    return {
+      id: v.id,
+      title,
+      price: vAmount,
+      inventoryQuantity: v.manage_inventory ? (v.inventory_quantity ?? 0) : undefined,
+      color: variantColorFromTitle(v.title),
+    }
+  })
+
+  // Determine option name (e.g. "Color", "Size")
+  const optionName = p.options?.[0]?.title
+    ? p.options[0].title.charAt(0).toUpperCase() + p.options[0].title.slice(1)
+    : undefined
 
   const meta = (p.metadata || {}) as Record<string, unknown>
 
@@ -129,6 +184,8 @@ function mapProduct(p: MedusaProduct): ProductItem {
     handle: p.handle,
     variantId: variant?.id,
     inventoryQuantity: variant?.manage_inventory ? (variant?.inventory_quantity ?? 0) : undefined,
+    variants,
+    optionName,
   }
 }
 
@@ -234,7 +291,7 @@ export function useProducts(collectionId?: string, regionId?: string | null) {
     const cached = getLocalCache<MedusaProduct[]>('products')
     if (cached?.length) {
       setProducts(cached)
-      setLoading(false)  // Show cached data immediately
+      setLoading(false)
     }
   }, [])
 
@@ -283,7 +340,7 @@ export function useProducts(collectionId?: string, regionId?: string | null) {
 }
 
 /** Fetch a single product by handle */
-export function useProduct(handle: string) {
+export function useProduct(handle: string, regionId?: string | null) {
   const [product, setProduct] = useState<MedusaProduct | null>(null)
   const [loading, setLoading] = useState(true)
 
@@ -293,8 +350,19 @@ export function useProduct(handle: string) {
     const fetchProduct = async () => {
       try {
         setLoading(true)
-        const { products } = await withCache(`product:${handle}`, () =>
-          getSDK().store.product.list({ handle, fields: DETAIL_FIELDS }) as Promise<any>
+        const query: any = { handle, fields: DETAIL_FIELDS }
+        // calculated_price requires a region_id to work
+        if (regionId) {
+          query.region_id = regionId
+        } else {
+          // Without region_id, calculated_price breaks the query; use prices instead
+          query.fields = DETAIL_FIELDS.replace(
+            'variants.calculated_price,',
+            ''
+          ).replace(',variants.calculated_price', '')
+        }
+        const { products } = await withCache(`product:${handle}:${regionId || 'no-region'}`, () =>
+          getSDK().store.product.list(query) as Promise<any>
         )
         if (!cancelled) setProduct(products?.[0] || null)
       } catch (err) {
@@ -305,7 +373,7 @@ export function useProduct(handle: string) {
     }
     fetchProduct()
     return () => { cancelled = true }
-  }, [handle])
+  }, [handle, regionId])
 
   return { product, loading }
 }
@@ -399,10 +467,12 @@ export function useCart(regionId?: string | null) {
       if (!cart) return
       setLoading(true)
       try {
-        const { cart: updatedCart } = await getSDK().store.cart.deleteLineItem(
+        // Medusa v2 DELETE line-item returns { parent } instead of { cart }
+        const res: any = await getSDK().store.cart.deleteLineItem(
           cart.id,
           lineItemId
         )
+        const updatedCart = res.parent || res.cart || res
         setCart(updatedCart as MedusaCart)
       } finally {
         setLoading(false)
@@ -480,10 +550,17 @@ export async function completeCart(cartId: string) {
 export function useMappedProducts(collectionId?: string) {
   const { regionId, loading: regionLoading } = useDefaultRegion()
   const { products, loading, error } = useProducts(collectionId, regionId)
-  const mapped = products.map(mapProduct)
+  let mapped: ProductItem[] = []
+  let mapError: Error | null = null
+  try {
+    mapped = products.map(mapProduct)
+  } catch (err) {
+    mapError = err as Error
+    console.error("mapProduct failed:", err, "products:", JSON.stringify(products).slice(0, 500))
+  }
   // Use the products hook's own loading state — it starts as true
   // and only becomes false after data arrives
-  return { products: mapped, rawProducts: products, loading, error }
+  return { products: mapped, rawProducts: products, loading, error: error || mapError }
 }
 
 /** Fetch a limited set of related products (for detail page) */

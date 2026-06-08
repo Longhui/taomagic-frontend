@@ -1,7 +1,7 @@
 // ========== Demo Product Data ==========
 // Used as fallback when Medusa backend is unreachable
 
-import type { ProductItem, ReviewItem, RatingDistribution } from './medusa-types'
+import type { ProductItem, ProductVariant, ReviewItem, RatingDistribution } from './medusa-types'
 
 export const FALLBACK_CATEGORIES = [
   { id: 'all', name: 'All Items', icon: '✦' },
@@ -12,6 +12,11 @@ export const FALLBACK_CATEGORIES = [
   { id: 'love', name: 'Love & Relationships', icon: '💕' },
 ]
 
+/** Helper: build a single variant entry for demo products */
+function makeVariant(productId: string, title: string, price: number, color?: string): ProductVariant {
+  return { id: `${productId}-${title.toLowerCase()}`, title, price, color }
+}
+
 export const DEMO_PRODUCTS: ProductItem[] = [
   {
     id: 'demo-1', name: 'Brass Wu Lou (Calabash)', price: 48, category: 'health',
@@ -20,6 +25,8 @@ export const DEMO_PRODUCTS: ProductItem[] = [
     material: 'Solid Brass', size: '4.5 inches', weight: '0.8 lbs',
     tags: ['Health', 'Protection', 'Brass'], bestseller: true,
     images: [], handle: 'brass-wu-lou', variantId: 'v1', inventoryQuantity: 15,
+    variants: [makeVariant('demo-1', 'Standard', 48, '#B87333')],
+    optionName: 'Color',
   },
   {
     id: 'demo-2', name: 'Obsidian Pixiu Bracelet', price: 36, category: 'wealth',
@@ -28,6 +35,7 @@ export const DEMO_PRODUCTS: ProductItem[] = [
     material: 'Black Obsidian', size: 'Adjustable 6-8 inches', weight: '0.3 lbs',
     tags: ['Wealth', 'Protection', 'Obsidian'], bestseller: true,
     images: [], handle: 'obsidian-pixiu', variantId: 'v2', inventoryQuantity: 42,
+    variants: [makeVariant('demo-2', 'Standard', 36, '#1a1a2e')],
   },
   {
     id: 'demo-3', name: 'Bagua Mirror Set (3pc)', price: 62, category: 'protection',
@@ -36,6 +44,7 @@ export const DEMO_PRODUCTS: ProductItem[] = [
     material: 'Wood, Glass Mirror', size: '6 inches each', weight: '1.2 lbs',
     tags: ['Protection', 'Bagua', 'Mirror'], bestseller: false,
     images: [], handle: 'bagua-mirror-set', variantId: 'v3', inventoryQuantity: 8,
+    variants: [makeVariant('demo-3', 'Standard', 62, '#8B7355')],
   },
   {
     id: 'demo-4', name: 'Five Elements Crystal Grid', price: 89, category: 'harmony',
@@ -44,6 +53,7 @@ export const DEMO_PRODUCTS: ProductItem[] = [
     material: 'Natural Crystals', size: 'Grid 8×8 inches', weight: '2.4 lbs',
     tags: ['Five Elements', 'Crystals', 'Harmony'], bestseller: false,
     images: [], handle: 'five-elements-grid', variantId: 'v4', inventoryQuantity: 5,
+    variants: [makeVariant('demo-4', 'Standard', 89, '#E8D5B7')],
   },
   {
     id: 'demo-5', name: 'Rose Quartz Mandarin Ducks', price: 54, category: 'love',
@@ -52,6 +62,7 @@ export const DEMO_PRODUCTS: ProductItem[] = [
     material: 'Rose Quartz', size: '3 inches each', weight: '0.6 lbs',
     tags: ['Love', 'Rose Quartz', 'Mandarin Ducks'], bestseller: true,
     images: [], handle: 'rose-quartz-ducks', variantId: 'v5', inventoryQuantity: 12,
+    variants: [makeVariant('demo-5', 'Standard', 54, '#F7CAC9')],
   },
   {
     id: 'demo-6', name: 'Brass Money Frog (Three-Legged Toad)', price: 42, category: 'wealth',
@@ -60,6 +71,7 @@ export const DEMO_PRODUCTS: ProductItem[] = [
     material: 'Brass with Gold Finish', size: '3.5 inches', weight: '0.9 lbs',
     tags: ['Wealth', 'Brass', 'Money Frog'], bestseller: false,
     images: [], handle: 'brass-money-frog', variantId: 'v6', inventoryQuantity: 25,
+    variants: [makeVariant('demo-6', 'Standard', 42, '#D4A017')],
   },
   {
     id: 'demo-7', name: 'Bamboo Wind Chime (8 Rods)', price: 38, category: 'harmony',
@@ -68,6 +80,7 @@ export const DEMO_PRODUCTS: ProductItem[] = [
     material: 'Natural Bamboo', size: '24 inches total', weight: '0.5 lbs',
     tags: ['Harmony', 'Bamboo', 'Sound'], bestseller: false,
     images: [], handle: 'bamboo-wind-chime', variantId: 'v7', inventoryQuantity: 20,
+    variants: [makeVariant('demo-7', 'Standard', 38, '#7B8D3A')],
   },
   {
     id: 'demo-8', name: 'Five Emperor Coins Set', price: 28, category: 'wealth',
@@ -76,6 +89,7 @@ export const DEMO_PRODUCTS: ProductItem[] = [
     material: 'Brass Alloy', size: '1.2 inches each', weight: '0.2 lbs',
     tags: ['Wealth', 'Coins', 'History'], bestseller: false,
     images: [], handle: 'five-emperor-coins', variantId: 'v8', inventoryQuantity: 60,
+    variants: [makeVariant('demo-8', 'Standard', 28, '#B8860B')],
   },
   {
     id: 'demo-9', name: 'Selenite Wand Set', price: 45, category: 'protection',
@@ -84,6 +98,7 @@ export const DEMO_PRODUCTS: ProductItem[] = [
     material: 'Natural Selenite', size: '6 inches each (3pc)', weight: '0.7 lbs',
     tags: ['Protection', 'Cleansing', 'Selenite'], bestseller: false,
     images: [], handle: 'selenite-wand-set', variantId: 'v9', inventoryQuantity: 18,
+    variants: [makeVariant('demo-9', 'Standard', 45, '#E8E0D0')],
   },
   {
     id: 'demo-10', name: 'Ammonite Fossil Display', price: 78, category: 'wealth',
@@ -92,6 +107,7 @@ export const DEMO_PRODUCTS: ProductItem[] = [
     material: 'Natural Fossil', size: '5-6 inches', weight: '1.5 lbs',
     tags: ['Wealth', 'Fossil', 'Ancient'], bestseller: false,
     images: [], handle: 'ammonite-fossil', variantId: 'v10', inventoryQuantity: 3,
+    variants: [makeVariant('demo-10', 'Standard', 78, '#8B7355')],
   },
   {
     id: 'demo-11', name: 'Red String Protection Bracelet', price: 18, category: 'protection',
@@ -100,6 +116,7 @@ export const DEMO_PRODUCTS: ProductItem[] = [
     material: 'Silk Thread', size: 'Adjustable', weight: '0.05 lbs',
     tags: ['Protection', 'Simple', 'Red String'], bestseller: true,
     images: [], handle: 'red-string-bracelet', variantId: 'v11', inventoryQuantity: 200,
+    variants: [makeVariant('demo-11', 'Standard', 18, '#CC3333')],
   },
   {
     id: 'demo-12', name: 'Lucky Bamboo (3 Stalks)', price: 32, category: 'wealth',
@@ -108,6 +125,7 @@ export const DEMO_PRODUCTS: ProductItem[] = [
     material: 'Live Plant + Ceramic', size: '12-16 inches', weight: '1.8 lbs',
     tags: ['Wealth', 'Plant', 'Bamboo'], bestseller: false,
     images: [], handle: 'lucky-bamboo', variantId: 'v12', inventoryQuantity: 10,
+    variants: [makeVariant('demo-12', 'Standard', 32, '#5C8A3C')],
   },
 ]
 

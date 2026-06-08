@@ -2,16 +2,25 @@
 
 import React from 'react'
 import { Star, Ruler, Weight, Gem } from 'lucide-react'
-import type { ProductItem, RatingDistribution } from '@/app/lib/medusa-types'
+import type { ProductItem, ProductVariant, RatingDistribution } from '@/app/lib/medusa-types'
 
 interface ProductInfoProps {
   product: ProductItem
+  selectedVariantIndex: number
+  onSelectVariant: (index: number) => void
   onScrollToReviews: () => void
 }
 
-export default function ProductInfo({ product, onScrollToReviews }: ProductInfoProps) {
+export default function ProductInfo({
+  product,
+  selectedVariantIndex,
+  onSelectVariant,
+  onScrollToReviews,
+}: ProductInfoProps) {
   const filledStars = Math.floor(product.rating)
   const hasFraction = product.rating - filledStars >= 0.5
+  const hasVariants = product.variants.length > 1
+  const selectedVariant = product.variants[selectedVariantIndex] || product.variants[0]
 
   return (
     <div>
@@ -22,12 +31,12 @@ export default function ProductInfo({ product, onScrollToReviews }: ProductInfoP
             Best Seller
           </span>
         )}
-        {product.inventoryQuantity !== undefined && product.inventoryQuantity <= 5 && product.inventoryQuantity > 0 && (
+        {selectedVariant.inventoryQuantity !== undefined && selectedVariant.inventoryQuantity <= 5 && selectedVariant.inventoryQuantity > 0 && (
           <span className="bg-gold/20 text-gold text-xs px-2 py-1 rounded-sm font-medium">
             Low Stock
           </span>
         )}
-        {product.inventoryQuantity !== undefined && product.inventoryQuantity === 0 && (
+        {selectedVariant.inventoryQuantity !== undefined && selectedVariant.inventoryQuantity === 0 && (
           <span className="bg-ink/10 text-ink/50 text-xs px-2 py-1 rounded-sm font-medium">
             Out of Stock
           </span>
@@ -64,14 +73,67 @@ export default function ProductInfo({ product, onScrollToReviews }: ProductInfoP
         </span>
       </button>
 
+      {/* ─── Variant Selector ─── */}
+      {hasVariants && (
+        <div className="mb-5">
+          <div className="flex items-center justify-between mb-3">
+            <span className="text-xs text-ink/50 uppercase tracking-wider">
+              {product.optionName || 'Option'}:
+              {' '}
+              <span className="text-ink font-medium normal-case">
+                {selectedVariant.title}
+              </span>
+            </span>
+            <span className="text-sm text-ink/60">
+              {selectedVariant.inventoryQuantity !== undefined
+                ? `(${selectedVariant.inventoryQuantity} available)`
+                : ''}
+            </span>
+          </div>
+
+          <div className="flex gap-2.5">
+            {product.variants.map((v: ProductVariant, idx: number) => (
+              <button
+                key={v.id}
+                onClick={() => onSelectVariant(idx)}
+                className={`group relative flex flex-col items-center gap-1.5 transition-all ${
+                  idx === selectedVariantIndex ? 'scale-105' : 'opacity-60 hover:opacity-90'
+                }`}
+                title={v.title}
+              >
+                {/* Color swatch circle */}
+                <div
+                  className={`w-9 h-9 rounded-full border-2 transition-all ${
+                    idx === selectedVariantIndex
+                      ? 'border-gold shadow-[0_0_0_2px_#C9A227]'
+                      : 'border-ink/20 hover:border-ink/40'
+                  }`}
+                  style={{ backgroundColor: v.color || '#ccc' }}
+                />
+                {/* Label below swatch */}
+                <span
+                  className={`text-[10px] leading-tight transition-colors ${
+                    idx === selectedVariantIndex
+                      ? 'text-ink font-medium'
+                      : 'text-ink/40'
+                  }`}
+                >
+                  {v.title}
+                </span>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Price */}
       <div className="flex items-baseline gap-3 mb-6">
         <span className="text-3xl font-serif text-gold">
-          ${product.price.toFixed(2)}
+          ${(selectedVariant.price || product.price).toFixed(2)}
         </span>
-        {product.originalPrice && product.originalPrice > product.price && (
+        {selectedVariant.originalPrice && selectedVariant.originalPrice > selectedVariant.price && (
           <span className="text-lg text-ink/30 line-through">
-            ${product.originalPrice.toFixed(2)}
+            ${selectedVariant.originalPrice.toFixed(2)}
           </span>
         )}
       </div>

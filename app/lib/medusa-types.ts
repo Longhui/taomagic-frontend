@@ -212,6 +212,17 @@ export interface MedusaSingleResponse<T> {
   collection?: T
 }
 
+// ---- UI Product Variant ----
+
+export interface ProductVariant {
+  id: string
+  title: string
+  price: number
+  originalPrice?: number
+  inventoryQuantity?: number
+  color?: string        // CSS color derived from variant title (for swatches)
+}
+
 // ---- UI Product Type (mapped from Medusa API) ----
 
 export interface ProductItem {
@@ -236,6 +247,10 @@ export interface ProductItem {
   variantId?: string
   inventoryQuantity?: number
   metaKeywords?: string
+  /** All available variants (from Medusa API) */
+  variants: ProductVariant[]
+  /** Option title used for variant selection (e.g. "Color", "Size") */
+  optionName?: string
 }
 
 // ---- Review Types ----
