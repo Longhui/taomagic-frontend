@@ -667,7 +667,7 @@ export default function CheckoutPage() {
                           ) : (
                             <div className="w-full h-full bg-gradient-to-br from-ink/5 to-ink/10 flex items-center justify-center rounded-sm">
                               <span className="text-[10px] font-serif text-gold/40">
-                                {(item.product_title || item.title).split(' ').map(w => w[0]).filter(Boolean).slice(0, 2).join('').toUpperCase()}
+                                {(item.title || '').split(' ').map(w => w[0]).filter(Boolean).slice(0, 2).join('').toUpperCase()}
                               </span>
                             </div>
                           )}
@@ -715,7 +715,7 @@ export default function CheckoutPage() {
                       ) : (
                         <div className="w-full h-full bg-gradient-to-br from-ink/5 to-ink/10 flex items-center justify-center rounded-sm">
                           <span className="text-xs font-serif text-gold/40">
-                            {(item.product_title || item.title).split(' ').map(w => w[0]).filter(Boolean).slice(0, 2).join('').toUpperCase()}
+                            {(item.title || '').split(' ').map(w => w[0]).filter(Boolean).slice(0, 2).join('').toUpperCase()}
                           </span>
                         </div>
                       )}
