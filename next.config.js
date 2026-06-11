@@ -15,8 +15,14 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'medusa-public-images.s3.eu-west-1.amazonaws.com',
       },
+      // 远程 Medusa 后端
+      {
+        protocol: 'https',
+        hostname: 'medusa.rao123.top',
+      },
     ],
   },
+  output: 'standalone',
 }
 
 module.exports = nextConfig
