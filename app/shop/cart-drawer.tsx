@@ -211,7 +211,7 @@ function CartItem({
         ) : (
           <div className="w-full h-full bg-gradient-to-br from-ink/5 to-ink/10 flex items-center justify-center">
             <span className="text-lg font-serif text-gold/40">
-              {(item.product_title || item.title).split(' ').map(w => w[0]).filter(Boolean).slice(0, 2).join('').toUpperCase()}
+              {(item.title || '').split(' ').map(w => w[0]).filter(Boolean).slice(0, 2).join('').toUpperCase()}
             </span>
           </div>
         )}
