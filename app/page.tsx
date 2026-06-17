@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { BookOpen, Sparkles, HomeIcon, ChevronRight, Star, Mail } from 'lucide-react'
 import Navigation from '@/app/components/Navigation'
 import FeaturedProducts from '@/app/components/FeaturedProducts'
+import { trackClick, trackLink, trackSubmit } from '@/app/lib/analytics'
 
 // Yin Yang SVG Component
 const YinYangSVG = ({ size = 200, className = '' }) => (
@@ -42,11 +43,19 @@ const HeroSection = () => {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link href="/iching" className="bg-cinnabar text-rice px-8 py-4 rounded-sm text-lg hover:bg-cinnabar/80 transition-all flex items-center justify-center gap-2">
+          <Link
+            href="/iching"
+            onClick={() => trackClick('cta', 'Hero - Get Free I Ching Reading')}
+            className="bg-cinnabar text-rice px-8 py-4 rounded-sm text-lg hover:bg-cinnabar/80 transition-all flex items-center justify-center gap-2"
+          >
             <Sparkles size={20} />
             Get Free I Ching Reading
           </Link>
-          <Link href="/wisdom" className="border border-rice/30 text-rice px-8 py-4 rounded-sm text-lg hover:bg-rice/10 transition-all">
+          <Link
+            href="/wisdom"
+            onClick={() => trackClick('cta', 'Hero - Explore Wisdom')}
+            className="border border-rice/30 text-rice px-8 py-4 rounded-sm text-lg hover:bg-rice/10 transition-all"
+          >
             Explore Wisdom
           </Link>
         </div>
@@ -142,7 +151,11 @@ const ThreePillars = () => {
                   ))}
                 </ul>
 
-                <Link href={pillar.href} className="inline-flex items-center gap-2 text-ink font-medium hover:text-cinnabar transition-colors group-hover:gap-3">
+                <Link
+                  href={pillar.href}
+                  onClick={() => trackClick('cta', `Three Pillars - ${pillar.title}`)}
+                  className="inline-flex items-center gap-2 text-ink font-medium hover:text-cinnabar transition-colors group-hover:gap-3"
+                >
                   {pillar.cta} <ChevronRight size={16} />
                 </Link>
               </div>
@@ -218,7 +231,10 @@ const Newsletter = () => {
             placeholder="Enter your email" 
             className="flex-1 px-4 py-3 rounded-sm border border-ink/20 bg-white focus:outline-none focus:border-bronze"
           />
-          <button className="bg-ink text-rice px-6 py-3 rounded-sm hover:bg-ink/80 transition-colors">
+          <button
+            onClick={() => trackSubmit('engagement', 'Newsletter Subscribe')}
+            className="bg-ink text-rice px-6 py-3 rounded-sm hover:bg-ink/80 transition-colors"
+          >
             Subscribe
           </button>
         </div>
@@ -245,36 +261,36 @@ const Footer = () => {
           <div>
             <h4 className="text-rice font-medium mb-4 text-sm uppercase tracking-wider">Shop</h4>
             <ul className="space-y-2 text-sm">
-              <li><Link href="/shop" className="hover:text-gold transition-colors">All Products</Link></li>
-              <li><Link href="/shop" className="hover:text-gold transition-colors">New Arrivals</Link></li>
-              <li><Link href="/shop" className="hover:text-gold transition-colors">Best Sellers</Link></li>
+              <li><Link href="/shop" onClick={() => trackClick('navigation', 'Footer - All Products')} className="hover:text-gold transition-colors">All Products</Link></li>
+              <li><Link href="/shop" onClick={() => trackClick('navigation', 'Footer - New Arrivals')} className="hover:text-gold transition-colors">New Arrivals</Link></li>
+              <li><Link href="/shop" onClick={() => trackClick('navigation', 'Footer - Best Sellers')} className="hover:text-gold transition-colors">Best Sellers</Link></li>
             </ul>
           </div>
 
           <div>
             <h4 className="text-rice font-medium mb-4 text-sm uppercase tracking-wider">I Ching</h4>
             <ul className="space-y-2 text-sm">
-              <li><Link href="/iching" className="hover:text-gold transition-colors">Free Reading</Link></li>
-              <li><Link href="/iching/analysis" className="hover:text-gold transition-colors">History</Link></li>
-              <li><Link href="/wisdom" className="hover:text-gold transition-colors">Blog</Link></li>
+              <li><Link href="/iching" onClick={() => trackClick('navigation', 'Footer - Free Reading')} className="hover:text-gold transition-colors">Free Reading</Link></li>
+              <li><Link href="/iching/analysis" onClick={() => trackClick('navigation', 'Footer - History')} className="hover:text-gold transition-colors">History</Link></li>
+              <li><Link href="/wisdom" onClick={() => trackClick('navigation', 'Footer - Blog')} className="hover:text-gold transition-colors">Blog</Link></li>
             </ul>
           </div>
 
           <div>
             <h4 className="text-rice font-medium mb-4 text-sm uppercase tracking-wider">Support</h4>
             <ul className="space-y-2 text-sm">
-              <li><Link href="/shipping-info" className="hover:text-gold transition-colors">Shipping</Link></li>
-              <li><Link href="/shop" className="hover:text-gold transition-colors">Track Order</Link></li>
-              <li><Link href="/contact" className="hover:text-gold transition-colors">Contact Us</Link></li>
+              <li><Link href="/shipping-info" onClick={() => trackClick('navigation', 'Footer - Shipping')} className="hover:text-gold transition-colors">Shipping</Link></li>
+              <li><Link href="/shop" onClick={() => trackClick('navigation', 'Footer - Track Order')} className="hover:text-gold transition-colors">Track Order</Link></li>
+              <li><Link href="/contact" onClick={() => trackClick('navigation', 'Footer - Contact Us')} className="hover:text-gold transition-colors">Contact Us</Link></li>
             </ul>
           </div>
 
           <div>
             <h4 className="text-rice font-medium mb-4 text-sm uppercase tracking-wider">Legal</h4>
             <ul className="space-y-2 text-sm">
-              <li><Link href="/privacy-policy" className="hover:text-gold transition-colors">Privacy Policy</Link></li>
-              <li><Link href="/return-policy" className="hover:text-gold transition-colors">Return Policy</Link></li>
-              <li><Link href="/disclaimer" className="hover:text-gold transition-colors">Disclaimer</Link></li>
+              <li><Link href="/privacy-policy" onClick={() => trackClick('navigation', 'Footer - Privacy Policy')} className="hover:text-gold transition-colors">Privacy Policy</Link></li>
+              <li><Link href="/return-policy" onClick={() => trackClick('navigation', 'Footer - Return Policy')} className="hover:text-gold transition-colors">Return Policy</Link></li>
+              <li><Link href="/disclaimer" onClick={() => trackClick('navigation', 'Footer - Disclaimer')} className="hover:text-gold transition-colors">Disclaimer</Link></li>
             </ul>
           </div>
         </div>

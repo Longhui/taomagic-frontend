@@ -10,6 +10,7 @@ import Navigation from '@/app/components/Navigation'
 import { useProduct, useRelatedProducts, mapProduct, useDefaultRegion } from '@/app/lib/medusa'
 import { useCartContext } from '@/app/lib/CartContext'
 import { getDemoProduct } from '@/app/lib/demo-data'
+import { trackEvent, trackClick } from '@/app/lib/analytics'
 import type { ProductItem } from '@/app/lib/medusa-types'
 import ImageGallery from './_components/ImageGallery'
 import ProductInfo from './_components/ProductInfo'
@@ -167,6 +168,7 @@ export default function ProductDetailPage() {
   const handleAddToCart = async (variantId: string, quantity: number) => {
     try {
       await addToCart(variantId, quantity)
+      trackEvent('shop', 'add_to_cart', product?.name, currentPrice)
     } catch (err: any) {
       alert(err?.message || 'Failed to add item to cart. Check that the Medusa backend is running.')
       throw err
@@ -178,6 +180,7 @@ export default function ProductDetailPage() {
     setAddingSticky(true)
     try {
       await addToCart(currentVariantId, 1)
+      trackEvent('shop', 'add_to_cart_sticky', product?.name, currentPrice)
     } catch {
       // handled
     } finally {
@@ -267,7 +270,7 @@ export default function ProductDetailPage() {
               {DETAIL_TABS.map(tab => (
                 <button
                   key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
+                  onClick={() => { setActiveTab(tab.id); trackClick('shop', `PDP Tab - ${tab.label}`) }}
                   className={`pb-3 text-sm transition-all ${
                     activeTab === tab.id
                       ? 'text-ink font-medium border-b-2 border-gold'

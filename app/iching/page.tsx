@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { analyzeLiuYao, generateAIPrompt } from '../lib/liuyao'
 import Navigation from '@/app/components/Navigation'
+import { trackClick, trackSubmit } from '@/app/lib/analytics'
 
 // Hexagram data - 64卦
 const HEXAGRAMS = [
@@ -284,7 +285,7 @@ export default function IChingGuidancePage() {
               </div>
               <label className="block text-sm font-medium text-ink mb-2">Your Question</label>
               <textarea value={question} onChange={(e) => setQuestion(e.target.value)} placeholder="What guidance do you seek?" className="w-full px-4 py-3 rounded-sm border border-ink/20 focus:outline-none focus:border-bronze mb-4 resize-none" rows={3} />
-              <button onClick={() => question.trim() ? setStep('casting') : null} className={`w-full py-4 rounded-sm text-lg transition-colors flex items-center justify-center gap-2 ${question.trim() ? 'bg-cinnabar text-rice hover:bg-cinnabar/80 cursor-pointer' : 'bg-cinnabar/50 text-rice/60 cursor-not-allowed'}`}>
+              <button onClick={() => { if (question.trim()) { trackSubmit('iching', 'Begin Reading'); setStep('casting') } }} className={`w-full py-4 rounded-sm text-lg transition-colors flex items-center justify-center gap-2 ${question.trim() ? 'bg-cinnabar text-rice hover:bg-cinnabar/80 cursor-pointer' : 'bg-cinnabar/50 text-rice/60 cursor-not-allowed'}`}>
                 <Sparkles size={20} />
                 {question.trim() ? 'Begin Reading' : 'Enter Your Question First'}
               </button>
@@ -314,8 +315,8 @@ export default function IChingGuidancePage() {
           </div>
           <div className="bg-rice/5 rounded-lg p-4 mb-8">
             <div className="flex justify-center gap-4 mb-4">
-              <button onClick={() => setMethod('manual')} className={`px-4 py-2 rounded-sm text-sm transition-colors ${method === 'manual' ? 'bg-cinnabar text-rice' : 'bg-rice/10 text-rice/70 hover:bg-rice/20'}`}>Use Real Coins (Recommended)</button>
-              <button onClick={() => setMethod('random')} className={`px-4 py-2 rounded-sm text-sm transition-colors ${method === 'random' ? 'bg-cinnabar text-rice' : 'bg-rice/10 text-rice/70 hover:bg-rice/20'}`}>Random Generate</button>
+              <button onClick={() => { setMethod('manual'); trackClick('iching', 'Casting Method - Real Coins') }} className={`px-4 py-2 rounded-sm text-sm transition-colors ${method === 'manual' ? 'bg-cinnabar text-rice' : 'bg-rice/10 text-rice/70 hover:bg-rice/20'}`}>Use Real Coins (Recommended)</button>
+              <button onClick={() => { setMethod('random'); trackClick('iching', 'Casting Method - Random') }} className={`px-4 py-2 rounded-sm text-sm transition-colors ${method === 'random' ? 'bg-cinnabar text-rice' : 'bg-rice/10 text-rice/70 hover:bg-rice/20'}`}>Random Generate</button>
             </div>
           </div>
 
@@ -333,7 +334,7 @@ export default function IChingGuidancePage() {
                 ))}
               </div>
               <div className="text-center">
-                <button onClick={castManualLine} disabled={currentLine >= 6} className="bg-cinnabar text-rice px-8 py-3 rounded-sm hover:bg-cinnabar/80 transition-colors disabled:opacity-50 inline-flex items-center gap-2">
+                <button onClick={() => { castManualLine(); trackClick('iching', `Record Line ${currentLine + 1}`) }} disabled={currentLine >= 6} className="bg-cinnabar text-rice px-8 py-3 rounded-sm hover:bg-cinnabar/80 transition-colors disabled:opacity-50 inline-flex items-center gap-2">
                   <Check size={18} /> Record Line {Math.min(currentLine + 1, 6)}
                 </button>
               </div>
@@ -346,7 +347,7 @@ export default function IChingGuidancePage() {
                 {[0, 1, 2].map((i) => (<CoinDisplay key={i} face={randomCoins[i]} isFlipping={isFlipping} />))}
               </div>
               <div className="text-center">
-                <button onClick={castRandomLine} disabled={isFlipping || currentLine >= 6} className="bg-cinnabar text-rice px-8 py-3 rounded-sm hover:bg-cinnabar/80 transition-colors disabled:opacity-50 inline-flex items-center gap-2">
+                <button onClick={() => { castRandomLine(); trackClick('iching', `Shake & Cast Line ${currentLine + 1}`) }} disabled={isFlipping || currentLine >= 6} className="bg-cinnabar text-rice px-8 py-3 rounded-sm hover:bg-cinnabar/80 transition-colors disabled:opacity-50 inline-flex items-center gap-2">
                   {isFlipping ? 'Shaking...' : `Shake & Cast Line ${Math.min(currentLine + 1, 6)}`}
                 </button>
               </div>
@@ -362,7 +363,7 @@ export default function IChingGuidancePage() {
                   <p className="text-rice/60 text-xs">Learn the proper casting method with our step-by-step guide</p>
                 </div>
               </div>
-              <a href="/guide" target="_blank" className="bg-gold text-ink px-4 py-2 rounded-sm text-sm hover:bg-gold/80 transition-colors inline-flex items-center gap-1 shrink-0">
+              <a href="/guide" target="_blank" onClick={() => trackClick('iching', 'View Guide')} className="bg-gold text-ink px-4 py-2 rounded-sm text-sm hover:bg-gold/80 transition-colors inline-flex items-center gap-1 shrink-0">
                 View Guide <ChevronRight size={14} />
               </a>
             </div>
@@ -380,7 +381,7 @@ export default function IChingGuidancePage() {
           </div>
 
           <div className="flex justify-center gap-4">
-            <button onClick={reset} className="border border-rice/30 text-rice px-6 py-3 rounded-sm hover:bg-rice/10 transition-colors flex items-center gap-2">
+            <button onClick={() => { reset(); trackClick('iching', 'Reset Casting') }} className="border border-rice/30 text-rice px-6 py-3 rounded-sm hover:bg-rice/10 transition-colors flex items-center gap-2">
               <RotateCcw size={16} /> Reset
             </button>
           </div>
@@ -433,12 +434,12 @@ export default function IChingGuidancePage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button
-                onClick={handleMasterConsultation}
+                onClick={() => { handleMasterConsultation(); trackClick('iching', 'Master Consultation') }}
                 className="bg-cinnabar text-rice px-6 py-3 rounded-sm hover:bg-cinnabar/80 transition-colors inline-flex items-center justify-center gap-2"
               >
                 <Sparkles size={18} /> Master Consultation $29
               </button>
-              <button onClick={reset} className="border border-rice/30 text-rice px-6 py-3 rounded-sm hover:bg-rice/10 transition-colors">New Reading</button>
+              <button onClick={() => { reset(); trackClick('iching', 'New Reading') }} className="border border-rice/30 text-rice px-6 py-3 rounded-sm hover:bg-rice/10 transition-colors">New Reading</button>
             </div>
           </div>
         </div>

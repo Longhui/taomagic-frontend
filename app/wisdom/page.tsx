@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { ArrowLeft, BookOpen, ChevronRight, ChevronDown, Circle, Square, Triangle, Wind, Flame, Droplets, Mountain } from 'lucide-react'
 import Link from 'next/link'
 import Navigation from '@/app/components/Navigation'
+import { trackClick } from '@/app/lib/analytics'
 
 const WISDOM_SECTIONS = [
   {
@@ -283,7 +284,7 @@ const SectionCard = ({ section, isOpen, onToggle }: {
   return (
     <div className={`rounded-lg border overflow-hidden transition-all ${isOpen ? 'shadow-md' : ''} ${colorMap[section.color]}`}>
       <button
-        onClick={onToggle}
+        onClick={() => { onToggle(); trackClick('wisdom', `Toggle Section - ${section.title}`) }}
         className="w-full p-6 flex items-center gap-4 text-left hover:bg-black/5 transition-colors"
       >
         <div className={`p-3 rounded-lg bg-white/80`}>
@@ -371,11 +372,11 @@ export default function WisdomPage() {
             or explore our curated Feng Shui objects.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/iching" className="bg-cinnabar text-rice px-6 py-3 rounded-sm hover:bg-cinnabar/80 transition-colors inline-flex items-center justify-center gap-2">
+            <Link href="/iching" onClick={() => trackClick('cta', 'Wisdom - Try I Ching Reading')} className="bg-cinnabar text-rice px-6 py-3 rounded-sm hover:bg-cinnabar/80 transition-colors inline-flex items-center justify-center gap-2">
               <Flame size={18} />
               Try I Ching Reading
             </Link>
-            <Link href="/shop" className="border border-ink/30 text-ink px-6 py-3 rounded-sm hover:bg-ink/5 transition-colors inline-flex items-center justify-center gap-2">
+            <Link href="/shop" onClick={() => trackClick('cta', 'Wisdom - Browse Feng Shui Store')} className="border border-ink/30 text-ink px-6 py-3 rounded-sm hover:bg-ink/5 transition-colors inline-flex items-center justify-center gap-2">
               <ChevronRight size={18} />
               Browse Feng Shui Store
             </Link>

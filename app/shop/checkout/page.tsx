@@ -7,6 +7,7 @@ import Link from 'next/link'
 import Navigation from '@/app/components/Navigation'
 import { useRouter } from 'next/navigation'
 import { useDefaultRegion, getSDK } from '@/app/lib/medusa'
+import { trackEvent, trackClick } from '@/app/lib/analytics'
 import type { MedusaCart, MedusaLineItem } from '@/app/lib/medusa-types'
 
 // ========== Types ==========
@@ -459,7 +460,7 @@ export default function CheckoutPage() {
                 {stepError && <p className="mt-4 text-sm text-cinnabar flex items-center gap-1"><AlertCircle size={14} />{stepError}</p>}
 
                 <button
-                  onClick={saveShippingInfo}
+                  onClick={() => { saveShippingInfo(); trackClick('shop', 'Checkout - Continue to Shipping') }}
                   className="mt-6 w-full bg-bronze text-rice py-3 rounded-sm text-sm font-medium hover:bg-bronze/80 transition-colors flex items-center justify-center gap-2"
                 >
                   Continue to Shipping <ChevronRight size={16} />
@@ -531,7 +532,7 @@ export default function CheckoutPage() {
                     <ChevronLeft size={16} /> Back
                   </button>
                   <button
-                    onClick={saveShippingMethod}
+                    onClick={() => { saveShippingMethod(); trackClick('shop', 'Checkout - Continue to Payment') }}
                     disabled={!selectedShipping}
                     className="flex-1 bg-bronze text-rice py-3 rounded-sm text-sm font-medium hover:bg-bronze/80 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
                   >
@@ -598,7 +599,7 @@ export default function CheckoutPage() {
                     <ChevronLeft size={16} /> Back
                   </button>
                   <button
-                    onClick={savePayment}
+                    onClick={() => { savePayment(); trackClick('shop', 'Checkout - Continue to Review') }}
                     disabled={!selectedPayment || paymentLoading}
                     className="flex-1 bg-bronze text-rice py-3 rounded-sm text-sm font-medium hover:bg-bronze/80 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
                   >
@@ -689,7 +690,7 @@ export default function CheckoutPage() {
                     <ChevronLeft size={16} /> Back
                   </button>
                   <button
-                    onClick={placeOrder}
+                    onClick={() => { trackEvent('shop', 'place_order', undefined, total); placeOrder() }}
                     disabled={placing}
                     className="flex-1 bg-cinnabar text-rice py-3 rounded-sm text-sm font-medium hover:bg-cinnabar/80 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
                   >

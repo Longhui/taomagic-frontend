@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Sparkles, ChevronRight } from 'lucide-react'
 import type { ProductItem } from '../lib/medusa-types'
+import { trackClick } from '@/app/lib/analytics'
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL || 'http://localhost:9000'
 const PUBLISHABLE_KEY = process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY || ''
@@ -56,7 +57,7 @@ export default function FeaturedProducts() {
             <h2 className="text-3xl md:text-4xl font-serif text-rice mb-2">Curated Feng Shui Objects</h2>
             <p className="text-rice/60">Each item selected for authentic energy and purpose</p>
           </div>
-          <Link href="/shop" className="hidden md:inline-flex items-center gap-2 text-gold hover:text-rice transition-colors">
+          <Link href="/shop" onClick={() => trackClick('cta', 'Featured - View All')} className="hidden md:inline-flex items-center gap-2 text-gold hover:text-rice transition-colors">
             View All <ChevronRight size={16} />
           </Link>
         </div>
@@ -76,7 +77,7 @@ export default function FeaturedProducts() {
             ))
           ) : (
             products.map((product) => (
-              <Link key={product.id} href={`/shop/${product.handle}`} className="group bg-ink border border-rice/10 rounded-lg overflow-hidden hover:border-gold/50 transition-all">
+              <Link key={product.id} href={`/shop/${product.handle}`} onClick={() => trackClick('shop', `Featured Product - ${product.name}`)} className="group bg-ink border border-rice/10 rounded-lg overflow-hidden hover:border-gold/50 transition-all">
                 <div className="aspect-square bg-gradient-to-br from-ink to-ink/80 flex items-center justify-center relative overflow-hidden">
                   {product.thumbnail ? (
                     <Image

@@ -8,6 +8,7 @@ import Navigation from '@/app/components/Navigation'
 import { useMappedProducts, useCollections } from '../lib/medusa'
 import { useCartContext } from '../lib/CartContext'
 import { FALLBACK_CATEGORIES, DEMO_PRODUCTS } from '../lib/demo-data'
+import { trackClick, trackEvent } from '@/app/lib/analytics'
 import type { ProductItem } from '../lib/medusa-types'
 
 // ========== Product Card ==========
@@ -28,7 +29,7 @@ const ProductCard = ({ product, onAddToCart, addingId }: {
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Image — wrapped in Link to product detail */}
-      <Link href={`/shop/${product.handle}`}>
+      <Link href={`/shop/${product.handle}`} onClick={() => trackClick('shop', `Product Card - ${product.name}`)}>
         <div className="aspect-square bg-gradient-to-br from-rice to-rice/80 relative overflow-hidden">
           {hasImage ? (
             <Image
@@ -67,6 +68,7 @@ const ProductCard = ({ product, onAddToCart, addingId }: {
           <button
             onClick={(e) => {
               e.preventDefault()
+              trackEvent('shop', 'quick_add', product.name, product.price)
               onAddToCart(product.id, product.variantId)
             }}
             disabled={addingId === product.id || !product.variantId}
@@ -120,6 +122,7 @@ const ProductCard = ({ product, onAddToCart, addingId }: {
               onClick={(e) => {
                 e.preventDefault()
                 e.stopPropagation()
+                trackEvent('shop', 'add_to_cart', product.name, product.price)
                 onAddToCart(product.id, product.variantId)
               }}
               disabled={addingId === product.id || !product.variantId}
@@ -238,6 +241,7 @@ export default function ShopPage() {
                 placeholder="Search items..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
+                onFocus={() => trackClick('shop', 'Search Focus')}
                 className="pl-9 pr-4 py-2 rounded-sm bg-rice text-ink text-sm w-48 md:w-64 focus:outline-none focus:ring-2 focus:ring-gold"
               />
             </div>
@@ -245,6 +249,7 @@ export default function ShopPage() {
 
           <Link
             href="/fengshui"
+            onClick={() => trackClick('cta', 'Shop Hero - Feng Shui Evaluation')}
             className="mt-6 inline-flex items-center gap-2 bg-bronze text-rice px-6 py-3 rounded-sm text-sm hover:bg-bronze/80 transition-all"
           >
             <span>🎯</span>
@@ -259,7 +264,10 @@ export default function ShopPage() {
           {categories.map(cat => (
             <button
               key={cat.id}
-              onClick={() => setActiveCategory(cat.id)}
+              onClick={() => {
+                setActiveCategory(cat.id)
+                trackClick('shop', `Category Filter - ${cat.name}`)
+              }}
               className={`px-4 py-2 rounded-sm text-sm whitespace-nowrap transition-colors ${
                 activeCategory === cat.id
                   ? 'bg-ink text-rice'

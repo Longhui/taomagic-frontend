@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { BookOpen, Sparkles, ShoppingCart, Menu, X } from 'lucide-react'
 import { useCartContext } from '@/app/lib/CartContext'
 import CartDrawer from '@/app/shop/cart-drawer'
+import { trackClick } from '@/app/lib/analytics'
 
 // Yin Yang SVG
 const YinYangSVG = ({ size = 32, className = '' }) => (
@@ -51,7 +52,11 @@ export default function Navigation({ solid = false, rightSlot }: NavigationProps
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <Link href="/" className="flex items-center gap-2">
+          <Link
+            href="/"
+            onClick={() => trackClick('navigation', 'Logo - Home')}
+            className="flex items-center gap-2"
+          >
             <YinYangSVG size={32} className="!animation-none" />
             <span className="text-rice font-serif text-xl font-bold tracking-wider">TaoInsight</span>
           </Link>
@@ -61,6 +66,7 @@ export default function Navigation({ solid = false, rightSlot }: NavigationProps
               <Link
                 key={item.name}
                 href={item.href}
+                onClick={() => trackClick('navigation', `Nav - ${item.name}`)}
                 className="text-rice/80 hover:text-gold transition-colors text-sm tracking-wide uppercase"
               >
                 {item.name}
@@ -71,7 +77,7 @@ export default function Navigation({ solid = false, rightSlot }: NavigationProps
           <div className="flex items-center gap-3">
             {/* Cart icon — always visible */}
             <button
-              onClick={(e) => { e.stopPropagation(); openCart() }}
+              onClick={(e) => { e.stopPropagation(); trackClick('navigation', 'Cart Open'); openCart() }}
               className="relative p-2 hover:bg-rice/10 rounded-sm transition-colors text-rice"
               aria-label="Open shopping cart"
             >
@@ -97,7 +103,10 @@ export default function Navigation({ solid = false, rightSlot }: NavigationProps
               key={item.name}
               href={item.href}
               className="block px-4 py-3 text-rice/80 hover:text-gold transition-colors"
-              onClick={() => setIsOpen(false)}
+              onClick={() => {
+                setIsOpen(false)
+                trackClick('navigation', `Mobile Nav - ${item.name}`)
+              }}
             >
               {item.name}
             </Link>
