@@ -86,7 +86,7 @@ export default function ShippingInfoPage() {
       {/* Simple Footer */}
       <footer className="bg-ink text-rice/60 py-8 mt-16">
         <div className="max-w-7xl mx-auto px-4 text-center text-sm">
-          <Link href="/" className="hover:text-gold transition-colors">&larr; Back to TaoInsight</Link>
+          <Link href="/" className="hover:text-gold transition-colors">&larr; Back to TaoMagic</Link>
         </div>
       </footer>
     </div>

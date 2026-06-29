@@ -46,10 +46,10 @@ const CheckItem = ({ title, desc }: { title: string; desc: string }) => (
 
 // ========== Section: What is Ba Zhai Ming Jing ==========
 const WhatIsBaZhai = () => (
-  <section className="py-24 bg-rice">
+  <section id="what-is-ba-zhai" className="py-24 bg-rice">
     <div className="max-w-5xl mx-auto px-4">
       <div className="bg-white rounded-lg border border-ink/10 p-8 md:p-12 shadow-sm">
-        <h2 className="text-3xl font-serif text-ink text-center mb-6">What is Ba Zhai Ming Jing?</h2>
+        <h2 className="text-3xl font-serif text-ink text-center mb-6">What is Ba Zhai Feng Shui?</h2>
         <p className="text-ink/60 text-center mb-10 max-w-2xl mx-auto leading-relaxed">
           The Eight Mansions Bright Mirror (Ba Zhai Ming Jing) is the most practical and
           accessible system in the School of Form &amp; Qi Feng Shui.
@@ -934,7 +934,7 @@ const Footer = () => (
               <circle cx="100" cy="50" r="15" fill="#1a1a1a" />
               <circle cx="100" cy="150" r="15" fill="#f5f0e8" />
             </svg>
-            <span className="text-rice font-serif text-lg font-bold">TaoInsight</span>
+            <span className="text-rice font-serif text-lg font-bold">TaoMagic</span>
           </div>
           <p className="text-sm leading-relaxed">Bridging 5,000 years of Chinese wisdom with modern seekers worldwide.</p>
         </div>
@@ -967,7 +967,7 @@ const Footer = () => (
         </div>
       </div>
       <div className="border-t border-rice/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-        <p className="text-sm">2024 TaoInsight. All rights reserved.</p>
+        <p className="text-sm">2026 TaoMagic. All rights reserved.</p>
         <div className="flex gap-6 text-sm">
           <a href="#" className="hover:text-gold transition-colors">Privacy Policy</a>
           <a href="#" className="hover:text-gold transition-colors">Terms of Service</a>
@@ -1000,20 +1000,21 @@ export default function FengShuiGuidePage() {
           <div className="mb-6 flex justify-center">
             <Compass size={64} className="text-gold" />
           </div>
-          <h1 className="text-4xl md:text-6xl font-serif text-rice mb-4 leading-tight">
-            Ba Zhai Ming Jing &middot; Indoor <span className="text-gold">Feng Shui</span> Guide
+          <h1 className="text-4xl md:text-6xl font-serif text-rice mb-2 leading-tight">
+            Free Ba Zhai Feng Shui Guidance
           </h1>
+          <h2 className="text-2xl md:text-3xl font-serif text-gold/80 mb-4">
+            Analyze Your Home&#39;s Lucky Directions
+          </h2>
           <p className="text-xl text-rice/70 max-w-3xl mx-auto mb-8">
-            Learn the Eight Mansions Feng Shui system from the ground up. Calculate your
-            Ming Gua, measure your house direction, configure room layouts, interpret
-            your results, and receive personalized remedy recommendations.
+            Calculate your home&rsquo;s Ba Zhai (Eight Mansions) feng shui directions for free. Get personalized analysis of wealth, health, love, and career sectors with remedies.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="#step-1" className="bg-cinnabar text-rice px-8 py-4 rounded-sm text-lg hover:bg-cinnabar/80 transition-all flex items-center justify-center gap-2">
+            <Link href="/fengshui" className="bg-cinnabar text-rice px-8 py-4 rounded-sm text-lg hover:bg-cinnabar/80 transition-all flex items-center justify-center gap-2">
               <Play size={20} />
-              Calculate Your Ming Gua
-            </a>
-            <a href="#step-2" className="border border-rice/30 text-rice px-8 py-4 rounded-sm text-lg hover:bg-rice/10 transition-all flex items-center justify-center gap-2">
+              Start Free Calculator
+            </Link>
+            <a href="#what-is-ba-zhai" className="border border-rice/30 text-rice px-8 py-4 rounded-sm text-lg hover:bg-rice/10 transition-all flex items-center justify-center gap-2">
               <BookOpen size={20} />
               Read Full Guide
             </a>

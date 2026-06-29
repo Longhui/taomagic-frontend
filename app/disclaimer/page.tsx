@@ -23,7 +23,7 @@ export default function DisclaimerPage() {
 
         <div className="bg-white border border-ink/10 rounded-lg p-8 space-y-6 text-ink/80 leading-relaxed">
           <p>
-            At TaoInsight, we celebrate the rich heritage of Chinese philosophy
+            At TaoMagic, we celebrate the rich heritage of Chinese philosophy
             and traditional arts. Our offerings are designed for cultural
             exploration, personal reflection, and mindful living.
           </p>
@@ -52,13 +52,13 @@ export default function DisclaimerPage() {
           </div>
 
           <p>
-            By using our services, you acknowledge that TaoInsight is not
+            By using our services, you acknowledge that TaoMagic is not
             liable for any actions taken based on the information provided.
           </p>
 
           <p>
             For questions, contact us at:{' '}
-            <a href="mailto:support@taoinsight.com" className="text-bronze hover:underline">support@taoinsight.com</a>
+            <a href="mailto:support@taomagic.net" className="text-bronze hover:underline">support@taomagic.net</a>
           </p>
         </div>
       </div>
@@ -66,7 +66,7 @@ export default function DisclaimerPage() {
       {/* Simple Footer */}
       <footer className="bg-ink text-rice/60 py-8 mt-16">
         <div className="max-w-7xl mx-auto px-4 text-center text-sm">
-          <Link href="/" className="hover:text-gold transition-colors">&larr; Back to TaoInsight</Link>
+          <Link href="/" className="hover:text-gold transition-colors">&larr; Back to TaoMagic</Link>
         </div>
       </footer>
     </div>

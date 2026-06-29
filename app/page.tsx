@@ -251,7 +251,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-center md:justify-start gap-2 mb-8">
           <YinYangSVG size={28} className="!animation-none" />
-          <span className="text-rice font-serif text-xl font-bold">TaoInsight</span>
+          <span className="text-rice font-serif text-xl font-bold">TaoMagic</span>
         </div>
         <p className="text-sm leading-relaxed max-w-xl mb-12 text-center md:text-left">
           Bridging 5,000 years of Chinese wisdom with modern seekers worldwide.
@@ -296,9 +296,9 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-rice/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm">&copy; 2026 TaoInsight. All rights reserved.</p>
-          <a href="mailto:support@taoinsight.com" className="text-sm text-rice/50 hover:text-gold transition-colors">
-            support@taoinsight.com
+          <p className="text-sm">&copy; 2026 TaoMagic. All rights reserved.</p>
+          <a href="mailto:support@taomagic.net" className="text-sm text-rice/50 hover:text-gold transition-colors">
+            support@taomagic.net
           </a>
         </div>
       </div>

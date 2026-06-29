@@ -17,8 +17,12 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'TaoInsight - Ancient Wisdom for Modern Life',
+  title: 'TaoMagic - Ancient Wisdom for Modern Life',
   description: 'Discover I Ching guidance, Feng Shui wisdom, and Taoist philosophy for personal transformation.',
+  icons: {
+    icon: '/favicon.svg',
+    apple: '/favicon.svg',
+  },
 }
 
 export default function RootLayout({

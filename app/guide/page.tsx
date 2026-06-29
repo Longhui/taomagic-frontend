@@ -788,7 +788,7 @@ export default function GuidePage() {
                   <circle cx="100" cy="50" r="15" fill="#1a1a1a" />
                   <circle cx="100" cy="150" r="15" fill="#f5f0e8" />
                 </svg>
-                <span className="text-rice font-serif text-lg font-bold">TaoInsight</span>
+                <span className="text-rice font-serif text-lg font-bold">TaoMagic</span>
               </div>
               <p className="text-sm leading-relaxed">Bridging 5,000 years of Chinese wisdom with modern seekers worldwide.</p>
             </div>
@@ -820,7 +820,7 @@ export default function GuidePage() {
             </div>
           </div>
           <div className="border-t border-rice/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm">2024 TaoInsight. All rights reserved.</p>
+            <p className="text-sm">2026 TaoMagic. All rights reserved.</p>
             <div className="flex gap-6 text-sm">
               <a href="#" className="hover:text-gold transition-colors">Privacy Policy</a>
               <a href="#" className="hover:text-gold transition-colors">Terms of Service</a>

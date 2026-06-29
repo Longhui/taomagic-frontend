@@ -35,7 +35,7 @@ export default function ReturnPolicyPage() {
 
           <h2 className="text-xl font-serif text-ink pt-4">Process</h2>
           <ol className="space-y-3 list-decimal pl-5">
-            <li>Contact <a href="mailto:support@taoinsight.com" className="text-bronze hover:underline">support@taoinsight.com</a> with order number</li>
+            <li>Contact <a href="mailto:support@taomagic.net" className="text-bronze hover:underline">support@taomagic.net</a> with order number</li>
             <li>Receive return authorization and prepaid label (for defective items)</li>
             <li>Ship item back within 14 days of authorization</li>
             <li>Refund processed within 5-7 business days after receipt</li>
@@ -58,7 +58,7 @@ export default function ReturnPolicyPage() {
       {/* Simple Footer */}
       <footer className="bg-ink text-rice/60 py-8 mt-16">
         <div className="max-w-7xl mx-auto px-4 text-center text-sm">
-          <Link href="/" className="hover:text-gold transition-colors">&larr; Back to TaoInsight</Link>
+          <Link href="/" className="hover:text-gold transition-colors">&larr; Back to TaoMagic</Link>
         </div>
       </footer>
     </div>

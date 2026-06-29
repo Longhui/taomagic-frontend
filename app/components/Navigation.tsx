@@ -58,7 +58,7 @@ export default function Navigation({ solid = false, rightSlot }: NavigationProps
             className="flex items-center gap-2"
           >
             <YinYangSVG size={32} className="!animation-none" />
-            <span className="text-rice font-serif text-xl font-bold tracking-wider">TaoInsight</span>
+            <span className="text-rice font-serif text-xl font-bold tracking-wider">TaoMagic</span>
           </Link>
 
           <div className="hidden md:flex items-center gap-8">

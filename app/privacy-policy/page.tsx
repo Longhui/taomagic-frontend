@@ -23,7 +23,7 @@ export default function PrivacyPolicyPage() {
 
         <div className="bg-white border border-ink/10 rounded-lg p-8 space-y-6 text-ink/80 leading-relaxed">
           <p>
-            TaoInsight (&ldquo;we&rdquo;, &ldquo;us&rdquo;) operates taoinsight.com. This policy
+            TaoMagic (&ldquo;we&rdquo;, &ldquo;us&rdquo;) operates taomagic.net. This policy
             describes how we collect, use, and protect your information.
           </p>
 
@@ -58,7 +58,7 @@ export default function PrivacyPolicyPage() {
 
           <h2 className="text-xl font-serif text-ink pt-4">Your Rights</h2>
           <ul className="space-y-3 list-disc pl-5">
-            <li>Request data deletion: <a href="mailto:support@taoinsight.com" className="text-bronze hover:underline">support@taoinsight.com</a></li>
+            <li>Request data deletion: <a href="mailto:support@taomagic.net" className="text-bronze hover:underline">support@taomagic.net</a></li>
             <li>Unsubscribe from emails: link in every email</li>
             <li>Cookie preferences: adjust in browser settings</li>
           </ul>
@@ -71,7 +71,7 @@ export default function PrivacyPolicyPage() {
           </ul>
 
           <p className="pt-4">
-            Contact: <a href="mailto:support@taoinsight.com" className="text-bronze hover:underline">support@taoinsight.com</a>
+            Contact: <a href="mailto:support@taomagic.net" className="text-bronze hover:underline">support@taomagic.net</a>
           </p>
         </div>
       </div>
@@ -79,7 +79,7 @@ export default function PrivacyPolicyPage() {
       {/* Simple Footer */}
       <footer className="bg-ink text-rice/60 py-8 mt-16">
         <div className="max-w-7xl mx-auto px-4 text-center text-sm">
-          <Link href="/" className="hover:text-gold transition-colors">&larr; Back to TaoInsight</Link>
+          <Link href="/" className="hover:text-gold transition-colors">&larr; Back to TaoMagic</Link>
         </div>
       </footer>
     </div>

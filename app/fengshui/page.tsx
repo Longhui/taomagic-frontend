@@ -287,11 +287,14 @@ export default function FengShuiPage() {
         <div className="mb-6 flex justify-center">
           <Compass size={64} className="text-gold" />
         </div>
-        <h1 className="text-4xl md:text-6xl font-serif text-rice mb-4 leading-tight">
-          Indoor <span className="text-gold">Feng Shui</span> Evaluation
+        <h1 className="text-4xl md:text-6xl font-serif text-rice mb-2 leading-tight">
+          Free Ba Zhai Feng Shui Calculator
         </h1>
+        <h2 className="text-2xl md:text-3xl font-serif text-gold/80 mb-4">
+          Analyze Your Home&#39;s Lucky Directions
+        </h2>
         <p className="text-lg md:text-xl text-rice/70 max-w-2xl mx-auto mb-8 leading-relaxed">
-          Enter your information and get a professional indoor Feng Shui analysis in 3 minutes. Discover your Ming Gua, evaluate your living space, and receive personalized recommendations.
+          Free online Ba Zhai (Eight Mansions) feng shui calculator. Enter your birth date and house direction to evaluate your living space, and receive personalized recommendations including personalized lucky directions, room layout advice, bracelet recommendations.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <button onClick={() => document.getElementById('step-1-form')?.scrollIntoView({ behavior: 'smooth' })} className="bg-cinnabar text-rice px-8 py-4 rounded-sm text-lg hover:bg-cinnabar/80 transition-all flex items-center justify-center gap-2">
@@ -301,10 +304,6 @@ export default function FengShuiPage() {
           <Link href="/fengshui/guide" className="border border-rice/30 text-rice px-8 py-4 rounded-sm text-lg hover:bg-rice/10 transition-all flex items-center justify-center gap-2">
             <BookOpen size={20} />
             Read the Guide
-          </Link>
-          <Link href="/shop" className="border border-rice/30 text-rice px-8 py-4 rounded-sm text-lg hover:bg-rice/10 transition-all flex items-center justify-center gap-2">
-            <ShoppingBag size={20} />
-            Shop Bracelets
           </Link>
         </div>
         <div className="mt-12 grid grid-cols-3 gap-8 max-w-2xl mx-auto">
@@ -761,7 +760,7 @@ export default function FengShuiPage() {
             <div>
               <div className="flex items-center gap-2 mb-4">
                 <YinYangSVG size={24} />
-                <span className="text-rice font-serif text-lg font-bold">TaoInsight</span>
+                <span className="text-rice font-serif text-lg font-bold">TaoMagic</span>
               </div>
               <p className="text-sm leading-relaxed">Bridging 5,000 years of Chinese wisdom with modern seekers worldwide.</p>
             </div>
@@ -794,7 +793,7 @@ export default function FengShuiPage() {
             </div>
           </div>
           <div className="border-t border-rice/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm">© 2024 TaoInsight. All rights reserved.</p>
+            <p className="text-sm">&copy; 2026 TaoMagic. All rights reserved.</p>
             <div className="flex gap-6 text-sm">
               <a href="#" className="hover:text-gold transition-colors">Privacy Policy</a>
               <a href="#" className="hover:text-gold transition-colors">Terms of Service</a>
